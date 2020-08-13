@@ -14,7 +14,7 @@ export class ServiceService {
 
   }
   public postPerson(p: Person) {
-    this.http.post<Person>("http://localhost:3500/", p).
+    this.http.post<Person>("http://localhost:3500/Home", p).
       subscribe(
         res => this.person = res,
         err => console.log(err)
