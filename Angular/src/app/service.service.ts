@@ -13,13 +13,14 @@ export class ServiceService {
   constructor(private http: HttpClient) {
 
   }
+
+
   public postPerson(p: Person) {
-    this.http.post<Person>("http://localhost:3500/Home", p).
+    this.http.post<Person>("http://localhost:3600/Home", p).
       subscribe(
         res => this.person = res,
         err => console.log(err)
       )
   }
-
 
 }
