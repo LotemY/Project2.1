@@ -1,0 +1,21 @@
+<h3>Name: </h3>
+<input #name>
+
+<h3>Last Name: </h3>
+<input #lastName>
+
+<h3>Email: </h3>
+<input #email>
+
+<h3>Password: </h3>
+<input #password type="password">
+
+<br>
+<input type="radio" #Student name="SorT" value="student">
+<label for="Student">Student</label><br>
+<input type="radio" #Teacher name="SorT" value="teacher">
+<label for="Teacher">Teacher</label><br>
+
+
+
+<button (click)="createPerson(name.value,lastName.value,email.value,password.value)">Sign Up</button>

@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const user = require('../http/Post');
+const user = require('../Schemas/Post');
 
 app.use(bodyParser.json());
 app.use(express.static('./dist/Angular'));
@@ -23,24 +23,5 @@ db.once("open", function () {
     console.log("Connection Successful!");
 });
 
-let userCollection = db.collection("user");
-
-
-
 let port = process.env.PORT || 3600;
 app.listen(port, () => console.log("Server Is OK"));
-
-app.post("/Home", (req, res) => {
-    let newUser = new user({
-        userName: req.body.userName,
-        password: req.body.password
-    });
-
-    userCollection.insert(newUser,function(err,res){
-        console.log(res);
-        if(err) return console.log(err);   
-    })
-
-    res.status(201);
-    res.send({ "msg": "success" });
-})

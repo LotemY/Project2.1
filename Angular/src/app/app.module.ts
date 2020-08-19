@@ -4,21 +4,21 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ChildComponent } from './child/child.component';
-import { Child2Component } from './child2/child2.component';
+import { signUpComponent } from './signUp/signUp.component';
+import { loginComponent } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 
 const appRoutes: Routes = [
-  {path:"Home",component:ChildComponent},
-  {path:"peepee",component:Child2Component},
+  {path:"signUp",component:signUpComponent},
+  {path:"login",component:loginComponent},
   {path: '',redirectTo: '/', pathMatch: 'full'}
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    ChildComponent,
-    Child2Component
+    signUpComponent,
+    loginComponent
   ],
   imports: [
     BrowserModule,

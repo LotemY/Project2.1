@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { mongoose } from 'mongoose';
-import { userPostSchema } from '../../../http/Post';
+import { userPostSchema } from '../../../Schemas/Post';
 import { HttpClient } from '@angular/common/http';
 import { Person } from '../../../models/Person';
 
@@ -13,7 +13,6 @@ export class ServiceService {
   constructor(private http: HttpClient) {
 
   }
-
 
   public postPerson(p: Person) {
     this.http.post<Person>("http://localhost:3600/Home", p).
