@@ -1,5 +1,5 @@
-<h3>Name: </h3>
-<input #name>
+<h3>First Name: </h3>
+<input #firstName>
 
 <h3>Last Name: </h3>
 <input #lastName>
@@ -11,11 +11,14 @@
 <input #password type="password">
 
 <br>
-<input type="radio" #Student name="SorT" value="student">
+<input type="radio" #Student name="SorT" value="" [(ngModel)]="nickName">
 <label for="Student">Student</label><br>
-<input type="radio" #Teacher name="SorT" value="teacher">
+<input type="radio" #Teacher name="SorT" value="T" [(ngModel)]="nickName">
 <label for="Teacher">Teacher</label><br>
 
+<div *ngIf="nickName!='T'">
+    <h3>Nickname: </h3>
+    <input #nickname [(ngModel)]="nickName">
+</div>
 
-
-<button (click)="createPerson(name.value,lastName.value,email.value,password.value)">Sign Up</button>
+<button (click)="createPerson(firstName.value,lastName.value,email.value,password.value)">Sign Up</button>

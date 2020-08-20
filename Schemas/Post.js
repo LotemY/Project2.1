@@ -1,7 +1,15 @@
 const mongoose = require('mongoose');
 
 const userPostSchema = mongoose.Schema({
-    userName: {
+    firstName: {
+        type: String,
+        required: true
+    },
+    lastName: {
+        type: String,
+        required: true
+    },
+    email: {
         type: String,
         required: true
     },
@@ -9,10 +17,7 @@ const userPostSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    date: {
-        type: Date,
-        default: Date.now
-    }
+    nickName: String
 });
 
 let user = mongoose.model('user', userPostSchema, "user");

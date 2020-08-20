@@ -11,15 +11,19 @@ import { Person } from '../../../../models/Person';
 export class signUpComponent {
 
   public myPerson: Person;
-
+  public nickName="T";
+  
   constructor(private service: ServiceService) {
+    this.myPerson=service.person;
   }
 
-  public createPerson(name: String, lastName: String, email: String, password: String) {
-    this.myPerson.userName = name;
+  public createPerson(firstName: String, lastName: String, email: String, password: String) {
+    this.myPerson.firstName = firstName;
     this.myPerson.lastName = lastName;
     this.myPerson.email = email;
     this.myPerson.password = password;
+    if(this.nickName!='T')
+      this.myPerson.nickName=this.nickName;
     this.service.postPerson(this.myPerson);
   }
 }

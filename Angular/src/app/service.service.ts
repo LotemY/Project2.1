@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { mongoose } from 'mongoose';
-import { userPostSchema } from '../../../Schemas/Post';
+import { userPost } from '../../../http/userPost';
 import { HttpClient } from '@angular/common/http';
 import { Person } from '../../../models/Person';
 
@@ -15,7 +15,7 @@ export class ServiceService {
   }
 
   public postPerson(p: Person) {
-    this.http.post<Person>("http://localhost:3600/Home", p).
+    this.http.post<Person>("http://localhost:3600/signUp", p).
       subscribe(
         res => this.person = res,
         err => console.log(err)
