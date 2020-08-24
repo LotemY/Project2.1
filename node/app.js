@@ -45,4 +45,5 @@ app.post("/signUp", (req, res) => {
 
     res.status(201);
     res.send({ "msg": "success" });
+    
 })

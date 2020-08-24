@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { signUpComponent } from './signUp/signUp.component';
 import { loginComponent } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const appRoutes: Routes = [
   {path:"signUp",component:signUpComponent},
@@ -25,7 +26,8 @@ const appRoutes: Routes = [
     AppRoutingModule,
     FormsModule,
     RouterModule.forRoot(appRoutes),
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

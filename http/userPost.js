@@ -1,6 +1,7 @@
 
 const userSchema = require('../Schemas/Post');
 let userCollection = db.collection("user");
+const router=express.Router();
 
 router.post("/signUp", (req, res) => {
     let newUser = new userSchema({
