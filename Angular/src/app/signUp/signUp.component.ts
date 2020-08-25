@@ -25,7 +25,7 @@ export class signUpComponent implements OnInit {
       lastName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(8)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(11), Validators.pattern('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$')]],
-      isStudent:[false],
+      isStudent: [false],
       nickName: ['', [Validators.minLength(3), Validators.maxLength(8)]]
     })
   }
@@ -45,7 +45,11 @@ export class signUpComponent implements OnInit {
     this.myPerson.lastName = this.myForm.get('lastName').value;
     this.myPerson.email = this.myForm.get('email').value;
     this.myPerson.password = this.myForm.get('password').value;
-    this.myPerson.nickName = this.myForm.get('nickName').value;
+    if (this.myForm.get('isStudent').value)
+      if (this.myForm.get('nickName').value == "")
+        this.myPerson.nickName = this.myPerson.firstName;
+      else
+        this.myPerson.nickName = this.myForm.get('nickName').value;
     this.service.postPerson(this.myPerson);
   }
 }

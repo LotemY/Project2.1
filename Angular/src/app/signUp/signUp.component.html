@@ -57,8 +57,8 @@
             <input formControlName="nickName" class="form-control"
                 [ngClass]="{ 'is-invalid': submitted && f.nickName.errors }">
             <div *ngIf="submitted && f.nickName.errors" class="invalid-feedback">
-                <div *ngIf="f.nickName.errors.minlength">Password must be at least 3 characters</div>
-                <div *ngIf="f.nickName.errors.maxlength">Password can't be more then 8 characters</div>
+                <div *ngIf="f.nickName.errors.minlength">nickName must be at least 3 characters</div>
+                <div *ngIf="f.nickName.errors.maxlength">nickName can't be more then 8 characters</div>
             </div>
         </div>
 
