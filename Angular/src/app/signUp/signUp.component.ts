@@ -25,9 +25,11 @@ export class signUpComponent implements OnInit {
       lastName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(8)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(11), Validators.pattern('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$')]],
+      isStudent:[false],
       nickName: ['', [Validators.minLength(3), Validators.maxLength(8)]]
     })
   }
+
   get f() {
     return this.myForm.controls;
   }

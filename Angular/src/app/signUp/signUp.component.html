@@ -47,13 +47,12 @@
         </div>
 
         <div>
-            <input type="radio" #Student name="SorT">
-            <label for="Student">Student</label><br>
-            <input type="radio" #Teacher name="SorT">
-            <label for="Teacher">Teacher</label>
+            <input type="checkbox" formControlName="isStudent" class="form-control"
+                [checked]="myForm.get('isStudent').value">
+            <label>Are you a Student?</label><br>
         </div>
 
-        <div>
+        <div *ngIf="myForm.get('isStudent').value">
             <label>Nickname</label>
             <input formControlName="nickName" class="form-control"
                 [ngClass]="{ 'is-invalid': submitted && f.nickName.errors }">
