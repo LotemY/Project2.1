@@ -9,15 +9,16 @@ import { ServiceService } from '../service.service'
 })
 export class loginComponent {
   public exitUser: Person;
-  
+  private bool: boolean = false;
+
   constructor(private service: ServiceService) {
     this.exitUser = service.person;
   }
 
-  public loginReq(name: String, password: String) {
-    this.exitUser.firstName = name;
+  public loginReq(email: String, password: String) {
+    this.exitUser.email = email;
     this.exitUser.password = password;
-    
+    this.service.loginPerson(this.exitUser);
   }
 }
 

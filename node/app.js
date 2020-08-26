@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require('mongoose');
 app.use(express.static('./dist/Angular'));
 const userP = require('../http/user/userPost')
+const userG = require('../http/user/userGet')
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
@@ -27,3 +28,4 @@ let port = process.env.PORT || 3600;
 app.listen(port, () => console.log("Server Is OK"));
 
 app.use(userP);
+app.use(userG)

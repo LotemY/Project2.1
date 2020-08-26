@@ -20,4 +20,13 @@ export class ServiceService {
         err => console.log(err)
       )
   }
+
+  public loginPerson(p: Person) {
+    this.http.post<Person>("http://localhost:3600/login", p).
+      subscribe(
+        res => console.log(res),
+        err => console.log(err)
+      )
+
+  }
 }

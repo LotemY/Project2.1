@@ -1,8 +1,6 @@
 const userSchema = require('../../Schemas/Post');
 const mongoose = require('mongoose');
 const express = require('express');
-const { static } = require('express');
-const { stringify } = require('querystring');
 const userP = express.Router();
 
 mongoose.connect(
@@ -23,16 +21,16 @@ userP.post("/signUp", async (req, res) => {
     if (req.body.nickName) {
         sId++;
         thisId = sId;
-        SorT="";
+        SorT = "";
     }
     else {
         tId++;
         thisId = tId;
-        SorT="t";
+        SorT = "t";
     }
 
     let newUser = new userSchema({
-        _id: thisId+SorT,
+        _id: thisId + SorT,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
@@ -47,11 +45,25 @@ userP.post("/signUp", async (req, res) => {
             console.log(res);
             if (err) return console.log(err);
         })
-        res.status(201);
-        res.send({ "msg": "success" });
+        res.status(201).send({ "msg": "success" });
     } catch (err) {
         res.status(500).send(err)
     }
+})
+let bool;
+userP.post("/login", async (req, res) => {
+    userCollection.findOne({ email: req.body.email, password: req.body.password },
+        function (err, user) {
+            if (err) {
+                console.log(err);
+                return res.status(500).send();
+            }
+            if (!user)
+                return res.status(404).send();
+
+            bool = user;
+            return res.status(200).send();
+        })
 })
 
 module.exports = userP;
