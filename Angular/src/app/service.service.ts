@@ -16,8 +16,8 @@ export class ServiceService {
   public postPerson(p: Person) {
     this.http.post<Person>("http://localhost:3600/signUp", p).
       subscribe(
-        res => this.person = res,
-        err => console.log(err)
+        res => console.log("this is res "+res),
+        err => console.log("this is error "+err)
       )
   }
 

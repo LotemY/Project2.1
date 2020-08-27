@@ -18,15 +18,22 @@ let thisId;
 let SorT;
 
 userP.post("/signUp", async (req, res) => {
-    if (req.body.nickName) {
-        sId++;
-        thisId = sId;
-        SorT = "";
-    }
-    else {
-        tId++;
-        thisId = tId;
-        SorT = "t";
+    if (await userCollection.findOne({ email: req.body.email }))
+        return res.status(400).send("Email already exists");
+
+    idFunc();
+
+    function idFunc() {
+        if (req.body.nickName) {
+            sId++;
+            thisId = sId;
+            SorT = "";
+        }
+        else {
+            tId++;
+            thisId = tId;
+            SorT = "t";
+        }
     }
 
     let newUser = new userSchema({
@@ -41,8 +48,11 @@ userP.post("/signUp", async (req, res) => {
     }
 
     try {
-        userCollection.insert(newUser, function (err, res) {
-            console.log(res);
+        while (await userCollection.findOne({ _id: newUser._id })) {
+            idFunc()
+            newUser._id = thisId + SorT;
+        }
+        await userCollection.insertOne(newUser, async (err, res) => {
             if (err) return console.log(err);
         })
         res.status(201).send({ "msg": "success" });
@@ -52,7 +62,7 @@ userP.post("/signUp", async (req, res) => {
 })
 let bool;
 userP.post("/login", async (req, res) => {
-    userCollection.findOne({ email: req.body.email, password: req.body.password },
+    await userCollection.findOne({ email: req.body.email, password: req.body.password },
         function (err, user) {
             if (err) {
                 console.log(err);

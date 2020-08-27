@@ -2,8 +2,9 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 app.use(express.static('./dist/Angular'));
-const userP = require('../http/user/userPost')
-const userG = require('../http/user/userGet')
+const userP = require('../http/user/userPost');
+const userG = require('../http/user/userGet');
+const jwt = require('jsonwebtoken');
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
