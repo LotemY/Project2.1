@@ -2,9 +2,13 @@ const userSchema = require('../../Schemas/Post');
 const mongoose = require('mongoose');
 const express = require('express');
 const userP = express.Router();
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
+const dotenv = require('dotenv');
+dotenv.config();
 
 mongoose.connect(
-    'mongodb://127.0.0.1:27017/project',
+    process.env.MONGO,
     {
         useNewUrlParser: true,
         useUnifiedTopology: true
@@ -36,12 +40,15 @@ userP.post("/signUp", async (req, res) => {
         }
     }
 
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(req.body.password, salt);
+
     let newUser = new userSchema({
         _id: thisId + SorT,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
-        password: req.body.password
+        password: hashedPassword
     });
     if (req.body.nickName) {
         newUser.nickName = req.body.nickName
@@ -60,18 +67,24 @@ userP.post("/signUp", async (req, res) => {
         res.status(500).send(err)
     }
 })
-let bool;
+
 userP.post("/login", async (req, res) => {
-    await userCollection.findOne({ email: req.body.email, password: req.body.password },
-        function (err, user) {
+    await userCollection.findOne({ email: req.body.email },
+        async (err, user) => {
             if (err) {
                 console.log(err);
                 return res.status(500).send();
             }
             if (!user)
-                return res.status(404).send();
+                return res.status(404).send("User not found");
 
-            bool = user;
+            const validPass = await bcrypt.compare(req.body.password, user.password);
+            if (!validPass)
+                return res.status(400).send("Invalid password");
+
+            const token = jwt.sign({ _id: user._id }, process.env.SECRET_TOKEN);
+            res.header('auth-token', token);
+
             return res.status(200).send();
         })
 })

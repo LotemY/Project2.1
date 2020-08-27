@@ -10,7 +10,7 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
 mongoose.connect(
-    'mongodb://127.0.0.1:27017/project',
+    process.env.MONGO,
     {
         useNewUrlParser: true,
         useUnifiedTopology: true
@@ -29,4 +29,4 @@ let port = process.env.PORT || 3600;
 app.listen(port, () => console.log("Server Is OK"));
 
 app.use(userP);
-app.use(userG)
+app.use(userG);

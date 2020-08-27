@@ -8,10 +8,12 @@ import { signUpComponent } from './signUp/signUp.component';
 import { loginComponent } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HomePageComponent } from './home-page/home-page.component';
 
 const appRoutes: Routes = [
   {path:"signUp",component:signUpComponent},
   {path:"login",component:loginComponent},
+  {path:"HomePage",component:HomePageComponent},
   {path: '',redirectTo: '/', pathMatch: 'full'}
 ];
 
@@ -19,7 +21,8 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     signUpComponent,
-    loginComponent
+    loginComponent,
+    HomePageComponent
   ],
   imports: [
     BrowserModule,
