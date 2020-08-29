@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Person } from '../../../../models/Person';
-import { ServiceService } from '../service.service'
+import { ServiceService } from '../service.service';
 
 @Component({
   selector: 'app-login',
@@ -8,8 +8,7 @@ import { ServiceService } from '../service.service'
   styleUrls: ['./login.component.css']
 })
 export class loginComponent {
-  public exitUser: Person;
-  private bool: boolean = false;
+  private exitUser: Person;
 
   constructor(private service: ServiceService) {
     this.exitUser = service.person;
@@ -20,6 +19,7 @@ export class loginComponent {
     this.exitUser.password = password;
     this.service.loginPerson(this.exitUser);
   }
+
 }
 
 

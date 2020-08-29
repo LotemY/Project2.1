@@ -75,13 +75,13 @@ userP.post("/login", async (req, res) => {
                 console.log(err);
                 return res.status(500).send();
             }
-            if (!user)
+            if (!user) 
                 return res.status(404).send("User not found");
 
             const validPass = await bcrypt.compare(req.body.password, user.password);
-            if (!validPass)
+            if (!validPass) 
                 return res.status(400).send("Invalid password");
-
+                
             const token = jwt.sign({ _id: user._id }, process.env.SECRET_TOKEN);
             res.header('auth-token', token);
 
