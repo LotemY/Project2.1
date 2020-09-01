@@ -10,10 +10,11 @@ mongoose.connect(
         useUnifiedTopology: true
     }
 );
-
-userG.get('/HomePage', auth, (req, res) => {
-    res.send(req.user);
+/*
+userG.get('/', (req, res) => {
+    console.log("get req" + req.body);
 });
+*/
 
 module.exports = userG;
 

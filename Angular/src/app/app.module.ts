@@ -9,12 +9,14 @@ import { loginComponent } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HomePageComponent } from './home-page/home-page.component';
+import { SettingsComponent } from './settings/settings.component';
 
 const appRoutes: Routes = [
-  {path:"signUp",component:signUpComponent},
-  {path:"login",component:loginComponent},
-  {path:"HomePage",component:HomePageComponent},
-  {path: '',redirectTo: '/', pathMatch: 'full'}
+  { path: "signUp", component: signUpComponent },
+  { path: "login", component: loginComponent },
+  { path: "HomePage", component: HomePageComponent },
+  { path: "settings", component: SettingsComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full' }
 ];
 
 @NgModule({
@@ -22,7 +24,8 @@ const appRoutes: Routes = [
     AppComponent,
     signUpComponent,
     loginComponent,
-    HomePageComponent
+    HomePageComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-const userSchema = require('../../Schemas/Post');
+const userSchema = require('../../Schemas/User');
 const mongoose = require('mongoose');
 const express = require('express');
 const userP = express.Router();
@@ -19,7 +19,6 @@ let userCollection = mongoose.connection.collection("user");
 let tId = 999;
 let sId = 999;
 let thisId;
-let SorT;
 
 userP.post("/signUp", async (req, res) => {
     if (await userCollection.findOne({ email: req.body.email }))
@@ -29,14 +28,12 @@ userP.post("/signUp", async (req, res) => {
 
     function idFunc() {
         if (req.body.nickName) {
-            sId++;
+            sId++;  
             thisId = sId;
-            SorT = "";
         }
         else {
             tId++;
-            thisId = tId;
-            SorT = "t";
+            thisId = tId+"t";
         }
     }
 
@@ -44,7 +41,7 @@ userP.post("/signUp", async (req, res) => {
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
     let newUser = new userSchema({
-        _id: thisId + SorT,
+        _id: thisId,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
@@ -57,7 +54,7 @@ userP.post("/signUp", async (req, res) => {
     try {
         while (await userCollection.findOne({ _id: newUser._id })) {
             idFunc()
-            newUser._id = thisId + SorT;
+            newUser._id = thisId;
         }
         await userCollection.insertOne(newUser, async (err, res) => {
             if (err) return console.log(err);
@@ -75,19 +72,18 @@ userP.post("/login", async (req, res) => {
                 console.log(err);
                 return res.status(500).send();
             }
-            if (!user) 
+            if (!user)
                 return res.status(404).send("User not found");
 
             const validPass = await bcrypt.compare(req.body.password, user.password);
-            if (!validPass) 
+            if (!validPass)
                 return res.status(400).send("Invalid password");
-                
+
             const token = jwt.sign({ _id: user._id }, process.env.SECRET_TOKEN);
-            res.header('auth-token', token);
+            res.header("authToken", token);
 
             return res.status(200).send();
         })
 })
 
 module.exports = userP;
-
