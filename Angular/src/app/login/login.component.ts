@@ -11,7 +11,7 @@ export class loginComponent {
   private exitUser: Person;
 
   constructor(private service: ServiceService) {
-    this.exitUser = service.person;
+    this.exitUser = this.service.person;
   }
 
   public loginReq(email: String, password: String) {

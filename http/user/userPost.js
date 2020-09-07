@@ -4,8 +4,7 @@ const express = require('express');
 const userP = express.Router();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const dotenv = require('dotenv');
-dotenv.config();
+const dotenv = require('dotenv').config();
 
 mongoose.connect(
     process.env.MONGO,
@@ -16,50 +15,44 @@ mongoose.connect(
 );
 
 let userCollection = mongoose.connection.collection("user");
-let tId = 999;
-let sId = 999;
-let thisId;
+let tempId = "";
+let numberId = 0;
 
-userP.post("/signUp", async (req, res) => {
+userP.post("/register", async (req, res) => {
     if (await userCollection.findOne({ email: req.body.email }))
         return res.status(400).send("Email already exists");
-
-    idFunc();
-
-    function idFunc() {
-        if (req.body.nickName) {
-            sId++;  
-            thisId = sId;
-        }
-        else {
-            tId++;
-            thisId = tId+"t";
-        }
-    }
 
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
     let newUser = new userSchema({
-        _id: thisId,
+        _id: req.body._id,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
         password: hashedPassword
     });
-    if (req.body.nickName) {
-        newUser.nickName = req.body.nickName
-    }
+    if (req.body.nickName)
+        newUser.nickName = req.body.nickName;
 
     try {
         while (await userCollection.findOne({ _id: newUser._id })) {
-            idFunc()
-            newUser._id = thisId;
+            if (newUser.nickName) {
+                numberId = parseInt(newUser._id);
+                numberId++;
+                newUser._id = numberId;
+            }
+            else {
+                tempId = newUser._id.split("t")[0];
+                numberId = parseInt(tempId);
+                numberId++;
+                newUser._id = numberId + "t";
+            }
         }
         await userCollection.insertOne(newUser, async (err, res) => {
             if (err) return console.log(err);
         })
-        res.status(201).send({ "msg": "success" });
+        res.status(201).send(newUser);
     } catch (err) {
         res.status(500).send(err)
     }
@@ -80,10 +73,10 @@ userP.post("/login", async (req, res) => {
                 return res.status(400).send("Invalid password");
 
             const token = jwt.sign({ _id: user._id }, process.env.SECRET_TOKEN);
-            res.header("authToken", token);
+            res.header("authToken", token).status(200).send(user);
+        }
 
-            return res.status(200).send();
-        })
+    )
 })
 
 module.exports = userP;

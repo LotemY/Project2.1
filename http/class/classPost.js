@@ -2,8 +2,7 @@ const classSchema = require('../../Schemas/class');
 const mongoose = require('mongoose');
 const express = require('express');
 const classP = express.Router();
-const dotenv = require('dotenv');
-dotenv.config();
+const dotenv = require('dotenv').config();
 
 mongoose.connect(
     process.env.MONGO,

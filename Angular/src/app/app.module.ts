@@ -4,28 +4,28 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { signUpComponent } from './signUp/signUp.component';
+import { registerComponent } from './register/register.component';
 import { loginComponent } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HomePageComponent } from './home-page/home-page.component';
-import { SettingsComponent } from './settings/settings.component';
+import { teacherHPComponent } from './teacherHP/teacherHP.component';
+import { studentHPComponent } from './studentHP/studentHP.component';
 
 const appRoutes: Routes = [
-  { path: "signUp", component: signUpComponent },
+  { path: "register", component: registerComponent },
   { path: "login", component: loginComponent },
-  { path: "HomePage", component: HomePageComponent },
-  { path: "settings", component: SettingsComponent },
+  { path: "teacherHP/:id", component: teacherHPComponent },
+  { path: "studentHP/:id", component: studentHPComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    signUpComponent,
+    registerComponent,
     loginComponent,
-    HomePageComponent,
-    SettingsComponent
+    teacherHPComponent,
+    studentHPComponent
   ],
   imports: [
     BrowserModule,

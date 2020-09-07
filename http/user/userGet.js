@@ -1,20 +1,28 @@
 const mongoose = require('mongoose');
 const express = require('express');
 const userG = express.Router();
+const dotenv = require('dotenv').config();
 const auth = require('../auth');
+const { userInfo } = require('os');
+let userCollection = mongoose.connection.collection("user");
 
 mongoose.connect(
-    'mongodb://127.0.0.1:27017/project',
+    process.env.MONGO,
     {
         useNewUrlParser: true,
         useUnifiedTopology: true
     }
 );
-/*
-userG.get('/', (req, res) => {
-    console.log("get req" + req.body);
+
+userG.get(`/studentHP/:id`, async (req, res) => {
+    let user = await userCollection.findOne({ _id: req.params.id });
+    res.status(200).send(user);
 });
-*/
+userG.get(`/teacherHP/:id`, async (req, res) => {
+    let user = await userCollection.findOne({ _id: req.params.id });
+    res.status(200).send(user);
+});
+
 
 module.exports = userG;
 
