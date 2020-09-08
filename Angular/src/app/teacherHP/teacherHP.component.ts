@@ -37,13 +37,13 @@ export class teacherHPComponent implements OnInit {
   }
 
   public save(email: String) {
-    let edit=new Person();
-    edit._id=this.thisTeacher._id;
-    edit.email=email;
+    let edit = new Person();
+    edit._id = this.thisTeacher._id;
+    edit.email = email;
     this.service.editTeacher(edit);
   }
 
-  public del(){
-    this.service.deletePerson(this.thisTeacher._id);
+  public del() {
+    this.service.deleteTeacher(this.thisTeacher._id);
   }
 }

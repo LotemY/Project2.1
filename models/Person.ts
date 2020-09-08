@@ -5,4 +5,5 @@ export class Person {
     email: String;
     password: String;
     nickName?: String;
+    token:string;
 }

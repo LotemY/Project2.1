@@ -15,7 +15,6 @@ const classP = require('../http/class/classPost');
 //const classPut = require('../http/class/classPut');
 //const classD = require('../http/class/classDelete');
 
-
 mongoose.connect(
     process.env.MONGO,
     {

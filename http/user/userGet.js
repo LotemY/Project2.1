@@ -3,7 +3,6 @@ const express = require('express');
 const userG = express.Router();
 const dotenv = require('dotenv').config();
 const auth = require('../auth');
-const { userInfo } = require('os');
 let userCollection = mongoose.connection.collection("user");
 
 mongoose.connect(

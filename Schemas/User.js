@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const userPostSchema = mongoose.Schema({
-    _id:{
+    _id: {
         type: String,
         required: true
     },
@@ -21,7 +21,12 @@ const userPostSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    nickName: String
+    nickName: {
+        type: String
+    },
+    token: {
+        type: String
+    }
 });
 
 let user = mongoose.model('user', userPostSchema, "user");

@@ -52,31 +52,30 @@ userP.post("/register", async (req, res) => {
         await userCollection.insertOne(newUser, async (err, res) => {
             if (err) return console.log(err);
         })
-        res.status(201).send(newUser);
+        res.status(201).send();
     } catch (err) {
         res.status(500).send(err)
     }
 })
 
 userP.post("/login", async (req, res) => {
-    await userCollection.findOne({ email: req.body.email },
-        async (err, user) => {
-            if (err) {
-                console.log(err);
-                return res.status(500).send();
-            }
-            if (!user)
-                return res.status(404).send("User not found");
-
-            const validPass = await bcrypt.compare(req.body.password, user.password);
-            if (!validPass)
-                return res.status(400).send("Invalid password");
-
-            const token = jwt.sign({ _id: user._id }, process.env.SECRET_TOKEN);
-            res.header("authToken", token).status(200).send(user);
+    await userCollection.findOne({ email: req.body.email }, async (err, user) => {
+        if (err) {
+            console.log(err);
+            return res.status(500).send();
         }
+        if (!user)
+            return res.status(404).send("User not found");
 
-    )
+        const validPass = await bcrypt.compare(req.body.password, user.password);
+        if (!validPass)
+            return res.status(400).send("Invalid password");
+
+        const token = jwt.sign({ _id: user._id }, process.env.SECRET_TOKEN);
+        user.token = token;
+        res.header("token", token);
+        res.status(200).send(user);
+    })
 })
 
 module.exports = userP;

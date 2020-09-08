@@ -24,4 +24,15 @@ export class studentHPComponent implements OnInit {
     this.service.studentEmitter.subscribe(s => this.thisStudent = s);
   }
 
+  public save(email: String) {
+    let edit = new Person();
+    edit._id = this.thisStudent._id;
+    edit.email = email;
+    this.service.editStudent(edit);
+  }
+
+  public del() {
+    this.service.deleteStudent(this.thisStudent._id);
+  }
+
 }

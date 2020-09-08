@@ -1,8 +1,9 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpHeaderResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Person } from '../../../models/Person';
 import { Class } from '../../../models/Class';
 import { Router } from '@angular/router';
+import { FnParam } from '@angular/compiler/src/output/output_ast';
 
 @Injectable({
   providedIn: 'root'
@@ -27,13 +28,10 @@ export class ServiceService {
   }
 
   public postPerson(p: Person) {
-    this.http.post<Person>(`${this.localHost}register`, p).
+    this.http.post(`${this.localHost}register`, p).
       subscribe(
         res => {
-          if (res.nickName)
-            this.sNavigate(res._id);
-          else
-            this.tNavigate(res._id);
+          this.loginNavigate();
         },
         err => {
           console.log(err);
@@ -57,17 +55,19 @@ export class ServiceService {
     this.http.post<Person>(`${this.localHost}login`, p).
       subscribe(
         res => {
+          localStorage.setItem("token", res.token);
           if (res.nickName)
             this.sNavigate(res._id);
           else
             this.tNavigate(res._id);
-          err => {
-            console.log(err);
-            alert("Something is wrong");
-          }
+        },
+        err => {
+          console.log(err);
+          alert("Something is wrong");
         }
       )
   }
+
   public deleteTeacher(id: String) {
     this.http.delete(`${this.localHost}teacherHP/${id}`).
       subscribe(
@@ -88,18 +88,6 @@ export class ServiceService {
         err => console.log(err)
       )
   }
-  /*
-   public deleteClass() {
-     this.http.delete(this.localHost).
-       subscribe(
-         res => this.navigate(),
-         err => {
-           console.log(err);
-           alert("Something is wrong");
-         }
-       )
-   }
- */
 
   public editTeacher(p: Person) {
     this.http.patch(`${this.localHost}teacherHP/${p._id}`, p).
@@ -114,6 +102,7 @@ export class ServiceService {
         }
       )
   }
+
   public editStudent(p: Person) {
     this.http.put(`${this.localHost}studentHP/${p._id}`, p).
       subscribe(
@@ -134,8 +123,8 @@ export class ServiceService {
         res => this.studentEmitter.emit(res),
         err => console.log(err)
       )
-
   }
+
   public getTeacher(id: String) {
     this.http.get<Person>(`${this.localHost}teacherHP/${id}`).
       subscribe(
