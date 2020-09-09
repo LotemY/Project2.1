@@ -72,6 +72,9 @@ userP.post("/login", async (req, res) => {
             return res.status(400).send("Invalid password");
 
         const token = jwt.sign({ _id: user._id }, process.env.SECRET_TOKEN);
+
+        await userCollection.updateOne({ _id: user._id }, { $set: { token: token } });
+
         user.token = token;
         res.header("token", token);
         res.status(200).send(user);

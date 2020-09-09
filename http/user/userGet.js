@@ -13,11 +13,11 @@ mongoose.connect(
     }
 );
 
-userG.get(`/studentHP/:id`, async (req, res) => {
+userG.get(`/studentHP/:id`, auth, async (req, res) => {
     let user = await userCollection.findOne({ _id: req.params.id });
     res.status(200).send(user);
 });
-userG.get(`/teacherHP/:id`, async (req, res) => {
+userG.get(`/teacherHP/:id`, auth, async (req, res) => {
     let user = await userCollection.findOne({ _id: req.params.id });
     res.status(200).send(user);
 });
