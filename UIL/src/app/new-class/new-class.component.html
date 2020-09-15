@@ -1,0 +1,53 @@
+<div class="card-body">
+    <div>
+        <label>Class Names</label>
+        <input #name list="name">
+        <datalist id="name">
+            <option *ngFor="let name of classNames">{{name}}</option>
+        </datalist>
+    </div>
+
+    <br>
+    <br>
+
+    <div>
+        <label>Class Grades</label>
+        <select #grade>
+            <option *ngFor="let grad of grades">{{grad}}</option>
+        </select>
+    </div>
+
+    <br>
+    <br>
+
+    <div>
+        <label>Class Subjects</label>
+        <input #sub onfocus="this.value=''"> <button (click)="addSub(sub.value)">+</button>
+        <table border= "1" *ngIf="newClass.classSubject[0]" >
+            <td >Subjects
+                <tr *ngFor="let sub of newClass.classSubject">
+                    {{sub}}
+                </tr>
+            </td>
+        </table>
+    </div>
+
+    <br>
+    <br>
+
+    <div>
+        <label>Class Students</label>
+        <input #student type="number" onfocus="this.value=''"> <button (click)="addStudent(student.value)">+</button>
+        <table border= "1" *ngIf="newClass.classStudents[0]" >
+            <td >Students
+                <tr *ngFor="let student of newClass.classStudents">
+                    {{student}}
+                </tr>
+            </td>
+        </table>
+    </div>
+
+    <div class="text-center">
+        <button class="btn btn-primary mr-1" (click)="createClass(name.value,grade.value)">Create</button>
+    </div>
+</div>

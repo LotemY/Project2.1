@@ -1,8 +1,8 @@
-import{ Person } from './Person';
 export class Class {
+    _id: String;
     className: String;
     grade: String;
     classSubject: Array<String>;
     classTeacher: String;
-    classStudents:Array<Person>;
+    classStudents: Array<String>;
 }
