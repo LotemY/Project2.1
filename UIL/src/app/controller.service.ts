@@ -1,7 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Person } from '../../../models/Person';
-import { Class } from '../../../models/Class';
+import { Person } from './shared/models/Person';
+import { Class } from './shared/models/Class';
 import { Router } from '@angular/router';
 
 @Injectable({

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ControllerService } from '../controller.service'
-import { Person } from '../../../../models/Person';
+import { Person } from '../shared/models/Person';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
