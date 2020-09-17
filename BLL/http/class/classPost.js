@@ -11,7 +11,7 @@ let userCollection = mongoose.connection.collection("user");
 
 let thisId = 10;
 
-classP.post("/", async (req, res) => {
+classP.post("/teacherHP/:id/newClass", async (req, res) => {
     let students = []
     let sutdentCounter = 0;
     let reqCounter = 0;
@@ -23,7 +23,7 @@ classP.post("/", async (req, res) => {
     });
 
     if (req.body.classSubject)
-        newClass.classSubject = req.body.classSubject
+        newClass.classSubject = req.body.classSubject;
 
     try {
         while (await classCollection.findOne({ _id: newClass._id })) {
@@ -45,7 +45,7 @@ classP.post("/", async (req, res) => {
         })
         res.status(201).send(newClass);
     } catch (err) {
-        res.status(500).send(err)
+        res.status(500).send(err);
     }
 })
 

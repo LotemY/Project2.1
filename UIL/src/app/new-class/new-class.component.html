@@ -1,6 +1,6 @@
 <div class="card-body">
     <div>
-        <label>Class Names</label>
+        <label>Class Name</label>
         <input #name list="name">
         <datalist id="name">
             <option *ngFor="let name of classNames">{{name}}</option>
@@ -11,7 +11,7 @@
     <br>
 
     <div>
-        <label>Class Grades</label>
+        <label>Class Grade</label>
         <select #grade>
             <option *ngFor="let grad of grades">{{grad}}</option>
         </select>
@@ -50,4 +50,10 @@
     <div class="text-center">
         <button class="btn btn-primary mr-1" (click)="createClass(name.value,grade.value)">Create</button>
     </div>
+    <br>
+    <br>
+    <div class="text-center">
+        <button class="btn btn-primary mr-1" (click)="goBack()">Cancel</button>
+    </div>
+
 </div>

@@ -1,0 +1,67 @@
+<div class="card-body">
+    <div>
+        <label>Class Name</label>
+        <input #name list="name" value="{{thisClass.className}}">
+        <datalist id="name">
+            <option *ngFor="let name of classNames">{{name}}</option>
+        </datalist>
+    </div>
+
+    <br>
+    <br>
+
+    <div>
+        <label>Class Grade</label>
+        <br>
+        <label>Current Grade: {{thisClass.grade}}</label>
+        <br>
+        <select #grade>
+            <option *ngFor="let grad of grades">{{grad}}</option>
+        </select>
+    </div>
+
+    <br>
+    <br>
+
+    <div>
+        <label>Class Subjects</label>
+        <table border="1" *ngIf="editSubject[0]">
+            <td>Subjects
+                <tr *ngFor="let sub of editSubject">
+                    {{sub}}<button (click)="removeElement(sub)">Remove</button>
+                </tr>
+            </td>
+        </table>
+        <input #sub onfocus="this.value=''"> <button (click)="addSub(sub.value)">Add Subject</button>
+    </div>
+
+    <br>
+    <br>
+
+    <div>
+        <label>Class Students</label>
+        <table border="1" *ngIf="editStudents[0]">
+            <td>Students
+                <tr *ngFor="let student of editStudents">
+                    {{student}}<button (click)="removeElement(student)">Remove</button>
+                </tr>
+            </td>
+        </table>
+        <input #student type="number" onfocus="this.value=''"> <button (click)="addStudent(student.value)">Add
+            Student</button>
+    </div>
+
+    <div class="text-center">
+        <button class="btn btn-primary mr-1" (click)="editClass(name.value,grade.value)">Create</button>
+    </div>
+    <br>
+    <br>
+    <div class="text-center">
+        <button class="btn btn-primary mr-1" (click)="goBack()">Cancel</button>
+    </div>
+    <br>
+    <br>
+    <div class="text-center">
+        <button class="btn btn-primary mr-1" (click)="deleteClass()">Delete</button>
+    </div>
+</div>

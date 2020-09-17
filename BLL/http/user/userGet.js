@@ -6,16 +6,16 @@ const auth = require('../auth');
 const jwt = require('jsonwebtoken');
 let userCollection = mongoose.connection.collection("user");
 
-/*
+
 userG.get(`/studentHP/:id`, async (req, res) => {
     let user = await userCollection.findOne({ _id: req.params.id });
     res.status(200).send(user);
 });
-userG.get(`/teacherHP/:id`,auth, async (req, res) => {
+userG.get(`/teacherHP/:id`, async (req, res) => {
     let user = await userCollection.findOne({ _id: req.params.id });
     res.status(200).send(user);
 });
-*/
+
 
 userG.get(`/login`, async (req, res) => {
     let id;

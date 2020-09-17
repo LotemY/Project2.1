@@ -14,14 +14,19 @@ import { TeacherHPComponent } from './teacher-hp/teacher-hp.component';
 import { NoAccessComponent } from './no-access/no-access.component';
 import { TClassComponent } from './t-class/t-class.component';
 import { NewClassComponent } from './new-class/new-class.component';
+import { EditClassComponent } from './edit-class/edit-class.component';
+import { SettingsComponent } from './settings/settings.component';
 
 const appRoutes: Routes = [
   { path: "register", component: RegisterComponent },
   { path: "login", component: LoginComponent },
   { path: "teacherHP/:id", component: TeacherHPComponent },
   { path: "studentHP/:id", component: StudentHPComponent },
+  { path: "teacherHP/:id/settings", component: SettingsComponent },
+  { path: "studentHP/:id/settings", component: SettingsComponent },
   { path: "teacherHP/:id/newClass", component: NewClassComponent },
   { path: "teacherHP/:id/tClass/:cId", component: TClassComponent },
+  { path: "teacherHP/:id/tClass/:cId/edit", component: EditClassComponent },
   { path: "NoAccess", component: NoAccessComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' }
 ];
@@ -36,6 +41,8 @@ const appRoutes: Routes = [
     NoAccessComponent,
     TClassComponent,
     NewClassComponent,
+    EditClassComponent,
+    SettingsComponent,
   ],
   imports: [
     BrowserModule,

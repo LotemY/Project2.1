@@ -11,26 +11,41 @@ import { Router } from '@angular/router';
 /*
   -TASKS-
 -- ofir jwt
--- class put + html
--- settings & validation
+
+-- teacher del
+-- error to right response
+
+-- get requests (teacher/student/class)
+-- student
 */
 
 export class ControllerService {
 
   public person: Person = new Person();
   public class: Class = new Class();
+  public classArr: Class[] = [];
   public teacherEmitter: EventEmitter<Person> = new EventEmitter<Person>();
   public studentEmitter: EventEmitter<Person> = new EventEmitter<Person>();
-  public classEmitter: EventEmitter<Class> = new EventEmitter<Class>();
+  public classEmitter: EventEmitter<Class[]> = new EventEmitter<Class[]>();
   public localHost = "http://localhost:3600/";
   constructor(private http: HttpClient, private router: Router) {
   }
 
-  public getToken(p: Person) {
+  public setToken(p: Person) {
     const header = {
       headers: new HttpHeaders().set(
         'token',
         p.token
+      )
+    };
+    return header;
+  }
+
+  public getToken() {
+    const header = {
+      headers: new HttpHeaders().set(
+        'token',
+        localStorage.getItem('token')
       )
     };
     return header;
@@ -48,10 +63,10 @@ export class ControllerService {
         subscribe(
           res => {
             if (res.nickName) {
-              this.sNavigate(res);
+              this.sNavigate(res._id, res);
             }
             else {
-              this.tNavigate(res);
+              this.tNavigate(res._id, res);
             }
           },
           err => console.log(err)
@@ -79,7 +94,9 @@ export class ControllerService {
     this.http.post<Class>(`${this.localHost}teacherHP/${c.classTeacher}/newClass`, c).
       subscribe(
         res => {
-          console.log(res);
+          this.classArr[this.classArr.length] = res;
+          this.classEmitter.emit(this.classArr);
+          this.tNavigate(c.classTeacher);
         },
         err => {
           console.log(err);
@@ -94,10 +111,10 @@ export class ControllerService {
         res => {
           localStorage.setItem("token", res.token);
           if (res.nickName) {
-            this.sNavigate(res);
+            this.sNavigate(res._id, res);
           }
           else {
-            this.tNavigate(res);
+            this.tNavigate(res._id, res);
           }
         },
         err => {
@@ -108,7 +125,7 @@ export class ControllerService {
   }
 
   public deleteTeacher(p: Person) {
-    this.http.delete(`${this.localHost}teacherHP/${p._id}`, this.getToken(p)).
+    this.http.delete(`${this.localHost}teacherHP/${p._id}`, this.setToken(p)).
       subscribe(
         res => {
           console.log("User deleted");
@@ -121,7 +138,7 @@ export class ControllerService {
       )
   }
   public deleteStudent(p: Person) {
-    this.http.delete(`${this.localHost}studentHP/${p._id}`, this.getToken(p)).
+    this.http.delete(`${this.localHost}studentHP/${p._id}`, this.setToken(p)).
       subscribe(
         res => {
           console.log("User deleted")
@@ -135,12 +152,11 @@ export class ControllerService {
   }
 
   public editTeacher(p: Person) {
-    this.http.patch<Person>(`${this.localHost}teacherHP/${p._id}`, p, this.getToken(p)).
+    this.http.patch(`${this.localHost}teacherHP/${p._id}/settings`, p, this.setToken(p)).
       subscribe(
         res => {
-          this.teacherEmitter.emit(res);
           console.log("User edit")
-          this.tNavigate(res)
+          this.tNavigate(p._id)
         },
         err => {
           console.log(err);
@@ -150,12 +166,11 @@ export class ControllerService {
   }
 
   public editStudent(p: Person) {
-    this.http.patch<Person>(`${this.localHost}studentHP/${p._id}`, this.getToken(p)).
+    this.http.patch(`${this.localHost}studentHP/${p._id}`, this.setToken(p)).
       subscribe(
         res => {
-          this.studentEmitter.emit(res);
           console.log("User edit")
-          this.sNavigate(res)
+          this.sNavigate(p._id)
         },
         err => {
           console.log(err);
@@ -165,11 +180,28 @@ export class ControllerService {
   }
 
   public editClass(c: Class) {
-    this.http.patch<Class>(`${this.localHost}teacherHP/${c.classTeacher}/tClass/${c._id}`, c).
+    this.http.patch<Class>(`${this.localHost}teacherHP/${c.classTeacher}/tClass/${c._id}/edit`, c).
       subscribe(
         res => {
-          this.classEmitter.emit(res)
-          console.log(res);
+          let i = 0
+          for (i = 0; this.classArr[i]._id != c._id; i++);
+          this.classArr[i] = c;
+          this.classEmitter.emit(this.classArr);
+          this.goClass(c.classTeacher, c._id);
+        },
+        err => {
+          console.log(err);
+          this.noAccess();
+        }
+      )
+  }
+
+  public deleteClass(c: Class) {
+    this.http.delete(`${this.localHost}teacherHP/${c.classTeacher}/tClass/${c._id}/edit`).
+      subscribe(
+        res => {
+          console.log("Class deleted");
+          this.tNavigate(c.classTeacher);
         },
         err => {
           console.log(err);
@@ -179,16 +211,16 @@ export class ControllerService {
   }
 
   public getStudent(p: Person) {
-    this.http.get<Person>(`${this.localHost}studentHP/${p._id}`, this.getToken(p)).
-      subscribe(res => this.sNavigate(res))
+    this.http.get<Person>(`${this.localHost}studentHP/${p._id}`, this.setToken(p)).
+      subscribe(res => this.sNavigate(res._id, res))
   }
 
   public getTeacher(p: Person) {
-    this.http.get<Person>(`${this.localHost}teacherHP/${p._id}`, this.getToken(p)).
+    this.http.get<Person>(`${this.localHost}teacherHP/${p._id}`, this.setToken(p)).
       subscribe(
         res => {
           console.log("ok")
-          this.tNavigate(res)
+          this.tNavigate(res._id, res)
         },
         err => {
           console.log("not ok")
@@ -196,15 +228,24 @@ export class ControllerService {
       )
   }
 
-  public tNavigate(p: Person) {
-    this.person = p;
-    this.teacherEmitter.emit(this.person);
-    this.router.navigate([`teacherHP/${p._id}`]);
+  public tNavigate(id: String, p?: Person) {
+    if (p) {
+      this.person = p;
+      this.teacherEmitter.emit(this.person);
+      this.router.navigate([`teacherHP/${p._id}`]);
+    }
+    else
+      this.router.navigate([`teacherHP/${id}`]);
   }
-  public sNavigate(p: Person) {
-    this.person = p;
-    this.studentEmitter.emit(this.person);
-    this.router.navigate([`studentHP/${p._id}`]);
+
+  public sNavigate(id: String, p?: Person) {
+    if (p) {
+      this.person = p;
+      this.studentEmitter.emit(this.person);
+      this.router.navigate([`studentHP/${p._id}`]);
+    }
+    else
+      this.router.navigate([`studentHP/${id}`]);
   }
   public loginNavigate() {
     this.router.navigate(["login/"]);
@@ -212,12 +253,16 @@ export class ControllerService {
   public noAccess() {
     this.router.navigate(["NoAccess/"]);
   }
-
   public goCreateClass(id: String) {
     this.router.navigate([`teacherHP/${id}/newClass`]);
   }
-
   public goClass(id: String, cId: String) {
     this.router.navigate([`teacherHP/${id}/tClass/${cId}`]);
+  }
+  public goEditClass(id: String, cId: String) {
+    this.router.navigate([`teacherHP/${id}/tClass/${cId}/edit`]);
+  }
+  public goSettings(id: String) {
+    this.router.navigate([`teacherHP/${id}/settings`]);
   }
 }

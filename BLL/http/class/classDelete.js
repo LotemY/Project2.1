@@ -6,13 +6,11 @@ require('dotenv').config();
 
 let classCollection = mongoose.connection.collection("class");
 
-classD.delete("/", async (req, res) => {
-    if (await classCollection.findOne({ _id: req.body._id })) {
-        classCollection.deleteOne(req.body._id);
-        res.status(200).send("Class Got Delete");
-    }
-    else
-        res.status(500).send();
+classD.delete("/teacherHP/:id/tClass/:cId/edit", async (req, res) => {
+    await classCollection.deleteOne({ _id: req.params.cId }, async (err, res) => {
+        if (err) return res.status(500).send();
+    });
+    res.status(200).send();
 })
 
 module.exports = classD;

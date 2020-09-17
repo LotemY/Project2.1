@@ -39,10 +39,9 @@ export class RegisterComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
 
-    if (this.personForm.invalid) {
+    if (this.personForm.invalid) 
       return;
-    }
-
+    
     this.myPerson.firstName = this.personForm.get('firstName').value;
     this.myPerson.lastName = this.personForm.get('lastName').value;
     this.myPerson.email = this.personForm.get('email').value;

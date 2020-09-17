@@ -3,6 +3,10 @@
 <button (click)="goCreateClass()">Create a new class</button>
 <br>
 <br>
-<div>
-    <button (click)="goClass()">my Class</button>
+<button (click)="goSettings()">Settings</button>
+<br>
+<br>
+
+<div *ngFor="let c of myClass">
+    <button (click)="goClass(c)">{{c.className}} {{c.grade}}</button>
 </div>
