@@ -10,12 +10,14 @@ import { Router } from '@angular/router';
 
 /*
   -TASKS-
--- ofir jwt
+-- class get
+-- auto login
+-- token + auth
 
 -- teacher del
+
 -- error to right response
 
--- get requests (teacher/student/class)
 -- student
 */
 
@@ -26,8 +28,9 @@ export class ControllerService {
   public classArr: Class[] = [];
   public teacherEmitter: EventEmitter<Person> = new EventEmitter<Person>();
   public studentEmitter: EventEmitter<Person> = new EventEmitter<Person>();
-  public classEmitter: EventEmitter<Class[]> = new EventEmitter<Class[]>();
-  public localHost = "http://localhost:3600/";
+  public classEmitter: EventEmitter<Class> = new EventEmitter<Class>();
+  public classesEmitter: EventEmitter<Class[]> = new EventEmitter<Class[]>();
+  private localHost = "http://localhost:3600/";
   constructor(private http: HttpClient, private router: Router) {
   }
 
@@ -59,7 +62,7 @@ export class ControllerService {
           localStorage.getItem('token')
         )
       };
-      this.http.get<Person>(`${this.localHost}login`, header).
+      this.http.get<Person>(`${this.localHost}api/login`, header).
         subscribe(
           res => {
             if (res.nickName) {
@@ -77,8 +80,11 @@ export class ControllerService {
     }
   }
 
+
+  //************************  POST  ************************//
+
   public postPerson(p: Person) {
-    this.http.post(`${this.localHost}register`, p).
+    this.http.post(`${this.localHost}api/register`, p).
       subscribe(
         res => {
           this.loginNavigate();
@@ -91,11 +97,11 @@ export class ControllerService {
   }
 
   public postClass(c: Class) {
-    this.http.post<Class>(`${this.localHost}teacherHP/${c.classTeacher}/newClass`, c).
+    this.http.post<Class>(`${this.localHost}api/teacherHP/${c.classTeacher}/newClass`, c).
       subscribe(
         res => {
           this.classArr[this.classArr.length] = res;
-          this.classEmitter.emit(this.classArr);
+          this.classesEmitter.emit(this.classArr);
           this.tNavigate(c.classTeacher);
         },
         err => {
@@ -106,7 +112,7 @@ export class ControllerService {
   }
 
   public loginPerson(p: Person) {
-    this.http.post<Person>(`${this.localHost}login`, p).
+    this.http.post<Person>(`${this.localHost}api/login`, p).
       subscribe(
         res => {
           localStorage.setItem("token", res.token);
@@ -124,8 +130,10 @@ export class ControllerService {
       )
   }
 
+  //************************  DELETE  ************************//
+
   public deleteTeacher(p: Person) {
-    this.http.delete(`${this.localHost}teacherHP/${p._id}`, this.setToken(p)).
+    this.http.delete(`${this.localHost}api/teacherHP/${p._id}`, this.setToken(p)).
       subscribe(
         res => {
           console.log("User deleted");
@@ -138,7 +146,7 @@ export class ControllerService {
       )
   }
   public deleteStudent(p: Person) {
-    this.http.delete(`${this.localHost}studentHP/${p._id}`, this.setToken(p)).
+    this.http.delete(`${this.localHost}api/studentHP/${p._id}`, this.setToken(p)).
       subscribe(
         res => {
           console.log("User deleted")
@@ -151,8 +159,25 @@ export class ControllerService {
       )
   }
 
+  public deleteClass(c: Class) {
+    this.http.delete(`${this.localHost}api/teacherHP/${c.classTeacher}/tClass/${c._id}/edit`).
+      subscribe(
+        res => {
+          console.log("Class deleted");
+          this.tNavigate(c.classTeacher);
+        },
+        err => {
+          console.log(err);
+          this.noAccess();
+        }
+      )
+  }
+
+  //************************  PATCH  ************************//
+
+
   public editTeacher(p: Person) {
-    this.http.patch(`${this.localHost}teacherHP/${p._id}/settings`, p, this.setToken(p)).
+    this.http.patch(`${this.localHost}api/teacherHP/${p._id}/settings`, p, this.setToken(p)).
       subscribe(
         res => {
           console.log("User edit")
@@ -166,7 +191,7 @@ export class ControllerService {
   }
 
   public editStudent(p: Person) {
-    this.http.patch(`${this.localHost}studentHP/${p._id}`, this.setToken(p)).
+    this.http.patch(`${this.localHost}api/studentHP/${p._id}`, this.setToken(p)).
       subscribe(
         res => {
           console.log("User edit")
@@ -180,13 +205,13 @@ export class ControllerService {
   }
 
   public editClass(c: Class) {
-    this.http.patch<Class>(`${this.localHost}teacherHP/${c.classTeacher}/tClass/${c._id}/edit`, c).
+    this.http.patch<Class>(`${this.localHost}api/teacherHP/${c.classTeacher}/tClass/${c._id}/edit`, c).
       subscribe(
         res => {
           let i = 0
           for (i = 0; this.classArr[i]._id != c._id; i++);
           this.classArr[i] = c;
-          this.classEmitter.emit(this.classArr);
+          this.classesEmitter.emit(this.classArr);
           this.goClass(c.classTeacher, c._id);
         },
         err => {
@@ -196,37 +221,59 @@ export class ControllerService {
       )
   }
 
-  public deleteClass(c: Class) {
-    this.http.delete(`${this.localHost}teacherHP/${c.classTeacher}/tClass/${c._id}/edit`).
+  //************************  GET  ************************//
+
+  public getStudent() {
+    this.http.get<Person>(`${this.localHost}api/user`, this.getToken()).
       subscribe(
         res => {
-          console.log("Class deleted");
-          this.tNavigate(c.classTeacher);
+          this.studentEmitter.emit(res);
         },
         err => {
-          console.log(err);
-          this.noAccess();
+          console.log("not ok");
         }
       )
   }
 
-  public getStudent(p: Person) {
-    this.http.get<Person>(`${this.localHost}studentHP/${p._id}`, this.setToken(p)).
-      subscribe(res => this.sNavigate(res._id, res))
-  }
-
-  public getTeacher(p: Person) {
-    this.http.get<Person>(`${this.localHost}teacherHP/${p._id}`, this.setToken(p)).
+  public getTeacher() {
+    this.http.get<Person>(`${this.localHost}api/user`, this.getToken()).
       subscribe(
         res => {
-          console.log("ok")
-          this.tNavigate(res._id, res)
+          this.teacherEmitter.emit(res);
         },
         err => {
-          console.log("not ok")
+          console.log("not ok");
         }
       )
   }
+
+  public getClasses() {
+    this.http.get<Class[]>(`${this.localHost}api/classes`, this.getToken()).
+      subscribe(
+        res => {
+          this.classArr = res;
+          this.classesEmitter.emit(res);
+        },
+        err => {
+          console.log("not ok");
+        }
+      )
+  }
+
+  public getClass(cId: String) {
+    this.http.get<Class>(`${this.localHost}api/class/${cId}`, this.getToken()).
+      subscribe(
+        res => {
+          this.class = res;
+          this.classEmitter.emit(res);
+        },
+        err => {
+          console.log("not ok");
+        }
+      )
+  }
+
+  //************************  NAV  ************************//
 
   public tNavigate(id: String, p?: Person) {
     if (p) {

@@ -12,7 +12,7 @@ const userCollection = mongoose.connection.collection("user")
 let tempId = "";
 let numberId = 0;
 
-userP.post("/register", async (req, res) => {
+userP.post("/api/register", async (req, res) => {
     if (await userCollection.findOne({ email: req.body.email })){
         console.log("Email already exists");
         return res.status(400).send();
@@ -55,7 +55,7 @@ userP.post("/register", async (req, res) => {
     }
 })
 
-userP.post("/login", async (req, res) => {
+userP.post("/api/login", async (req, res) => {
     await userCollection.findOne({ email: req.body.email }, async (err, user) => {
         if (err) {
             console.log(err);

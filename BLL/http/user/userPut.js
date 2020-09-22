@@ -8,7 +8,7 @@ const auth = require('../auth');
 
 let userCollection = mongoose.connection.collection("user");
 
-userPut.patch("/teacherHP/:id/settings", async (req, res) => {
+userPut.patch("/api/teacherHP/:id/settings", async (req, res) => {
     try {
         if (req.body.email) {
             if (await userCollection.findOne({ email: req.body.email }))
@@ -28,7 +28,7 @@ userPut.patch("/teacherHP/:id/settings", async (req, res) => {
     res.status(200).send();
 });
 
-userPut.patch("/studentHP/:id/settings", async (req, res) => {
+userPut.patch("/api/studentHP/:id/settings", async (req, res) => {
     try {
         if (req.body.email)
             await userCollection.updateOne({ _id: req.body._id }, { $set: { email: req.body.email } });

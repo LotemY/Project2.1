@@ -21,12 +21,12 @@ const appRoutes: Routes = [
   { path: "register", component: RegisterComponent },
   { path: "login", component: LoginComponent },
   { path: "teacherHP/:id", component: TeacherHPComponent },
-  { path: "studentHP/:id", component: StudentHPComponent },
-  { path: "teacherHP/:id/settings", component: SettingsComponent },
-  { path: "studentHP/:id/settings", component: SettingsComponent },
   { path: "teacherHP/:id/newClass", component: NewClassComponent },
+  { path: "teacherHP/:id/settings", component: SettingsComponent },
   { path: "teacherHP/:id/tClass/:cId", component: TClassComponent },
   { path: "teacherHP/:id/tClass/:cId/edit", component: EditClassComponent },
+  { path: "studentHP/:id", component: StudentHPComponent },
+  { path: "studentHP/:id/settings", component: SettingsComponent },
   { path: "NoAccess", component: NoAccessComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' }
 ];
@@ -48,7 +48,7 @@ const appRoutes: Routes = [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    RouterModule.forRoot(appRoutes),
+    RouterModule.forRoot(appRoutes, { useHash: true }),
     HttpClientModule,
     ReactiveFormsModule
   ],

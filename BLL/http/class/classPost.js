@@ -11,7 +11,7 @@ let userCollection = mongoose.connection.collection("user");
 
 let thisId = 10;
 
-classP.post("/teacherHP/:id/newClass", async (req, res) => {
+classP.post("/api/teacherHP/:id/newClass", async (req, res) => {
     let students = []
     let sutdentCounter = 0;
     let reqCounter = 0;

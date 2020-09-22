@@ -7,7 +7,7 @@ const auth = require('../auth');
 
 let classCollection = mongoose.connection.collection("class");
 
-classPut.patch("/teacherHP/:id/tClass/:cId/edit", async (req, res) => {
+classPut.patch("/api/teacherHP/:id/tClass/:cId/edit", async (req, res) => {
     try {
         await classCollection.findOne({ _id: req.body._id }, async (err, iClass) => {
             if (err)

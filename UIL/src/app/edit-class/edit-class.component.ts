@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ControllerService } from '../controller.service'
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute } from '@angular/router';
 import { Class } from '../shared/models/Class';
 import { Person } from '../shared/models/Person';
 
@@ -10,26 +10,25 @@ import { Person } from '../shared/models/Person';
   styleUrls: ['./edit-class.component.css']
 })
 export class EditClassComponent implements OnInit {
-  public thisClass: Class = new Class();
-  public editSubject: String[];
-  public editStudents: String[];
+  public thisClass: Class;
+  public editSubject: String[]=[];
+  public editStudents: String[]=[];
   public classNames: String[] = ["History", "Math", "English"];
   public grades: String[] = ["", "a", "b", "c"];
 
   constructor(private service: ControllerService, private route: ActivatedRoute) {
-
+    this.thisClass = this.service.class;
+    this.service.classEmitter.subscribe(c => {
+      this.thisClass = c;
+      this.editSubject = c.classSubject;
+      this.editStudents = c.classStudents;
+    });
   }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
-      this.thisClass._id = params.get('cId');
-    })
-    let i;
-    for (i = 0; this.service.classArr[i]._id != this.thisClass._id; i++);
-
-    this.thisClass = this.service.classArr[i];
-    this.editSubject = this.thisClass.classSubject;
-    this.editStudents = this.thisClass.classStudents;
+      this.service.getClass(params.get('cId'));
+    });
   }
 
   public editClass(name: String, grade: String) {

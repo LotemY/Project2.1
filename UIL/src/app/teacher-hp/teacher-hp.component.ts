@@ -10,17 +10,20 @@ import { Person } from '../shared/models/Person';
 })
 export class TeacherHPComponent implements OnInit {
 
-  public myClass: Class[] = [];
+  public myClasses: Class[] = [];
   public thisTeacher: Person;
 
   constructor(private service: ControllerService) {
-    this.myClass = this.service.classArr;
+    this.myClasses = this.service.classArr;
     this.thisTeacher = this.service.person;
     this.service.teacherEmitter.subscribe(t => this.thisTeacher = t);
-    this.service.classEmitter.subscribe(c => this.myClass = c);
+    this.service.classesEmitter.subscribe(c => this.myClasses = c);
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.service.getTeacher();
+    this.service.getClasses();
+  }
 
   public goCreateClass() {
     this.service.goCreateClass(this.thisTeacher._id);

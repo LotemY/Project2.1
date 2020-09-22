@@ -20,9 +20,12 @@ export class NewClassComponent implements OnInit {
   constructor(private service: ControllerService) {
     this.newClass = this.service.class;
     this.thisTeacher = this.service.person;
+    this.service.teacherEmitter.subscribe(t => this.thisTeacher = t);
+    this.service.classEmitter.subscribe(c => this.newClass = c);
   }
 
   ngOnInit() {
+    this.service.getTeacher();
     this.newClass.classSubject = [];
     this.newClass.classStudents = [];
   }

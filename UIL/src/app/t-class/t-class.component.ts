@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ControllerService } from '../controller.service'
-import { ActivatedRoute } from '@angular/router'
+import { ControllerService } from '../controller.service';
+import { ActivatedRoute } from '@angular/router';
 import { Class } from '../shared/models/Class';
 import { Person } from '../shared/models/Person';
 
@@ -10,24 +10,28 @@ import { Person } from '../shared/models/Person';
   styleUrls: ['./t-class.component.css']
 })
 export class TClassComponent implements OnInit {
-  public teacherId: String;
-  public classId: String;
-  constructor(private service: ControllerService, private route: ActivatedRoute) {
+  public thisTeacher: Person;
+  public thisClass: Class;
 
+  constructor(private service: ControllerService, private route: ActivatedRoute) {
+    this.thisTeacher = this.service.person;
+    this.thisClass = this.service.class;
+    this.service.teacherEmitter.subscribe(t => this.thisTeacher = t);
+    this.service.classEmitter.subscribe(c => this.thisClass = c);
   }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
-      this.teacherId = params.get('id');
-      this.classId = params.get('cId');
+      this.service.getClass(params.get('cId'));
     })
+    this.service.getTeacher();
   }
 
   public goEditClass() {
-    this.service.goEditClass(this.teacherId, this.classId);
+    this.service.goEditClass(this.thisTeacher._id, this.thisClass._id);
   }
 
   public goBack() {
-    this.service.tNavigate(this.teacherId);
+    this.service.tNavigate(this.thisTeacher._id);
   }
 }

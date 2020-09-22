@@ -15,7 +15,6 @@ const classPostSchema = mongoose.Schema({
     },
     classSubject: {
         type: Array,
-        required: true
     },
     classTeacher: {
         type: String,
