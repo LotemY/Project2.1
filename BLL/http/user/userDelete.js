@@ -6,18 +6,23 @@ require('dotenv').config();
 const auth = require('../auth');
 
 let userCollection = mongoose.connection.collection("user");
+let classCollection = mongoose.connection.collection("class");
 
-userD.delete(`/api/teacherHP/:id`, async (req, res) => {
-    await userCollection.deleteOne({ _id: req.params.id }, async (err, res) => {
+userD.delete(`/api/user/:id/delete`, auth, async (req, res) => {
+    let user = await userCollection.findOne({ _id: req.params.id });
+
+    await userCollection.deleteOne({ _id: user._id }, async (err, res) => {
         if (err) return res.status(500).send();
     });
+
+    if (user.nickName) {
+        await classCollection.updateMany({}, { $pull: { classStudents: user._id } });
+    }
+    else
+        await classCollection.deleteMany({ classTeacher: user._id });
+
     res.status(200).send();
 })
 
-userD.delete(`/api/studentHP/:id`, async (req, res) => {
-    await userCollection.deleteOne({ _id: req.params.id }, async (err, res) => {
-        if (err) return res.status(500).send();
-    });
-    res.status(200).send();
-})
+
 module.exports = userD;

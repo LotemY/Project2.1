@@ -68,7 +68,7 @@ userP.post("/api/login", async (req, res) => {
         if (!validPass)
             return res.status(400).send("Invalid password");
 
-        const token = jwt.sign({ _id: user._id }, process.env.SECRET_TOKEN, { expiresIn: '30 minutes' });
+        const token = jwt.sign({ _id: user._id }, process.env.SECRET_TOKEN, { expiresIn: '900 minutes' });
 
         await userCollection.updateOne({ _id: user._id }, { $set: { token: token } });
 

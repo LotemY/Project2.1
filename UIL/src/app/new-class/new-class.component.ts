@@ -25,7 +25,7 @@ export class NewClassComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.service.getTeacher();
+    this.service.getUser();
     this.newClass.classSubject = [];
     this.newClass.classStudents = [];
   }
@@ -44,6 +44,10 @@ export class NewClassComponent implements OnInit {
 
   public addSub(sub: String) {
     if (sub) {
+      for (let i = 0; i < this.newClass.classSubject.length; i++)
+        if (this.newClass.classSubject[i] == sub)
+          return alert("Subject already exist");
+
       if (this.subCounter < 10) {
         if (sub) {
           this.newClass.classSubject[this.subCounter] = sub;

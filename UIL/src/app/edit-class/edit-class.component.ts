@@ -11,8 +11,8 @@ import { Person } from '../shared/models/Person';
 })
 export class EditClassComponent implements OnInit {
   public thisClass: Class;
-  public editSubject: String[]=[];
-  public editStudents: String[]=[];
+  public editSubject: String[] = [];
+  public editStudents: String[] = [];
   public classNames: String[] = ["History", "Math", "English"];
   public grades: String[] = ["", "a", "b", "c"];
 
@@ -29,6 +29,7 @@ export class EditClassComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       this.service.getClass(params.get('cId'));
     });
+    this.service.getClasses();
   }
 
   public editClass(name: String, grade: String) {
@@ -43,6 +44,10 @@ export class EditClassComponent implements OnInit {
 
   public addSub(sub: String) {
     if (sub) {
+      for (let i = 0; i < this.editSubject.length; i++) 
+        if (sub == this.editSubject[i])
+          return alert("Subject already exist");
+      
       if (this.editSubject.length == 10)
         return alert("Max class subjects has reached");
       this.editSubject[this.editSubject.length] = sub;
@@ -65,6 +70,7 @@ export class EditClassComponent implements OnInit {
   public removeElement(element: String) {
     let temp: String[] = [];
     let tempCounter = 0;
+    let del: Boolean = false;
     let i, j;
 
     if (Number(element)) {
@@ -84,6 +90,7 @@ export class EditClassComponent implements OnInit {
           temp[tempCounter] = this.editSubject[i];
           tempCounter++;
         }
+
       this.editSubject = [];
       for (j = 0; j < temp.length; j++)
         this.editSubject[j] = temp[j];

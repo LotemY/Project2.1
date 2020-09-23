@@ -21,7 +21,7 @@ export class TeacherHPComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.service.getTeacher();
+    this.service.getUser();
     this.service.getClasses();
   }
 

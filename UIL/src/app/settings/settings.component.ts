@@ -9,21 +9,24 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./settings.component.css']
 })
 export class SettingsComponent implements OnInit {
-  public thisTeacher: Person;
+  public thisUser: Person;
   public edit: Person = new Person();
   public personForm: FormGroup;
   public submitted = false;
 
   constructor(private service: ControllerService, private fb: FormBuilder) {
-    this.thisTeacher = this.service.person;
-    this.service.teacherEmitter.subscribe(t => this.thisTeacher = t);
+    this.thisUser = this.service.person;
+
+    this.service.teacherEmitter.subscribe(t => this.thisUser = t);
+    this.service.studentEmitter.subscribe(s => this.thisUser = s);
   }
 
   ngOnInit() {
-    this.service.getTeacher();
+    this.service.getUser();
     this.personForm = this.fb.group({
       email: ['', [Validators.email]],
-      password: ['', [Validators.minLength(6), Validators.maxLength(11), Validators.pattern('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$')]]
+      password: ['', [Validators.minLength(6), Validators.maxLength(11), Validators.pattern('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$')]],
+      nickName: ['', [Validators.minLength(3), Validators.maxLength(8)]],
     })
   }
 
@@ -43,17 +46,26 @@ export class SettingsComponent implements OnInit {
     if (this.personForm.get('password').value)
       this.edit.password = this.personForm.get('password').value;
 
-    if (!this.personForm.get('email').value && !this.personForm.get('password').value)
+    if (this.personForm.get('nickName').value)
+      this.edit.nickName = this.personForm.get('nickName').value;
+
+    if (!this.edit.nickName && this.thisUser.nickName)
+      this.edit.nickName = this.thisUser.nickName;
+
+    if (!this.personForm.get('email').value && !this.personForm.get('password').value && !this.personForm.get('nickName').value)
       alert("Nothing to change");
 
     else {
-      this.edit._id = this.thisTeacher._id;
-      this.edit.token = this.thisTeacher.token;
-      this.service.editTeacher(this.edit);
+      this.edit._id = this.thisUser._id;
+      this.edit.token = this.thisUser.token;
+      this.service.editUser(this.edit);
     }
   }
 
   public del() {
-    this.service.deleteTeacher(this.thisTeacher);
+    let answer = prompt("Are you sure?\nEnter yes to delete");
+    if (answer == "yes")
+      this.service.deleteUser(this.thisUser);
+
   }
 }

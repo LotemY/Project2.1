@@ -24,7 +24,7 @@ export class TClassComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       this.service.getClass(params.get('cId'));
     })
-    this.service.getTeacher();
+    this.service.getUser();
   }
 
   public goEditClass() {

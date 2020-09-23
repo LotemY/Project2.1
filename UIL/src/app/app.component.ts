@@ -8,10 +8,10 @@ import { ControllerService } from './controller.service'
 })
 
 export class AppComponent implements OnInit {
-  constructor(private service: ControllerService) {
+  constructor() {
 
   }
   ngOnInit() {
-    //this.service.autoLogin();
+    
   }
 }

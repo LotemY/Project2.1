@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Person } from '../shared/models/Person';
 import { ControllerService } from '../controller.service';
 
@@ -7,11 +7,15 @@ import { ControllerService } from '../controller.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit  {
   private exitUser: Person;
 
   constructor(private service: ControllerService) {
     this.exitUser = this.service.person;
+  }
+
+  ngOnInit(){
+    this.service.autoLogin();
   }
 
   public loginReq(email: String, password: String) {
@@ -21,6 +25,3 @@ export class LoginComponent {
   }
 
 }
-
-
-
