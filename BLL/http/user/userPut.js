@@ -8,7 +8,7 @@ const auth = require('../auth');
 
 let userCollection = mongoose.connection.collection("user");
 
-userPut.patch("/api/user/settings/edit", auth, async (req, res) => {
+userPut.patch("/api/user/:id/settings/edit", auth, async (req, res) => {
     try {
         if (req.body.email) {
             if (await userCollection.findOne({ email: req.body.email }))

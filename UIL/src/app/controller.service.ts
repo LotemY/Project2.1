@@ -11,10 +11,10 @@ import { Router } from '@angular/router';
 /*
   -TASKS-
 
--- nav bar
 -- error to right response
    *refrash token*
 -- student
+
 */
 
 export class ControllerService {
@@ -26,6 +26,8 @@ export class ControllerService {
   public studentEmitter: EventEmitter<Person> = new EventEmitter<Person>();
   public classEmitter: EventEmitter<Class> = new EventEmitter<Class>();
   public classesEmitter: EventEmitter<Class[]> = new EventEmitter<Class[]>();
+  public logInEmitter: EventEmitter<Boolean> = new EventEmitter<Boolean>();
+
   private localHost = "http://localhost:3600/";
   constructor(private http: HttpClient, private router: Router) {
   }
@@ -42,7 +44,7 @@ export class ControllerService {
 
   public autoLogin() {
     if (localStorage.getItem('token')) {
-      this.http.get<Person>(`${this.localHost}api/user`, this.getToken()).
+      this.http.get<Person>(`${this.localHost}api/user/${localStorage.getItem('userI')}`, this.getToken()).
         subscribe(
           res => {
             if (res.nickName) {
@@ -57,6 +59,12 @@ export class ControllerService {
     }
   }
 
+  public logOut() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('userI');
+    this.logInEmitter.emit(false);
+    this.loginNavigate();
+  }
 
   //************************  POST  ************************//
 
@@ -78,6 +86,9 @@ export class ControllerService {
       subscribe(
         res => {
           localStorage.setItem("token", res.token);
+          localStorage.setItem("userI", String(res._id));
+          this.logInEmitter.emit(true);
+
           if (res.nickName) {
             this.sNavigate(res._id, res);
           }
@@ -114,6 +125,7 @@ export class ControllerService {
       subscribe(
         res => {
           localStorage.removeItem('token');
+          localStorage.removeItem('userI');
           console.log("User deleted");
           this.loginNavigate();
         },
@@ -142,7 +154,7 @@ export class ControllerService {
 
 
   public editUser(p: Person) {
-    this.http.patch(`${this.localHost}api/user/settings/edit`, p, this.getToken()).
+    this.http.patch(`${this.localHost}api/user/${p._id}/settings/edit`, p, this.getToken()).
       subscribe(
         res => {
           console.log("User edit");
@@ -177,14 +189,16 @@ export class ControllerService {
 
   //************************  GET  ************************//
 
-  public getUser() {
-    this.http.get<Person>(`${this.localHost}api/user`, this.getToken()).
+  public getUser(id: String) {
+    this.http.get<Person>(`${this.localHost}api/user/${id}`, this.getToken()).
       subscribe(
         res => {
+          this.logInEmitter.emit(true);
           if (res.nickName)
             this.studentEmitter.emit(res);
           else
             this.teacherEmitter.emit(res);
+          this.person = res;
         },
         err => {
           this.noAccess();
@@ -192,10 +206,11 @@ export class ControllerService {
       )
   }
 
-  public getClasses() {
-    this.http.get<Class[]>(`${this.localHost}api/classes`, this.getToken()).
+  public getClasses(id: String) {
+    this.http.get<Class[]>(`${this.localHost}api/user/${id}/classes`, this.getToken()).
       subscribe(
         res => {
+          this.logInEmitter.emit(true);
           this.classArr = res;
           this.classesEmitter.emit(res);
         },
@@ -205,10 +220,11 @@ export class ControllerService {
       )
   }
 
-  public getClass(cId: String) {
-    this.http.get<Class>(`${this.localHost}api/class/${cId}`, this.getToken()).
+  public getClass(id: String, cId: String) {
+    this.http.get<Class>(`${this.localHost}api/user/${id}/class/${cId}`, this.getToken()).
       subscribe(
         res => {
+          this.logInEmitter.emit(true);
           this.class = res;
           this.classEmitter.emit(res);
         },
@@ -243,7 +259,8 @@ export class ControllerService {
     this.router.navigate(["login/"]);
   }
   public noAccess() {
-    this.router.navigate(["NoAccess/"]);
+    let id = localStorage.getItem('userI')
+    this.router.navigate([`NoAccess/${id}`]);
   }
   public goCreateClass(id: String) {
     this.router.navigate([`teacherHP/${id}/newClass`]);
@@ -254,10 +271,7 @@ export class ControllerService {
   public goEditClass(id: String, cId: String) {
     this.router.navigate([`teacherHP/${id}/tClass/${cId}/edit`]);
   }
-  public goSettings(id: String) {
-    this.router.navigate([`teacherHP/${id}/settings`]);
-  }
-  public goStuSettings(id: String) {
-    this.router.navigate([`studentHP/${id}/settings`]);
+  public serSettings() {
+    this.router.navigate([`${this.person._id}/settings`]);
   }
 }

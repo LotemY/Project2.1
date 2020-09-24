@@ -27,9 +27,10 @@ export class EditClassComponent implements OnInit {
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
-      this.service.getClass(params.get('cId'));
+      this.service.getClass(params.get('id'), params.get('cId'));
+      this.service.getClasses(params.get('id'));
     });
-    this.service.getClasses();
+    
   }
 
   public editClass(name: String, grade: String) {
@@ -44,10 +45,10 @@ export class EditClassComponent implements OnInit {
 
   public addSub(sub: String) {
     if (sub) {
-      for (let i = 0; i < this.editSubject.length; i++) 
+      for (let i = 0; i < this.editSubject.length; i++)
         if (sub == this.editSubject[i])
           return alert("Subject already exist");
-      
+
       if (this.editSubject.length == 10)
         return alert("Max class subjects has reached");
       this.editSubject[this.editSubject.length] = sub;

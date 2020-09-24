@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ControllerService } from '../controller.service';
+import { ActivatedRoute } from '@angular/router';
 import { Class } from '../shared/models/Class';
 import { Person } from '../shared/models/Person';
 
@@ -11,16 +12,14 @@ import { Person } from '../shared/models/Person';
 export class StudentHPComponent implements OnInit {
   public thisStudent: Person;
 
-  constructor(private service: ControllerService) {
+  constructor(private service: ControllerService, private route: ActivatedRoute) {
     this.thisStudent = this.service.person;
     this.service.studentEmitter.subscribe(s => this.thisStudent = s);
   }
 
   ngOnInit() {
-    this.service.getUser();
-  }
-
-  public goSettings() {
-    this.service.goStuSettings(this.thisStudent._id)
+    this.route.paramMap.subscribe(params => {
+      this.service.getUser(params.get('id'));
+    })
   }
 }

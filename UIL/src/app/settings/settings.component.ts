@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ControllerService } from '../controller.service'
+import { ControllerService } from '../controller.service';
+import { ActivatedRoute } from '@angular/router';
 import { Person } from '../shared/models/Person';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -14,7 +15,7 @@ export class SettingsComponent implements OnInit {
   public personForm: FormGroup;
   public submitted = false;
 
-  constructor(private service: ControllerService, private fb: FormBuilder) {
+  constructor(private service: ControllerService, private route: ActivatedRoute, private fb: FormBuilder) {
     this.thisUser = this.service.person;
 
     this.service.teacherEmitter.subscribe(t => this.thisUser = t);
@@ -22,7 +23,11 @@ export class SettingsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.service.getUser();
+    this.route.paramMap.subscribe(params => {
+      let id = params.get('id');
+      this.service.getUser(id);
+    })
+
     this.personForm = this.fb.group({
       email: ['', [Validators.email]],
       password: ['', [Validators.minLength(6), Validators.maxLength(11), Validators.pattern('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$')]],
@@ -66,6 +71,12 @@ export class SettingsComponent implements OnInit {
     let answer = prompt("Are you sure?\nEnter yes to delete");
     if (answer == "yes")
       this.service.deleteUser(this.thisUser);
+  }
 
+  public goBack() {
+    if (this.thisUser.nickName)
+      this.service.sNavigate(this.thisUser._id)
+    else
+      this.service.tNavigate(this.thisUser._id)
   }
 }

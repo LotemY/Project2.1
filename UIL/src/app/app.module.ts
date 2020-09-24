@@ -22,12 +22,11 @@ const appRoutes: Routes = [
   { path: "login", component: LoginComponent },
   { path: "teacherHP/:id", component: TeacherHPComponent },
   { path: "teacherHP/:id/newClass", component: NewClassComponent },
-  { path: "teacherHP/:id/settings", component: SettingsComponent },
+  { path: ":id/settings", component: SettingsComponent },
   { path: "teacherHP/:id/tClass/:cId", component: TClassComponent },
   { path: "teacherHP/:id/tClass/:cId/edit", component: EditClassComponent },
   { path: "studentHP/:id", component: StudentHPComponent },
-  { path: "studentHP/:id/settings", component: SettingsComponent },
-  { path: "NoAccess", component: NoAccessComponent },
+  { path: "NoAccess/:id", component: NoAccessComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' }
 ];
 

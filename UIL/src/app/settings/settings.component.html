@@ -21,7 +21,7 @@
                 <div *ngIf="thisUser.nickName">
                     <label>Nickname</label>
                     <input formControlName="nickName" class="form-control"
-                        [ngClass]="{ 'is-invalid': submitted && f.nickName.errors }" value="thisUser.nickName"/>
+                        [ngClass]="{ 'is-invalid': submitted && f.nickName.errors }" value="thisUser.nickName" />
                     <div *ngIf="submitted && f.nickName.errors" class="invalid-feedback">
                         <div *ngIf="f.nickName.errors.minlength">Nickname must be at least 3 characters</div>
                         <div *ngIf="f.nickName.errors.maxlength">Nickname can't be more then 8 characters</div>
@@ -33,9 +33,10 @@
             </div>
         </div>
     </form>
-    <div class="form-group col">
-        <div class="text-center">
-            <button (click)="del()">Delete</button>
-        </div>
+    <div class="text-center">
+        <button (click)="del()">Delete</button>
+    </div>
+    <div class="text-center">
+        <button (click)="goBack()">Back</button>
     </div>
 </div>

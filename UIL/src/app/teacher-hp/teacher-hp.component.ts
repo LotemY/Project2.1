@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ControllerService } from '../controller.service'
+import { ActivatedRoute } from '@angular/router';
 import { Class } from '../shared/models/Class';
 import { Person } from '../shared/models/Person';
 
@@ -13,7 +14,7 @@ export class TeacherHPComponent implements OnInit {
   public myClasses: Class[] = [];
   public thisTeacher: Person;
 
-  constructor(private service: ControllerService) {
+  constructor(private service: ControllerService, private route: ActivatedRoute) {
     this.myClasses = this.service.classArr;
     this.thisTeacher = this.service.person;
     this.service.teacherEmitter.subscribe(t => this.thisTeacher = t);
@@ -21,8 +22,11 @@ export class TeacherHPComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.service.getUser();
-    this.service.getClasses();
+    this.route.paramMap.subscribe(params => {
+      this.service.getUser(params.get('id'));
+      this.service.getClasses(params.get('id'));
+    })
+    
   }
 
   public goCreateClass() {
@@ -31,9 +35,5 @@ export class TeacherHPComponent implements OnInit {
 
   public goClass(c: Class) {
     this.service.goClass(c.classTeacher, c._id);
-  }
-
-  public goSettings() {
-    this.service.goSettings(this.thisTeacher._id);
   }
 }

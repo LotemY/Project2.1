@@ -4,11 +4,12 @@ const express = require('express');
 const classG = express.Router();
 const jwt = require('jsonwebtoken');
 const auth = require('../auth');
+const e = require('express');
 
 let userCollection = mongoose.connection.collection("user");
 let classCollection = mongoose.connection.collection("class");
 
-classG.get('/api/classes', auth, async (req, res) => {
+classG.get('/api/user/:id/classes', auth, async (req, res) => {
     let classes;
     try {
         let id = jwt.verify(req.header("token"), process.env.SECRET_TOKEN)._id;
@@ -28,9 +29,17 @@ classG.get('/api/classes', auth, async (req, res) => {
 });
 
 
-classG.get(`/api/class/:cId`, auth, async (req, res) => {
-    let iClass = await classCollection.findOne({ _id: req.params.cId });
-    res.send(iClass);
+classG.get(`/api/user/:id/class/:cId`, auth, async (req, res) => {
+    try {
+        let iClass = await classCollection.findOne({ _id: req.params.cId });
+        if (req.params.id == iClass.classTeacher)
+            res.send(iClass);
+        else
+            res.status(401).send("Error")
+    }
+    catch (err) {
+        return res.status(401).send();
+    }
 });
 
 

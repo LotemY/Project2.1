@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ControllerService } from '../controller.service'
+import { ControllerService } from '../controller.service';
+import { ActivatedRoute } from '@angular/router';
 import { Class } from '../shared/models/Class';
 import { Person } from '../shared/models/Person';
 
@@ -17,7 +18,7 @@ export class NewClassComponent implements OnInit {
   public subCounter = 0;
   public stuCounter = 0;
 
-  constructor(private service: ControllerService) {
+  constructor(private service: ControllerService, private route: ActivatedRoute) {
     this.newClass = this.service.class;
     this.thisTeacher = this.service.person;
     this.service.teacherEmitter.subscribe(t => this.thisTeacher = t);
@@ -25,7 +26,9 @@ export class NewClassComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.service.getUser();
+    this.route.paramMap.subscribe(params => {
+      this.service.getUser(params.get('id'));
+    })
     this.newClass.classSubject = [];
     this.newClass.classStudents = [];
   }

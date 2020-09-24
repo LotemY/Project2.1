@@ -8,10 +8,17 @@ import { ControllerService } from './controller.service'
 })
 
 export class AppComponent implements OnInit {
-  constructor() {
-
+  public loged: Boolean = false;
+  constructor(private service: ControllerService) {
+    this.service.logInEmitter.subscribe(l => this.loged = l);
   }
-  ngOnInit() {
-    
+
+  ngOnInit() { }
+
+  public logOut() {
+    return this.service.logOut();
+  }
+  public goSettings() {
+    this.service.serSettings();
   }
 }

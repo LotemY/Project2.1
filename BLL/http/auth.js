@@ -1,3 +1,4 @@
+const e = require('express');
 const jwt = require('jsonwebtoken');
 
 module.exports = async (req, res, next) => {
@@ -9,7 +10,11 @@ module.exports = async (req, res, next) => {
 
         const verified = jwt.verify(token, process.env.SECRET_TOKEN);
         req.user = verified;
-        next();
+        const id = jwt.verify(token, process.env.SECRET_TOKEN)._id;
+        if (id == req.params.id)
+            next();
+        else
+            res.status(401).send("Invalid User");
 
     } catch (err) {
         res.status(401).send("Invalid Token");
