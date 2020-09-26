@@ -99,7 +99,7 @@ export class EditClassComponent implements OnInit {
   }
 
   public goBack() {
-    this.service.goClass(this.thisClass.classTeacher, this.thisClass._id);
+    this.service.goTeacherClass(this.thisClass.classTeacher, this.thisClass._id);
   }
   public deleteClass() {
     this.service.deleteClass(this.thisClass);

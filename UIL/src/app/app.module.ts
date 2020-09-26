@@ -16,6 +16,7 @@ import { TClassComponent } from './t-class/t-class.component';
 import { NewClassComponent } from './new-class/new-class.component';
 import { EditClassComponent } from './edit-class/edit-class.component';
 import { SettingsComponent } from './settings/settings.component';
+import { SClassComponent } from './s-class/s-class.component';
 
 const appRoutes: Routes = [
   { path: "register", component: RegisterComponent },
@@ -26,6 +27,7 @@ const appRoutes: Routes = [
   { path: "teacherHP/:id/tClass/:cId", component: TClassComponent },
   { path: "teacherHP/:id/tClass/:cId/edit", component: EditClassComponent },
   { path: "studentHP/:id", component: StudentHPComponent },
+  { path: "studentHP/:id/sClass/:cId", component: SClassComponent },
   { path: "NoAccess/:id", component: NoAccessComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' }
 ];
@@ -42,6 +44,7 @@ const appRoutes: Routes = [
     NewClassComponent,
     EditClassComponent,
     SettingsComponent,
+    SClassComponent,
   ],
   imports: [
     BrowserModule,

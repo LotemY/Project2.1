@@ -34,8 +34,13 @@ classG.get(`/api/user/:id/class/:cId`, auth, async (req, res) => {
         let iClass = await classCollection.findOne({ _id: req.params.cId });
         if (req.params.id == iClass.classTeacher)
             res.send(iClass);
+        else if (req.params.id != iClass.classTeacher) {
+            for (let i = 0; i < iClass.classStudents.length; i++)
+                if (req.params.id == iClass.classStudents[i])
+                    return res.send(iClass);
+        }
         else
-            res.status(401).send("Error")
+            res.status(401).send("Error");
     }
     catch (err) {
         return res.status(401).send();

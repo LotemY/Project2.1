@@ -15,8 +15,8 @@ export class TeacherHPComponent implements OnInit {
   public thisTeacher: Person;
 
   constructor(private service: ControllerService, private route: ActivatedRoute) {
-    this.myClasses = this.service.classArr;
     this.thisTeacher = this.service.person;
+    this.myClasses = this.service.classArr;
     this.service.teacherEmitter.subscribe(t => this.thisTeacher = t);
     this.service.classesEmitter.subscribe(c => this.myClasses = c);
   }
@@ -34,6 +34,6 @@ export class TeacherHPComponent implements OnInit {
   }
 
   public goClass(c: Class) {
-    this.service.goClass(c.classTeacher, c._id);
+    this.service.goTeacherClass(c.classTeacher, c._id);
   }
 }

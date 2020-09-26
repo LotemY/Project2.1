@@ -1,1 +1,6 @@
-<p>student-hp works!</p>
+<br>
+<br>
+
+<div *ngFor="let c of myClasses">
+    <button (click)="goClass(c)">{{c.className}} {{c.grade}}</button>
+</div>

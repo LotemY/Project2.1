@@ -178,7 +178,7 @@ export class ControllerService {
           for (i = 0; this.classArr[i]._id != c._id; i++);
           this.classArr[i] = c;
           this.classesEmitter.emit(this.classArr);
-          this.goClass(c.classTeacher, c._id);
+          this.goTeacherClass(c.classTeacher, c._id);
         },
         err => {
           console.log(err);
@@ -265,8 +265,11 @@ export class ControllerService {
   public goCreateClass(id: String) {
     this.router.navigate([`teacherHP/${id}/newClass`]);
   }
-  public goClass(id: String, cId: String) {
+  public goTeacherClass(id: String, cId: String) {
     this.router.navigate([`teacherHP/${id}/tClass/${cId}`]);
+  }
+  public goStudentClass(id: String, cId: String) {
+    this.router.navigate([`studentHP/${id}/sClass/${cId}`]);
   }
   public goEditClass(id: String, cId: String) {
     this.router.navigate([`teacherHP/${id}/tClass/${cId}/edit`]);
