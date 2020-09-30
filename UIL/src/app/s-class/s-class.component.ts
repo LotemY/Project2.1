@@ -22,7 +22,7 @@ export class SClassComponent implements OnInit {
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
-      this.service.getClass(params.get('id'),params.get('cId'));
+      this.service.getClass(params.get('id'), params.get('cId'));
       this.service.getUser(params.get('id'));
     })
   }

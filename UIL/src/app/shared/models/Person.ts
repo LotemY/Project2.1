@@ -1,3 +1,4 @@
+import { Points } from './Points';
 export class Person {
     _id: String;
     firstName: String;
@@ -5,5 +6,6 @@ export class Person {
     email: String;
     password: String;
     nickName?: String;
-    token:string;
+    token: string;
+    points?: Array<Points>;
 }

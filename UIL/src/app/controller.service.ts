@@ -13,13 +13,13 @@ import { Router } from '@angular/router';
 
 -- error to right response
    *refrash token*
--- student
-
+-- student points 
 */
 
 export class ControllerService {
 
   public person: Person = new Person();
+  public studentInfo: String;
   public class: Class = new Class();
   public classArr: Class[] = [];
   public teacherEmitter: EventEmitter<Person> = new EventEmitter<Person>();
@@ -171,13 +171,9 @@ export class ControllerService {
   }
 
   public editClass(c: Class) {
-    this.http.patch<Class>(`${this.localHost}api/teacherHP/${c.classTeacher}/tClass/${c._id}/edit`, c, this.getToken()).
+    this.http.patch(`${this.localHost}api/teacherHP/${c.classTeacher}/tClass/${c._id}/edit`, c, this.getToken()).
       subscribe(
         res => {
-          let i;
-          for (i = 0; this.classArr[i]._id != c._id; i++);
-          this.classArr[i] = c;
-          this.classesEmitter.emit(this.classArr);
           this.goTeacherClass(c.classTeacher, c._id);
         },
         err => {

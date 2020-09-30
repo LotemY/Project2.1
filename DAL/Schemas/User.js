@@ -26,6 +26,9 @@ const userPostSchema = mongoose.Schema({
     },
     token: {
         type: String
+    },
+    points: {
+        type: Array
     }
 });
 

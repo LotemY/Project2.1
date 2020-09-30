@@ -25,11 +25,19 @@
 
     <div>
         <label>Class Subjects</label>
+        <label *ngIf="totalPoints!=1000">&nbsp;points left&nbsp;{{1000-totalPoints}}</label>
         <table border="1" *ngIf="editSubject[0]">
-            <td>Subjects
-                <tr *ngFor="let sub of editSubject">
-                    {{sub}}<button (click)="removeElement(sub)">Remove</button>
+            <td *ngFor="let sub of editSubject">Subjects
+                <tr >
+                    {{sub.name}}
                 </tr>
+    
+                <tr>
+                    {{sub.points}}
+                    <button (click)="editPoints(sub)">Edit Points</button>
+                </tr>
+                
+                <tr> <button (click)="removeElement(sub)">Remove</button> </tr>
             </td>
         </table>
         <input #sub onfocus="this.value=''"> <button (click)="addSub(sub.value)">Add Subject</button>
@@ -43,7 +51,7 @@
         <table border="1" *ngIf="editStudents[0]">
             <td>Students
                 <tr *ngFor="let student of editStudents">
-                    {{student}}<button (click)="removeElement(student)">Remove</button>
+                    {{student._id}}<button (click)="removeElement(student)">Remove</button>
                 </tr>
             </td>
         </table>

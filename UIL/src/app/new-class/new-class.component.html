@@ -26,7 +26,7 @@
         <table border= "1" *ngIf="newClass.classSubject[0]" >
             <td >Subjects
                 <tr *ngFor="let sub of newClass.classSubject">
-                    {{sub}}
+                    {{sub.name}}
                 </tr>
             </td>
         </table>
@@ -41,7 +41,7 @@
         <table border= "1" *ngIf="newClass.classStudents[0]" >
             <td >Students
                 <tr *ngFor="let student of newClass.classStudents">
-                    {{student}}
+                    {{student._id}}
                 </tr>
             </td>
         </table>

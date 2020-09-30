@@ -3,6 +3,8 @@ import { ControllerService } from '../controller.service';
 import { ActivatedRoute } from '@angular/router';
 import { Class } from '../shared/models/Class';
 import { Person } from '../shared/models/Person';
+import { Points } from '../shared/models/Points';
+import { classSubject } from '../shared/models/classSubject';
 
 @Component({
   selector: 'app-t-class',
@@ -22,10 +24,9 @@ export class TClassComponent implements OnInit {
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
-      this.service.getClass(params.get('id'),params.get('cId'));
+      this.service.getClass(params.get('id'), params.get('cId'));
       this.service.getUser(params.get('id'));
     })
-    
   }
 
   public goEditClass() {

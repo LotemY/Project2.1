@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ɵConsole } from '@angular/core';
 import { ControllerService } from '../controller.service';
 import { ActivatedRoute } from '@angular/router';
 import { Class } from '../shared/models/Class';
 import { Person } from '../shared/models/Person';
+import { classSubject } from '../shared/models/classSubject';
 
 @Component({
   selector: 'app-new-class',
@@ -23,14 +24,14 @@ export class NewClassComponent implements OnInit {
     this.thisTeacher = this.service.person;
     this.service.teacherEmitter.subscribe(t => this.thisTeacher = t);
     this.service.classEmitter.subscribe(c => this.newClass = c);
+    this.newClass.classSubject = [];
+    this.newClass.classStudents = [];
   }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.service.getUser(params.get('id'));
     })
-    this.newClass.classSubject = [];
-    this.newClass.classStudents = [];
   }
 
   public createClass(name: String, grade: String) {
@@ -48,12 +49,16 @@ export class NewClassComponent implements OnInit {
   public addSub(sub: String) {
     if (sub) {
       for (let i = 0; i < this.newClass.classSubject.length; i++)
-        if (this.newClass.classSubject[i] == sub)
+        if (this.newClass.classSubject[i].name == sub)
           return alert("Subject already exist");
 
       if (this.subCounter < 10) {
         if (sub) {
-          this.newClass.classSubject[this.subCounter] = sub;
+          let subject: classSubject = new classSubject;
+          subject.name = sub;
+          subject.points = 100;
+
+          this.newClass.classSubject[this.subCounter] = subject;
           this.subCounter++;
         }
       }
@@ -66,10 +71,11 @@ export class NewClassComponent implements OnInit {
     if (this.stuCounter < 40) {
       if (id) {
         for (let i = 0; i < this.newClass.classStudents.length; i++)
-          if (this.newClass.classStudents[i] == id)
+          if (this.newClass.classStudents[i]._id == id)
             return alert("Student already exists");
 
-        this.newClass.classStudents[this.stuCounter] = id;
+        this.newClass.classStudents[this.stuCounter] = new Person();
+        this.newClass.classStudents[this.stuCounter]._id = id;
         this.stuCounter++;
       }
     }

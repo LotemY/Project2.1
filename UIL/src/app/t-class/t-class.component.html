@@ -1,5 +1,16 @@
-<p>t-class works!</p>
-
+<table border="1">
+    Studnets
+    <tr *ngFor="let s of thisClass.classStudents">
+        <td>
+            {{s.firstName}}
+        </td>
+        <td>
+            {{s.lastName}}
+        </td>
+    </tr>
+</table>
+<br>
+<br>
 <button (click)="goEditClass()">Edit Class</button>
 <br>
 <br>

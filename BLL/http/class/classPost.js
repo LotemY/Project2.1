@@ -12,7 +12,6 @@ let userCollection = mongoose.connection.collection("user");
 let thisId = 10;
 
 classP.post("/api/teacherHP/:id/newClass", auth, async (req, res) => {
-    let students = []
     let sutdentCounter = 0;
     let reqCounter = 0;
     let newClass = new classSchema({
@@ -30,15 +29,18 @@ classP.post("/api/teacherHP/:id/newClass", auth, async (req, res) => {
             thisId++;
             newClass._id = thisId;
         }
-        while (reqCounter < 40) {
-            if (await userCollection.findOne({ _id: req.body.classStudents[reqCounter] })) {
-                students[sutdentCounter] = req.body.classStudents[reqCounter];
+        while (reqCounter < req.body.classStudents.length) {
+            let user = await userCollection.findOne({ _id: String(req.body.classStudents[reqCounter]._id) })
+            if (user) {
+                
+                user.email = undefined;
+                user.password = undefined;
+                user.token = undefined;
+                newClass.classStudents[sutdentCounter] = user;
                 sutdentCounter++;
             }
             reqCounter++;
         }
-
-        newClass.classStudents = students;
 
         await classCollection.insertOne(newClass, async (err, res) => {
             if (err) return console.log(err);
