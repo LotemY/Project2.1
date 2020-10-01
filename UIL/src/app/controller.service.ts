@@ -17,8 +17,9 @@ import { Router } from '@angular/router';
 */
 
 export class ControllerService {
-
+  
   public person: Person = new Person();
+  public info: String;
   public studentInfo: String;
   public class: Class = new Class();
   public classArr: Class[] = [];
@@ -27,6 +28,8 @@ export class ControllerService {
   public classEmitter: EventEmitter<Class> = new EventEmitter<Class>();
   public classesEmitter: EventEmitter<Class[]> = new EventEmitter<Class[]>();
   public logInEmitter: EventEmitter<Boolean> = new EventEmitter<Boolean>();
+  public infoEmitter: EventEmitter<String> = new EventEmitter<String>();
+
 
   private localHost = "http://localhost:3600/";
   constructor(private http: HttpClient, private router: Router) {
@@ -230,6 +233,7 @@ export class ControllerService {
       )
   }
 
+
   //************************  NAV  ************************//
 
   public tNavigate(id: String, p?: Person) {
@@ -272,5 +276,10 @@ export class ControllerService {
   }
   public serSettings() {
     this.router.navigate([`${this.person._id}/settings`]);
+  }
+  public goSubInfo(id: String, cId:String, info:String){
+    this.info = info;
+    this.infoEmitter.emit(info);
+    this.router.navigate([`teacherHP/${id}/tClass/${cId}/${info}`]);
   }
 }

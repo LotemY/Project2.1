@@ -6,39 +6,32 @@ import { Person } from '../shared/models/Person';
 import { Points } from '../shared/models/Points';
 import { classSubject } from '../shared/models/classSubject';
 
+
 @Component({
-  selector: 'app-t-class',
-  templateUrl: './t-class.component.html',
-  styleUrls: ['./t-class.component.css']
+  selector: 'app-sub-info',
+  templateUrl: './sub-info.component.html',
+  styleUrls: ['./sub-info.component.css']
 })
-export class TClassComponent implements OnInit {
+export class SubInfoComponent implements OnInit {
+  
   public thisTeacher: Person;
   public thisClass: Class;
+  public info: String;
 
   constructor(private service: ControllerService, private route: ActivatedRoute) {
     this.thisTeacher = this.service.person;
     this.thisClass = this.service.class;
+    this.info= this.service.info;
     this.service.teacherEmitter.subscribe(t => this.thisTeacher = t);
     this.service.classEmitter.subscribe(c => this.thisClass = c);
+    this.service.infoEmitter.subscribe(i => this.info = i);
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.service.getClass(params.get('id'), params.get('cId'));
       this.service.getUser(params.get('id'));
     })
-  }
-
-  public goEditClass() {
-    this.service.goEditClass(this.thisTeacher._id, this.thisClass._id);
-  }
-
-  public goBack() {
-    this.service.tNavigate(this.thisTeacher._id);
-  }
-
-  public subInfo(info:String) {
-    this.service.goSubInfo(this.thisTeacher._id, this.thisClass._id,info);
   }
 
 }

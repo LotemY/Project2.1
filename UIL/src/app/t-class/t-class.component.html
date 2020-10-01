@@ -1,11 +1,11 @@
 <table border="1">
-    Studnets
-    <tr *ngFor="let s of thisClass.classStudents">
+    <title>Subjects</title>
+    <tr *ngFor="let s of thisClass.classSubject">
         <td>
-            {{s.firstName}}
+            <button (click)="subInfo(s.name)">{{s.name}}</button>
         </td>
         <td>
-            {{s.lastName}}
+            {{s.points}}
         </td>
     </tr>
 </table>

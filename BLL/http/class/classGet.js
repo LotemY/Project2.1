@@ -48,6 +48,4 @@ classG.get(`/api/user/:id/class/:cId`, auth, async (req, res) => {
     }
 });
 
-
 module.exports = classG;
-
