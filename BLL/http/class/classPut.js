@@ -8,6 +8,7 @@ const auth = require('../auth');
 let classCollection = mongoose.connection.collection("class");
 let userCollection = mongoose.connection.collection("user");
 
+let pointsObj = {};
 classPut.patch("/api/teacherHP/:id/tClass/:cId/edit", auth, async (req, res) => {
     try {
         let iClass = await classCollection.findOne({ _id: req.body._id });
@@ -22,10 +23,15 @@ classPut.patch("/api/teacherHP/:id/tClass/:cId/edit", auth, async (req, res) => 
         for (let i = 0; i < req.body.classStudents.length; i++) {
             let user = await userCollection.findOne({ _id: req.body.classStudents[i]._id })
             if (user) {
+                user.email = undefined;
+                user.password = undefined;
+                user.token = undefined;
+                user.points = [];
+                
+                // במקרה שנושא נמחק, למחוק את האיבר במערך
+                // במקרה של הוספת תלמיד חדש או נושא חדש לאתחל את הנקודות 
+                
                 iClass.classStudents[reqCounter] = user;
-                iClass.classStudents[reqCounter].email = undefined;
-                iClass.classStudents[reqCounter].password = undefined;
-                iClass.classStudents[reqCounter].token = undefined;
                 reqCounter++;
             }
         }

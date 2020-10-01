@@ -17,7 +17,7 @@ import { Router } from '@angular/router';
 */
 
 export class ControllerService {
-  
+
   public person: Person = new Person();
   public info: String;
   public studentInfo: String;
@@ -233,7 +233,6 @@ export class ControllerService {
       )
   }
 
-
   //************************  NAV  ************************//
 
   public tNavigate(id: String, p?: Person) {
@@ -277,7 +276,7 @@ export class ControllerService {
   public serSettings() {
     this.router.navigate([`${this.person._id}/settings`]);
   }
-  public goSubInfo(id: String, cId:String, info:String){
+  public goSubInfo(id: String, cId: String, info: String) {
     this.info = info;
     this.infoEmitter.emit(info);
     this.router.navigate([`teacherHP/${id}/tClass/${cId}/${info}`]);

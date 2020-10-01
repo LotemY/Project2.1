@@ -10,7 +10,7 @@ let classCollection = mongoose.connection.collection("class");
 let userCollection = mongoose.connection.collection("user");
 
 let thisId = 10;
-
+let pointsObj = {};
 classP.post("/api/teacherHP/:id/newClass", auth, async (req, res) => {
     let sutdentCounter = 0;
     let reqCounter = 0;
@@ -32,10 +32,16 @@ classP.post("/api/teacherHP/:id/newClass", auth, async (req, res) => {
         while (reqCounter < req.body.classStudents.length) {
             let user = await userCollection.findOne({ _id: String(req.body.classStudents[reqCounter]._id) })
             if (user) {
-                
                 user.email = undefined;
                 user.password = undefined;
                 user.token = undefined;
+                user.points = [];
+                for (let s = 0; s < newClass.classSubject.length; s++) {
+                    pointsObj.name = newClass.classSubject[s].name;
+                    pointsObj.points = 0;
+                    user.points[s] = pointsObj;
+                    pointsObj = {};
+                }
                 newClass.classStudents[sutdentCounter] = user;
                 sutdentCounter++;
             }
