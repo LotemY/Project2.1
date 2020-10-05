@@ -23,11 +23,23 @@
     <div>
         <label>Class Subjects</label>
         <input #sub onfocus="this.value=''"> <button (click)="addSub(sub.value)">+</button>
-        <table border= "1" *ngIf="newClass.classSubject[0]" >
-            <td >Subjects
+        <table border="1" *ngIf="newClass.classSubject[0]">
+            <td>Subjects
                 <tr *ngFor="let sub of newClass.classSubject">
+                    <button (click)="removeElement(sub.name)">-</button>
                     {{sub.name}}
+                    <button (click)="addSubsub(sub.name)">+</button>
+
+                    <td *ngIf="sub.subsubject[0]">
+                        <table>
+                            <tr *ngFor="let s of sub.subsubject">
+                                <button (click)="removeElement(sub.name,s.name)">-</button>
+                                {{s.name}}
+                            </tr>
+                        </table>
+                    </td>
                 </tr>
+
             </td>
         </table>
     </div>
@@ -38,9 +50,10 @@
     <div>
         <label>Class Students</label>
         <input #student type="number" onfocus="this.value=''"> <button (click)="addStudent(student.value)">+</button>
-        <table border= "1" *ngIf="newClass.classStudents[0]" >
-            <td >Students
+        <table border="1" *ngIf="newClass.classStudents[0]">
+            <td>Students
                 <tr *ngFor="let student of newClass.classStudents">
+                    <button (click)="removeElement(student._id)">-</button>
                     {{student._id}}
                 </tr>
             </td>

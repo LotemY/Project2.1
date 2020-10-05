@@ -16,8 +16,6 @@ export class NewClassComponent implements OnInit {
   public thisTeacher: Person;
   public classNames: String[] = ["History", "Math", "English"];
   public grades: String[] = ["", "a", "b", "c"];
-  public subCounter = 0;
-  public stuCounter = 0;
 
   constructor(private service: ControllerService, private route: ActivatedRoute) {
     this.newClass = this.service.class;
@@ -48,18 +46,19 @@ export class NewClassComponent implements OnInit {
 
   public addSub(sub: String) {
     if (sub) {
-      for (let i = 0; i < this.newClass.classSubject.length; i++)
+      let counter = this.newClass.classSubject.length
+      for (let i = 0; i < counter; i++)
         if (this.newClass.classSubject[i].name == sub)
           return alert("Subject already exist");
 
-      if (this.subCounter < 10) {
+      if (counter < 10) {
         if (sub) {
           let subject: classSubject = new classSubject;
           subject.name = sub;
           subject.points = 100;
+          subject.subsubject = [];
 
-          this.newClass.classSubject[this.subCounter] = subject;
-          this.subCounter++;
+          this.newClass.classSubject[counter] = subject;
         }
       }
       else
@@ -67,16 +66,51 @@ export class NewClassComponent implements OnInit {
     }
   }
 
+  public removeElement(element: any, subsub?: String) {
+    if (subsub || !Number(element))
+      this.newClass.classSubject = this.service.removeElement(element, subsub, this.newClass.classSubject);
+    else {
+      this.newClass.classStudents = this.service.removeElement(element, "", this.newClass.classSubject, this.newClass.classStudents);
+    }
+  }
+
+  public addSubsub(name: String) {
+    let thisSubsub = prompt("Enter name of the subject");
+
+    for (let i = 0; i < this.newClass.classSubject.length; i++) {
+      if (name == this.newClass.classSubject[i].name) {
+        if (name == thisSubsub)
+          return alert("Duplicate name");
+
+        if (this.newClass.classSubject[i].subsubject.length >= 5)
+          return alert("Max class subjects has reached");
+
+        for (let j = 0; j < this.newClass.classSubject[i].subsubject.length; j++)
+          if (this.newClass.classSubject[i].subsubject[j].name == thisSubsub)
+            return alert("Name already exist");
+
+        let sub: classSubject = {
+          name: thisSubsub,
+          points: 0,
+          subsubject: undefined
+        }
+
+        this.newClass.classSubject[i].subsubject[this.newClass.classSubject[i].subsubject.length] = sub;;
+        break;
+      }
+    }
+  }
+
   public addStudent(id: String) {
-    if (this.stuCounter < 40) {
+    let counter = this.newClass.classStudents.length;
+    if (counter < 40) {
       if (id) {
-        for (let i = 0; i < this.newClass.classStudents.length; i++)
+        for (let i = 0; i < counter; i++)
           if (this.newClass.classStudents[i]._id == id)
             return alert("Student already exists");
 
-        this.newClass.classStudents[this.stuCounter] = new Person();
-        this.newClass.classStudents[this.stuCounter]._id = id;
-        this.stuCounter++;
+        this.newClass.classStudents[counter] = new Person();
+        this.newClass.classStudents[counter]._id = id;
       }
     }
     else

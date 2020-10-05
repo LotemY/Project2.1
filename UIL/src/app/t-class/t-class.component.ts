@@ -3,7 +3,6 @@ import { ControllerService } from '../controller.service';
 import { ActivatedRoute } from '@angular/router';
 import { Class } from '../shared/models/Class';
 import { Person } from '../shared/models/Person';
-import { Points } from '../shared/models/Points';
 import { classSubject } from '../shared/models/classSubject';
 
 @Component({

@@ -26,18 +26,27 @@
     <div>
         <label>Class Subjects</label>
         <label *ngIf="totalPoints!=1000">&nbsp;points left&nbsp;{{1000-totalPoints}}</label>
-        <table border="1" *ngIf="editSubject[0]">
-            <td *ngFor="let sub of editSubject">Subjects
-                <tr >
+        <table border="1" *ngIf="thisClass.classSubject[0]">
+            <td *ngFor="let sub of thisClass.classSubject">Subjects
+                <tr>
                     {{sub.name}}
                 </tr>
-    
+
                 <tr>
                     {{sub.points}}
                     <button (click)="editPoints(sub)">Edit Points</button>
                 </tr>
-                
-                <tr> <button (click)="removeElement(sub)">Remove</button> </tr>
+
+                <tr> <button (click)="removeElement(sub)">Remove Subject</button> </tr>
+                <tr>
+                    <table *ngFor="let s of sub.subsubject">
+                        <tr>
+                            <button (click)="removeElement(sub,s)">Remove</button>
+                            {{s.name}}
+                            <button (click)="editPoints(sub,s)">Edit Points</button>
+                        </tr>
+                    </table>
+                </tr>
             </td>
         </table>
         <input #sub onfocus="this.value=''"> <button (click)="addSub(sub.value)">Add Subject</button>
@@ -48,10 +57,10 @@
 
     <div>
         <label>Class Students</label>
-        <table border="1" *ngIf="editStudents[0]">
+        <table border="1" *ngIf="thisClass.classStudents[0]">
             <td>Students
-                <tr *ngFor="let student of editStudents">
-                    {{student._id}}<button (click)="removeElement(student)">Remove</button>
+                <tr *ngFor="let student of thisClass.classStudents">
+                    {{student._id}}<button (click)="removeElement(student._id)">Remove</button>
                 </tr>
             </td>
         </table>

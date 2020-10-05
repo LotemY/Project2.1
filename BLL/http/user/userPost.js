@@ -13,11 +13,11 @@ let tempId = "";
 let numberId = 0;
 
 userP.post("/api/register", async (req, res) => {
-    if (await userCollection.findOne({ email: req.body.email })){
+    if (await userCollection.findOne({ email: req.body.email })) {
         console.log("Email already exists");
         return res.status(400).send();
     }
-        
+
 
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
@@ -27,10 +27,13 @@ userP.post("/api/register", async (req, res) => {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
-        password: hashedPassword
+        password: hashedPassword,
+        points: undefined
     });
-    if (req.body.nickName)
+    if (req.body.nickName) {
         newUser.nickName = req.body.nickName;
+        newUser.points = 0;
+    }
 
     try {
         while (await userCollection.findOne({ _id: newUser._id })) {

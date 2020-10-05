@@ -12,8 +12,6 @@ import { Person } from '../shared/models/Person';
 })
 export class EditClassComponent implements OnInit {
   public thisClass: Class;
-  public editSubject: classSubject[] = [];
-  public editStudents: Person[] = [];
   public classNames: String[] = ["History", "Math", "English"];
   public grades: String[] = ["", "a", "b", "c"];
   public totalPoints = 0;
@@ -22,10 +20,8 @@ export class EditClassComponent implements OnInit {
     this.thisClass = this.service.class;
     this.service.classEmitter.subscribe(c => {
       this.thisClass = c;
-      this.editSubject = c.classSubject;
-      this.editStudents = c.classStudents;
-      for (let i = 0; i < this.editSubject.length; i++)
-        this.totalPoints += Number(this.editSubject[i].points);
+      for (let i = 0; i < this.thisClass.classSubject.length; i++)
+        this.totalPoints += Number(this.thisClass.classSubject[i].points);
     });
   }
 
@@ -36,97 +32,78 @@ export class EditClassComponent implements OnInit {
   }
 
   public editClass(name: String, grade: String) {
-    for (let i = 0; i < this.editSubject.length; i++)
-      if (this.totalPoints != 1000 || this.editSubject[i].points < 100)
-        return alert("Must use all the points (min 100 point per class)");
+    if (this.totalPoints != 1000)
+      return alert("Must use all the points");
+
+    for (let i = 0; i < this.thisClass.classSubject.length; i++)
+      if (this.thisClass.classSubject[i].points < 100)
+        return alert("Min 100 point per class)");
 
     if (grade != "")
       this.thisClass.grade = grade;
     this.thisClass.className = name;
-    this.thisClass.classSubject = this.editSubject;
-    this.thisClass.classStudents = this.editStudents;
     this.service.editClass(this.thisClass);
 
   }
 
   public addSub(sub: String) {
     if (sub) {
-      for (let i = 0; i < this.editSubject.length; i++)
-        if (sub == this.editSubject[i].name)
-          return alert("Subject already exist");
+      let counter = this.thisClass.classSubject.length;
 
-      if (this.editSubject.length == 10)
+      if (counter == 10)
         return alert("Max class subjects has reached");
+
+      for (let i = 0; i < counter; i++)
+        if (sub == this.thisClass.classSubject[i].name)
+          return alert("Subject already exist");
 
       let subject: classSubject = new classSubject;
       subject.name = sub;
       subject.points = 0;
-      this.editSubject[this.editSubject.length] = subject;
+      this.thisClass.classSubject[counter] = subject;
     }
   }
 
-  public editPoints(sub: classSubject) {
+  public editPoints(sub: classSubject, subsub?: String) {
     let points = Number(prompt("Enter points"));
-    for (let i = 0; i < this.editSubject.length; i++)
-      if (this.editSubject[i].name == sub.name) {
-        if (points + this.totalPoints - Number(this.editSubject[i].points) > 1000)
+    if (points == 0)
+      return;
+    for (let i = 0; i < this.thisClass.classSubject.length; i++)
+      if (this.thisClass.classSubject[i].name == sub.name) {
+        if (points + this.totalPoints - Number(this.thisClass.classSubject[i].points) > 1000)
           return alert("total points cannot be above 1000");
         else {
-          this.editSubject[i].points = points;
+          this.thisClass.classSubject[i].points = points;
           break;
         }
       }
 
     this.totalPoints = 0;
 
-    for (let i = 0; i < this.editSubject.length; i++)
-      this.totalPoints += Number(this.editSubject[i].points);
+    for (let i = 0; i < this.thisClass.classSubject.length; i++)
+      this.totalPoints += Number(this.thisClass.classSubject[i].points);
   }
 
   public addStudent(id: String) {
     if (id) {
-      if (this.editStudents.length == 40)
+      let counter = this.thisClass.classStudents.length;
+      if (counter == 40)
         return alert("Max Students has reached");
       else
-        for (let i = 0; i < this.editStudents.length; i++)
-          if (this.editStudents[i]._id == id)
+        for (let i = 0; i < counter; i++)
+          if (this.thisClass.classStudents[i]._id == id)
             return alert("Student already exists");
       let student: Person = new Person()
       student._id = id;
-      this.editStudents[this.editStudents.length] = student;
+      this.thisClass.classStudents[counter] = student;
     }
   }
 
-  public removeElement(element: any) {
-    let tempCounter = 0;
-    let i, j;
-
-    if (Number(element._id)) {
-      let temp: Person[] = [];
-      for (i = 0; i < this.editStudents.length; i++) {
-        if (this.editStudents[i]._id != element._id) {
-          temp[tempCounter] = this.editStudents[i];
-          tempCounter++;
-        }
-      }
-      this.editStudents = [];
-      for (j = 0; j < temp.length; j++)
-        this.editStudents[j] = temp[j];
-    }
-
+  public removeElement(element: any, subsub?: String) {
+    if (subsub || !Number(element))
+      this.thisClass.classSubject = this.service.removeElement(element, subsub, this.thisClass.classSubject);
     else {
-      let temp: classSubject[] = [];
-      this.totalPoints -= element.points;
-
-      for (i = 0; i < this.editSubject.length; i++)
-        if (this.editSubject[i].name != element.name) {
-          temp[tempCounter] = this.editSubject[i];
-          tempCounter++;
-        }
-
-      this.editSubject = [];
-      for (j = 0; j < temp.length; j++)
-        this.editSubject[j] = temp[j];
+      this.thisClass.classStudents = this.service.removeElement(element, "", this.thisClass.classSubject, this.thisClass.classStudents);
     }
   }
 

@@ -2,6 +2,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Person } from './shared/models/Person';
 import { Class } from './shared/models/Class';
+import { classSubject } from './shared/models/classSubject';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -10,10 +11,13 @@ import { Router } from '@angular/router';
 
 /*
   -TASKS-
-
+-- student points
+        edit (rm sub and subsub)
+-- class post?
+-- class Put
+********##########BOOK!!!!########************
 -- error to right response
    *refrash token*
--- student points 
 */
 
 export class ControllerService {
@@ -280,5 +284,53 @@ export class ControllerService {
     this.info = info;
     this.infoEmitter.emit(info);
     this.router.navigate([`teacherHP/${id}/tClass/${cId}/${info}`]);
+  }
+
+  //************************  FUNCTION  ************************//
+
+  public removeElement(element: any, subsub?: String, classSub?: classSubject[], classStu?: Person[]): Array<any> {
+    let tempCounter = 0;
+    let i, j;
+
+    if (Number(element)) {
+      let temp: Person[] = [];
+      for (i = 0; i < classStu.length; i++)
+        if (classStu[i]._id != element) {
+          temp[tempCounter] = classStu[i];
+          tempCounter++;
+        }
+      return temp;  //Students[]
+    }
+
+    else {
+      if (!subsub) {
+        let temp: classSubject[] = [];
+        for (i = 0; i < classSub.length; i++)
+          if (classSub[i].name != element) {
+            temp[tempCounter] = classSub[i];
+            tempCounter++;
+          }
+        return temp;  //Subject[]
+      }
+      else {
+        let temp: classSubject = new classSubject();
+        temp.subsubject = [];
+        for (i = 0; i < classSub.length; i++) {
+          if (classSub[i].name == element) {
+            temp.name = classSub[i].name;
+            temp.points = 100;
+            for (j = 0; j < classSub[i].subsubject.length; j++)
+              if (classSub[i].subsubject[j].name != subsub) {
+                temp.subsubject[tempCounter] = classSub[i].subsubject[j];
+                tempCounter++;
+              }
+
+            classSub[i] = temp;
+            break;
+          }
+        }
+        return classSub;
+      }
+    }
   }
 }
