@@ -37,16 +37,17 @@
                     <button (click)="editPoints(sub)">Edit Points</button>
                 </tr>
 
-                <tr> <button (click)="removeElement(sub)">Remove Subject</button> </tr>
+                <tr> <button (click)="removeElement(sub.name)">Remove Subject</button> </tr>
                 <tr>
                     <table *ngFor="let s of sub.subsubject">
                         <tr>
-                            <button (click)="removeElement(sub,s)">Remove</button>
+                            <button (click)="removeElement(sub.name,s.name)">Remove</button>
                             {{s.name}}
                             <button (click)="editPoints(sub,s)">Edit Points</button>
                         </tr>
                     </table>
                 </tr>
+                <tr><button (click)="addSubsub(sub.name)">Add Subsubject</button></tr>
             </td>
         </table>
         <input #sub onfocus="this.value=''"> <button (click)="addSub(sub.value)">Add Subject</button>
@@ -69,7 +70,7 @@
     </div>
 
     <div class="text-center">
-        <button class="btn btn-primary mr-1" (click)="editClass(name.value,grade.value)">Create</button>
+        <button class="btn btn-primary mr-1" (click)="editClass(name.value,grade.value)">Update</button>
     </div>
     <br>
     <br>

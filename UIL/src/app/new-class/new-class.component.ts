@@ -79,11 +79,11 @@ export class NewClassComponent implements OnInit {
 
     for (let i = 0; i < this.newClass.classSubject.length; i++) {
       if (name == this.newClass.classSubject[i].name) {
-        if (name == thisSubsub)
-          return alert("Duplicate name");
-
         if (this.newClass.classSubject[i].subsubject.length >= 5)
           return alert("Max class subjects has reached");
+
+        if (name == thisSubsub)
+          return alert("Duplicate name");
 
         for (let j = 0; j < this.newClass.classSubject[i].subsubject.length; j++)
           if (this.newClass.classSubject[i].subsubject[j].name == thisSubsub)

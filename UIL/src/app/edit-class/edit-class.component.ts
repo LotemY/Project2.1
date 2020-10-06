@@ -18,10 +18,11 @@ export class EditClassComponent implements OnInit {
 
   constructor(private service: ControllerService, private route: ActivatedRoute) {
     this.thisClass = this.service.class;
+    this.thisClass.classSubject = [];
+    this.thisClass.classStudents = [];
     this.service.classEmitter.subscribe(c => {
       this.thisClass = c;
-      for (let i = 0; i < this.thisClass.classSubject.length; i++)
-        this.totalPoints += Number(this.thisClass.classSubject[i].points);
+      this.checkPoints();
     });
   }
 
@@ -60,7 +61,35 @@ export class EditClassComponent implements OnInit {
       let subject: classSubject = new classSubject;
       subject.name = sub;
       subject.points = 0;
+      subject.subsubject = [];
       this.thisClass.classSubject[counter] = subject;
+    }
+  }
+
+  public addSubsub(name: String) {
+    let thisSubsub = prompt("Enter name of the subject");
+
+    for (let i = 0; i < this.thisClass.classSubject.length; i++) {
+      if (name == this.thisClass.classSubject[i].name) {
+        if (this.thisClass.classSubject[i].subsubject.length >= 5)
+          return alert("Max class subjects has reached");
+
+        if (name == thisSubsub)
+          return alert("Duplicate name");
+
+        for (let j = 0; j < this.thisClass.classSubject[i].subsubject.length; j++)
+          if (this.thisClass.classSubject[i].subsubject[j].name == thisSubsub)
+            return alert("Name already exist");
+
+        let sub: classSubject = {
+          name: thisSubsub,
+          points: 0,
+          subsubject: undefined
+        }
+
+        this.thisClass.classSubject[i].subsubject[this.thisClass.classSubject[i].subsubject.length] = sub;
+        break;
+      }
     }
   }
 
@@ -77,11 +106,7 @@ export class EditClassComponent implements OnInit {
           break;
         }
       }
-
-    this.totalPoints = 0;
-
-    for (let i = 0; i < this.thisClass.classSubject.length; i++)
-      this.totalPoints += Number(this.thisClass.classSubject[i].points);
+    this.checkPoints();
   }
 
   public addStudent(id: String) {
@@ -100,13 +125,19 @@ export class EditClassComponent implements OnInit {
   }
 
   public removeElement(element: any, subsub?: String) {
-    if (subsub || !Number(element))
+    if (subsub || !Number(element)) {
       this.thisClass.classSubject = this.service.removeElement(element, subsub, this.thisClass.classSubject);
-    else {
-      this.thisClass.classStudents = this.service.removeElement(element, "", this.thisClass.classSubject, this.thisClass.classStudents);
+      this.checkPoints();
     }
+    else
+      this.thisClass.classStudents = this.service.removeElement(element, "", this.thisClass.classSubject, this.thisClass.classStudents);
   }
 
+  public checkPoints() {
+    this.totalPoints = 0;
+    for (let i = 0; i < this.thisClass.classSubject.length; i++)
+      this.totalPoints += Number(this.thisClass.classSubject[i].points);
+  }
   public goBack() {
     this.service.goTeacherClass(this.thisClass.classTeacher, this.thisClass._id);
   }

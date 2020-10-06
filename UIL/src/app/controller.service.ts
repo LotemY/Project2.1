@@ -11,10 +11,6 @@ import { Router } from '@angular/router';
 
 /*
   -TASKS-
--- student points
-        edit (rm sub and subsub)
--- class post?
--- class Put
 ********##########BOOK!!!!########************
 -- error to right response
    *refrash token*
