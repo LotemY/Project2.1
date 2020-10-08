@@ -1,9 +1,16 @@
-<br>
-<br>
-<button (click)="goCreateClass()">Create a new class</button>
-<br>
-<br>
+<div>
+    <br><br>
+    <button class="button" (click)="goCreateClass()"><span>create new class</span></button>
+    <br><br>
 
-<div *ngFor="let c of myClasses">
-    <button (click)="goClass(c)">{{c.className}} {{c.grade}}</button>
+    <section class="card-list">
+        <div *ngFor="let c of myClasses">
+            <button class="card" (click)="goClass(c)">
+                <p> {{c.className}}</p>
+                <div id="myProgress">
+                    <div id="myBar">{{c.grade}}</div>
+                </div>
+            </button>
+        </div>
+    </section>
 </div>

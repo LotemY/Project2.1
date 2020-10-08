@@ -1,17 +1,18 @@
-<table border="1">
-    <title>Subjects</title>
-    <tr *ngFor="let s of thisClass.classSubject">
-        <td>
-            <button (click)="subInfo(s.name)">{{s.name}}</button>
-        </td>
-        <td>
-            {{s.points}}
-        </td>
-    </tr>
-</table>
-<br>
-<br>
-<button (click)="goEditClass()">Edit Class</button>
-<br>
-<br>
-<button (click)="goBack()">Back</button>
+
+    <table border="1">
+        <title>Subjects</title>
+        <tr *ngFor="let s of thisClass.classSubject">
+            <td>
+                <button (click)="subInfo(s.name)">{{s.name}}</button>
+            </td>
+            <td>
+                {{s.points}}
+            </td>
+        </tr>
+    </table>
+    <br>
+    <br>
+    <button (click)="goEditClass()">Edit Class</button>
+    <br>
+    <br>
+    <button class="oo" (click)="goBack()">Back</button>

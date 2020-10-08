@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&display=swap');
+
+body {
+    padding: 0;
+    margin: 0;
+
+    color: white;
+    font-family: 'DM Mono', monospace;
+}
+
+.card-list {
+    display: flex;
+    padding: 5rem;
+    overflow-x: auto;
+}
+
+
+.card-header{
+    font-size: 10px;
+}
+
+#myBar {
+    width: 10%;
+    height: 30px;
+    background-color: #ffc27d;
+    text-align: center; /* To center it horizontally (if you want) */
+    line-height: 30px; /* To center it vertically */
+    color: rgb(0, 0, 0);
+  }
+
+
+.card-list::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+.card-list::-webkit-scrollbar-thumb {
+    background: #201c29;
+    border-radius: 10px;
+    box-shadow: inset 2px 2px 2px hsla(0,0%,100%,.25), inset -2px -2px 2px rgba(0,0,0,.25);
+}
+
+.card-list::-webkit-scrollbar-track {
+    background: linear-gradient(90deg,#201c29,#201c29 1px,#17141d 0,#17141d);
+}
+
+
+.card {    
+    font-family: 'DM Mono', monospace;
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    height: 200px;
+    width: 200px;
+    min-width: 200px;
+    padding: 3rem;
+
+    border-radius: 500px;
+    
+    box-shadow: -1rem -1 3rem rgb(184, 182, 182);
+    background-image: url('/UIL/src/assets/history.png');
+    transition: .3s;
+}
+
+
+
+
+
+.card:hover {
+    transform: translateY(-2rem);
+}
+
+.card:hover~.card {
+    transform: translateX(200px);
+}
+
+
+.card:not(:first-child) {
+    margin-left: -50px;
+}
+
+
+
+.button {
+    border-radius: 4px;
+    background-color: #f4511e;
+    border: 50px;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 28px;
+    padding: 20px;
+    width: 200px;
+    height: 200px;
+    transition: ease-in-out 0.5s;
+    cursor: pointer;
+    margin: 1px;
+  }
+  
+  .button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+  
+  .button span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+  
+  .button:hover span {
+    padding-right: 25px;
+  }
+  
+  .button:hover span:after {
+    opacity: 1;
+    right: 0;
+  }

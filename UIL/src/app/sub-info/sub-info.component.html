@@ -1,18 +1,19 @@
-<h2>{{info}}</h2>
 
-<table border="1">
-    <title>Students</title>
-    <tr *ngFor="let s of thisClass.classStudents">
-        <td>
-            {{s.firstName}}
-        </td>
-        <td>
-            {{s.lastName}}
-        </td>
-        <div *ngFor="let p of s.points">
-            <td *ngIf="p.name == info">
-                {{p.points}}
+    <h2>{{info}}</h2>
+
+    <table border="1">
+        <title>Students</title>
+        <tr *ngFor="let s of thisClass.classStudents">
+            <td>
+                {{s.firstName}}
             </td>
-        </div>
-    </tr>
-</table>
+            <td>
+                {{s.lastName}}
+            </td>
+            <div *ngFor="let p of s.points">
+                <td *ngIf="p.name == info">
+                    {{p.points}}
+                </td>
+            </div>
+        </tr>
+    </table>
