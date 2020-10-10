@@ -61,10 +61,6 @@ body {
     transition: .3s;
 }
 
-
-
-
-
 .card:hover {
     transform: translateY(-2rem);
 }

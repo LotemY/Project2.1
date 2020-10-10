@@ -11,7 +11,9 @@ import { Router } from '@angular/router';
 
 /*
   -TASKS-
-********##########BOOK!!!!########************
+table of students
+class points
+Benefits
 -- error to right response
    *refrash token*
 */
@@ -211,6 +213,7 @@ export class ControllerService {
         res => {
           this.logInEmitter.emit(true);
           this.classArr = res;
+          this.classImgs()
           this.classesEmitter.emit(res);
         },
         err => {
@@ -327,6 +330,12 @@ export class ControllerService {
         }
         return classSub;
       }
+    }
+  }
+
+  public classImgs() {
+    for (let i = 0; i < this.classArr.length; i++) {
+      this.classArr[i].img = `../../assets/${this.classArr[i].className}.jpg`;
     }
   }
 }

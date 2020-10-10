@@ -8,4 +8,5 @@ export class Class {
     classSubject: Array<classSubject>;
     classTeacher: String;
     classStudents: Array<Person>;
+    img: String;
 }

@@ -6,6 +6,7 @@
     <section class="card-list">
         <div *ngFor="let c of myClasses">
             <button class="card" (click)="goClass(c)">
+                <img src={{c.img}}>
                 <p> {{c.className}}</p>
                 <div id="myProgress">
                     <div id="myBar">{{c.grade}}</div>
