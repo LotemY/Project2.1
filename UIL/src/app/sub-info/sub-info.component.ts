@@ -11,10 +11,11 @@ import { classSubject } from '../shared/models/classSubject';
   styleUrls: ['./sub-info.component.css']
 })
 export class SubInfoComponent implements OnInit {
-
   public thisTeacher: Person;
   public thisClass: Class;
   public info: String;
+  public subPoints: Number = 0;
+  public completed: Boolean = true;
 
   constructor(private service: ControllerService, private route: ActivatedRoute) {
     this.thisTeacher = this.service.person;
@@ -34,6 +35,7 @@ export class SubInfoComponent implements OnInit {
         for (i = 0; i < this.thisClass.classSubject.length; i++) {
           if (params.get('info') == this.thisClass.classSubject[i].name) {
             this.info = this.thisClass.classSubject[i].name;
+            this.subPoints = this.thisClass.classSubject[i].points
             break;
           }
         }
@@ -41,5 +43,23 @@ export class SubInfoComponent implements OnInit {
           this.service.noAccess();
       }, 200);
     })
+  }
+
+  public complete() {
+    alert("This is one time button, Are you sure you finished the subject?")
+    let answer = prompt("Enter yes to procced")
+    if (answer == "yes") {
+      this.completed = false;
+      for (let i = 0; i < this.thisClass.classStudents.length; i++)
+        for (let j = 0; j < this.thisClass.classStudents[i].points.length; j++)
+          if (this.thisClass.classStudents[i].points[j].name == this.info)
+            this.thisClass.classStudents[i].points[j].points = this.subPoints;
+
+      this.service.updatePoints(this.thisClass);
+    }
+  }
+
+  public back() {
+    this.service.goTeacherClass(this.thisTeacher._id, this.thisClass._id);
   }
 }

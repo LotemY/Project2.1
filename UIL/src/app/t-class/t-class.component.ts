@@ -19,6 +19,9 @@ export class TClassComponent implements OnInit {
     this.thisClass = this.service.class;
     this.service.teacherEmitter.subscribe(t => this.thisTeacher = t);
     this.service.classEmitter.subscribe(c => this.thisClass = c);
+    this.thisClass.classStudents = [];
+    this.thisClass.classSubject = [];
+    this.thisClass.rewards = [];
   }
 
   ngOnInit() {
@@ -36,8 +39,8 @@ export class TClassComponent implements OnInit {
     this.service.tNavigate(this.thisTeacher._id);
   }
 
-  public subInfo(info:String) {
-    this.service.goSubInfo(this.thisTeacher._id, this.thisClass._id,info);
+  public subInfo(info: String) {
+    this.service.goSubInfo(this.thisTeacher._id, this.thisClass._id, info);
   }
 
 }

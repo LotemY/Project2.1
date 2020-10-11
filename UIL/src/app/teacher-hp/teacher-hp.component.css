@@ -57,7 +57,6 @@ body {
     border-radius: 500px;
     
     box-shadow: -1rem -1 3rem rgb(184, 182, 182);
-    background-image: url('/UIL/src/assets/history.png');
     transition: .3s;
 }
 

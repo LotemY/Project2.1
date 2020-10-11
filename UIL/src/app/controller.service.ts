@@ -4,6 +4,7 @@ import { Person } from './shared/models/Person';
 import { Class } from './shared/models/Class';
 import { classSubject } from './shared/models/classSubject';
 import { Router } from '@angular/router';
+import { Student } from './shared/models/Student';
 
 @Injectable({
   providedIn: 'root'
@@ -102,8 +103,7 @@ export class ControllerService {
           }
         },
         err => {
-          console.log(err);
-          alert("Something is wrong");
+          alert("Email or password are incorrect");
         }
       )
   }
@@ -181,6 +181,17 @@ export class ControllerService {
         res => {
           this.goTeacherClass(c.classTeacher, c._id);
         },
+        err => {
+          console.log(err);
+          this.noAccess();
+        }
+      )
+  }
+
+  public updatePoints(c: Class) {
+    this.http.patch(`${this.localHost}api/updatePoints/${c.classTeacher}`, c, this.getToken()).
+      subscribe(
+        res => { },
         err => {
           console.log(err);
           this.noAccess();
@@ -287,12 +298,12 @@ export class ControllerService {
 
   //************************  FUNCTION  ************************//
 
-  public removeElement(element: any, subsub?: String, classSub?: classSubject[], classStu?: Person[]): Array<any> {
+  public removeElement(element: any, subsub?: String, classSub?: classSubject[], classStu?: Student[]): Array<any> {
     let tempCounter = 0;
     let i, j;
 
     if (Number(element)) {
-      let temp: Person[] = [];
+      let temp: Student[] = [];
       for (i = 0; i < classStu.length; i++)
         if (classStu[i]._id != element) {
           temp[tempCounter] = classStu[i];

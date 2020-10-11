@@ -21,6 +21,7 @@ classPut.patch("/api/teacherHP/:id/tClass/:cId/edit", auth, async (req, res) => 
             await classCollection.updateOne({ _id: iClass._id }, { $set: { className: req.body.className } });
 
         await classCollection.updateOne({ _id: iClass._id }, { $set: { classSubject: req.body.classSubject } });
+        await classCollection.updateOne({ _id: iClass._id }, { $set: { rewards: req.body.rewards } });
         let reqCounter = 0;
 
         for (let i = 0; i < req.body.classStudents.length; i++) {
@@ -53,5 +54,16 @@ classPut.patch("/api/teacherHP/:id/tClass/:cId/edit", auth, async (req, res) => 
     }
     res.status(200).send();
 });
+
+classPut.patch("/api/updatePoints/:id", auth, async (req, res) => {
+    try {
+        await classCollection.updateOne({ _id: req.body._id }, { $set: { classStudents: req.body.classStudents } });
+    }
+    catch (err) {
+        console.log(err)
+        res.status(400).send();
+    }
+    res.status(200).send();
+})
 
 module.exports = classPut;

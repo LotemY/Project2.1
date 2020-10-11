@@ -1,6 +1,6 @@
 <div class="card-body">
     <div>
-        <label>Class Name</label>
+        <h5>Class Name</h5>
         <input #name list="name" value="{{thisClass.className}}">
         <datalist id="name">
             <option *ngFor="let name of classNames">{{name}}</option>
@@ -11,7 +11,7 @@
     <br>
 
     <div>
-        <label>Class Grade</label>
+        <h5>Class Grade</h5>
         <br>
         <label>Current Grade: {{thisClass.grade}}</label>
         <br>
@@ -24,7 +24,7 @@
     <br>
 
     <div>
-        <label>Class Subjects</label>
+        <h5>Class Subjects</h5>
         <label *ngIf="totalPoints!=1000">&nbsp;points left&nbsp;{{1000-totalPoints}}</label>
         <table border="1" *ngIf="thisClass.classSubject[0]">
             <td *ngFor="let sub of thisClass.classSubject">Subjects
@@ -57,7 +57,32 @@
     <br>
 
     <div>
-        <label>Class Students</label>
+        <h5>Class Rewards</h5>
+        <label>Reward type</label>
+        <input #reward onfocus="this.value=''">
+        <label>Reward cost</label>
+        <input type="number" #reCost onfocus="this.value=''">
+        <button (click)="addReward(reward.value,reCost.value)">Add</button>
+        <br>
+        <div *ngIf="thisClass.rewards[0]">
+            <h5>Reward List</h5>
+            <table border="1">
+                <tr *ngFor="let re of thisClass.rewards">
+                    <td>
+                        {{re.item}}
+                        {{re.cost}}
+                        <button (click)="removeReward(re.item)">-</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <br>
+    <br>
+
+    <div>
+        <h5>Class Students</h5>
         <table border="1" *ngIf="thisClass.classStudents[0]">
             <td>Students
                 <tr *ngFor="let student of thisClass.classStudents">

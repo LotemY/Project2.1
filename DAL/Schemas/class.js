@@ -22,6 +22,9 @@ const classPostSchema = mongoose.Schema({
     },
     classStudents: {
         type: Array
+    },
+    rewards: {
+        type: Array
     }
 });
 

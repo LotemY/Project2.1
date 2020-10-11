@@ -1,6 +1,6 @@
 <div class="card-body">
     <div>
-        <label>Class Name</label>
+        <h5>Class Name</h5>
         <input #name list="name">
         <datalist id="name">
             <option *ngFor="let name of classNames">{{name}}</option>
@@ -11,7 +11,7 @@
     <br>
 
     <div>
-        <label>Class Grade</label>
+        <h5>Class Grade</h5>
         <select #grade>
             <option *ngFor="let grad of grades">{{grad}}</option>
         </select>
@@ -21,10 +21,10 @@
     <br>
 
     <div>
-        <label>Class Subjects</label>
+        <h5>Class Subjects</h5>
         <input #sub onfocus="this.value=''"> <button (click)="addSub(sub.value)">+</button>
         <table border="1" *ngIf="newClass.classSubject[0]">
-            <td>Subjects
+            <td>
                 <tr *ngFor="let sub of newClass.classSubject">
                     <button (click)="removeElement(sub.name)">-</button>
                     {{sub.name}}
@@ -46,12 +46,34 @@
 
     <br>
     <br>
+    
+    <div>
+        <label>Reward type</label>
+        <input #reward onfocus="this.value=''">
+        <label>Reward cost</label>
+        <input type="number" #reCost onfocus="this.value=''">
+        <button (click)="addReward(reward.value,reCost.value)">Add</button>
+    </div>
+    <div *ngIf="newClass.rewards[0]">
+        <h5>Reward List</h5>
+        <table border="1">
+            <tr *ngFor="let re of newClass.rewards">
+                <td>
+                    {{re.item}}
+                    {{re.cost}}
+                    <button (click)="removeReward(re.item)">-</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <br>
+    <br>
 
     <div>
-        <label>Class Students</label>
+        <h5>Class Students</h5>
         <input #student type="number" onfocus="this.value=''"> <button (click)="addStudent(student.value)">+</button>
         <table border="1" *ngIf="newClass.classStudents[0]">
-            <td>Students
+            <td>
                 <tr *ngFor="let student of newClass.classStudents">
                     <button (click)="removeElement(student._id)">-</button>
                     {{student._id}}

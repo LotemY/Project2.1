@@ -1,19 +1,21 @@
+<h2>{{info}}</h2>
 
-    <h2>{{info}}</h2>
-
-    <table border="1">
-        <title>Students</title>
-        <tr *ngFor="let s of thisClass.classStudents">
-            <td>
-                {{s.firstName}}
-            </td>
-            <td>
-                {{s.lastName}}
-            </td>
-            <div *ngFor="let p of s.points">
-                <td *ngIf="p.name == info">
-                    {{p.points}}
-                </td>
+<table border="1">
+    <title>Students</title>
+    <tr *ngFor="let s of thisClass.classStudents">
+        <td>
+            {{s.firstName}}
+            {{s.lastName}}
+        </td>
+        <td *ngFor="let p of s.points">
+            <div *ngIf="p.name == info">
+                {{p.points}}
             </div>
-        </tr>
-    </table>
+        </td>
+    </tr>
+</table>
+
+<button (click)="complete()">Complete Subject</button>
+<br>
+<br>
+<button (click)="back()">Back</button>

@@ -1,8 +1,9 @@
-import { Component, OnInit, ɵConsole } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ControllerService } from '../controller.service';
 import { ActivatedRoute } from '@angular/router';
 import { Class } from '../shared/models/Class';
 import { Person } from '../shared/models/Person';
+import { Student } from '../shared/models/Student';
 import { classSubject } from '../shared/models/classSubject';
 
 @Component({
@@ -24,6 +25,7 @@ export class NewClassComponent implements OnInit {
     this.service.classEmitter.subscribe(c => this.newClass = c);
     this.newClass.classSubject = [];
     this.newClass.classStudents = [];
+    this.newClass.rewards = [];
   }
 
   ngOnInit() {
@@ -109,12 +111,39 @@ export class NewClassComponent implements OnInit {
           if (this.newClass.classStudents[i]._id == id)
             return alert("Student already exists");
 
-        this.newClass.classStudents[counter] = new Person();
+        this.newClass.classStudents[counter] = new Student();
         this.newClass.classStudents[counter]._id = id;
+        this.newClass.classStudents[counter].points = [];
       }
     }
     else
       alert("Max class students has reached");
+  }
+
+  public addReward(item: String, cost: Number) {
+    if (this.newClass.rewards.length >= 5)
+      return alert("Max reward is 5");
+    if (!item || !cost)
+      return alert("must put all parameters");
+    if (cost >= 1000)
+      return alert("The cost is too high")
+    for (let i = 0; i < this.newClass.rewards.length; i++)
+      if (this.newClass.rewards[i].item == item)
+        return alert("Item is in the list");
+
+    let reward = { item, cost };
+    reward.item = item;
+    reward.cost = cost;
+    this.newClass.rewards[this.newClass.rewards.length] = reward;
+  }
+
+  public removeReward(name: String) {
+    let temp = [];
+    for (let i = 0; i < this.newClass.rewards.length; i++)
+      if (this.newClass.rewards[i].item != name)
+        temp[temp.length] = this.newClass.rewards[i];
+
+    this.newClass.rewards = temp;
   }
 
   public goBack() {

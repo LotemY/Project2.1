@@ -1,5 +1,5 @@
 import { classSubject } from './classSubject';
-import { Person } from './Person';
+import { Student } from './Student';
 
 export class Class {
     _id: String;
@@ -7,6 +7,7 @@ export class Class {
     grade: String;
     classSubject: Array<classSubject>;
     classTeacher: String;
-    classStudents: Array<Person>;
+    classStudents: Array<Student>;
+    rewards: Array<{ item: String, cost: Number }>
     img: String;
 }

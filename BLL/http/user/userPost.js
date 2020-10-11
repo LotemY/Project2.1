@@ -65,11 +65,11 @@ userP.post("/api/login", async (req, res) => {
             return res.status(500).send("server error");
         }
         if (!user)
-            return res.status(404).send("User not found");
+            return res.status(404).send();
 
         const validPass = await bcrypt.compare(req.body.password, user.password);
         if (!validPass)
-            return res.status(400).send("Invalid password");
+            return res.status(400).send();
 
         const token = jwt.sign({ _id: user._id }, process.env.SECRET_TOKEN, { expiresIn: '900 minutes' });
 

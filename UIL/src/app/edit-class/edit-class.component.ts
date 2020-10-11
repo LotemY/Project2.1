@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Class } from '../shared/models/Class';
 import { classSubject } from '../shared/models/classSubject';
 import { Person } from '../shared/models/Person';
+import { Student } from '../shared/models/Student';
 
 @Component({
   selector: 'app-edit-class',
@@ -20,6 +21,7 @@ export class EditClassComponent implements OnInit {
     this.thisClass = this.service.class;
     this.thisClass.classSubject = [];
     this.thisClass.classStudents = [];
+    this.thisClass.rewards = [];
     this.service.classEmitter.subscribe(c => {
       this.thisClass = c;
       this.checkPoints();
@@ -118,8 +120,9 @@ export class EditClassComponent implements OnInit {
         for (let i = 0; i < counter; i++)
           if (this.thisClass.classStudents[i]._id == id)
             return alert("Student already exists");
-      let student: Person = new Person()
+      let student: Student = new Student();
       student._id = id;
+      student.points = [];
       this.thisClass.classStudents[counter] = student;
     }
   }
@@ -138,6 +141,33 @@ export class EditClassComponent implements OnInit {
     for (let i = 0; i < this.thisClass.classSubject.length; i++)
       this.totalPoints += Number(this.thisClass.classSubject[i].points);
   }
+
+  public addReward(item: String, cost: Number) {
+    if (this.thisClass.rewards.length >= 5)
+      return alert("Max reward is 5");
+    if (!item || !cost)
+      return alert("must put all parameters");
+    if (cost >= 1000)
+      return alert("The cost is too high")
+    for (let i = 0; i < this.thisClass.rewards.length; i++)
+      if (this.thisClass.rewards[i].item == item)
+        return alert("Item is in the list");
+
+    let reward = { item, cost };
+    reward.item = item;
+    reward.cost = cost;
+    this.thisClass.rewards[this.thisClass.rewards.length] = reward;
+  }
+
+  public removeReward(name: String) {
+    let temp = [];
+    for (let i = 0; i < this.thisClass.rewards.length; i++)
+      if (this.thisClass.rewards[i].item != name)
+        temp[temp.length] = this.thisClass.rewards[i];
+
+    this.thisClass.rewards = temp;
+  }
+
   public goBack() {
     this.service.goTeacherClass(this.thisClass.classTeacher, this.thisClass._id);
   }
