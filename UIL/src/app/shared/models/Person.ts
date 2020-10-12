@@ -6,5 +6,6 @@ export class Person {
     password: String;
     token: string;
     nickName?: String;
-    points?: Number;
+    classPoints?: Array<{ id: Number, points: Number }>;
+    totalPoints?: Number;
 }

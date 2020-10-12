@@ -1,0 +1,24 @@
+h2 {
+    -webkit-text-fill-color: rgb(255, 243, 243);
+}
+
+.all {
+    background-color: rgba(46, 43, 46, 0.75);
+    margin-left: 300px;
+    margin-right: 300px;
+    text-align: center;
+}
+
+h5 {
+    color: white;
+}
+
+table {
+    margin-left: auto;
+    margin-right: auto;
+    border-color: white;
+}
+
+td tr {
+    color: white;
+}

@@ -66,4 +66,15 @@ classPut.patch("/api/updatePoints/:id", auth, async (req, res) => {
     res.status(200).send();
 })
 
+classPut.patch("/api/complete/:id", auth, async (req, res) => {
+    try {
+        await classCollection.updateOne({ _id: req.body._id }, { $set: { classSubject: req.body.classSubject } });
+    }
+    catch (err) {
+        console.log(err)
+        res.status(400).send();
+    }
+    res.status(200).send();
+})
+
 module.exports = classPut;

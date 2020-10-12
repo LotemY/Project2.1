@@ -12,9 +12,6 @@ import { Student } from './shared/models/Student';
 
 /*
   -TASKS-
-table of students
-class points
-Benefits
 -- error to right response
    *refrash token*
 */
@@ -22,7 +19,7 @@ Benefits
 export class ControllerService {
 
   public person: Person = new Person();
-  public info: String;
+  public info: classSubject = new classSubject();
   public studentInfo: String;
   public class: Class = new Class();
   public classArr: Class[] = [];
@@ -31,7 +28,7 @@ export class ControllerService {
   public classEmitter: EventEmitter<Class> = new EventEmitter<Class>();
   public classesEmitter: EventEmitter<Class[]> = new EventEmitter<Class[]>();
   public logInEmitter: EventEmitter<Boolean> = new EventEmitter<Boolean>();
-  public infoEmitter: EventEmitter<String> = new EventEmitter<String>();
+  public infoEmitter: EventEmitter<classSubject> = new EventEmitter<classSubject>();
 
 
   private localHost = "http://localhost:3600/";
@@ -199,6 +196,17 @@ export class ControllerService {
       )
   }
 
+  public comp(c: Class) {
+    this.http.patch(`${this.localHost}api/complete/${c.classTeacher}`, c, this.getToken()).
+      subscribe(
+        res => { },
+        err => {
+          console.log(err);
+          this.noAccess();
+        }
+      )
+  }
+
   //************************  GET  ************************//
 
   public getUser(id: String) {
@@ -291,8 +299,12 @@ export class ControllerService {
     this.router.navigate([`${this.person._id}/settings`]);
   }
   public goSubInfo(id: String, cId: String, info: String) {
-    this.info = info;
-    this.infoEmitter.emit(info);
+    for (let i = 0; i < this.class.classSubject.length; i++)
+      if (this.class.classSubject[i].name == info) {
+        this.info = this.class.classSubject[i];
+        break;
+      }
+    this.infoEmitter.emit(this.info);
     this.router.navigate([`teacherHP/${id}/tClass/${cId}/${info}`]);
   }
 

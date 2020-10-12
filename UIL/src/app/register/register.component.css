@@ -1,7 +1,17 @@
-.form-register{
+.form-register {
     width: 80%;
     padding: 20px 20px;
     margin: 8px 0;
-    margin: 0 auto; 
-    width:400px;
+    margin: 0 auto;
+    width: 400px;
+}
+
+label {
+    color: white;
+}
+
+.all {
+    background-color: rgba(46, 43, 46, 0.75);
+    margin-left: 300px;
+    margin-right: 300px;
 }

@@ -18,7 +18,10 @@ export class TClassComponent implements OnInit {
     this.thisTeacher = this.service.person;
     this.thisClass = this.service.class;
     this.service.teacherEmitter.subscribe(t => this.thisTeacher = t);
-    this.service.classEmitter.subscribe(c => this.thisClass = c);
+    this.service.classEmitter.subscribe(c => {
+      this.thisClass = c;
+      this.sumPoints();
+    });
     this.thisClass.classStudents = [];
     this.thisClass.classSubject = [];
     this.thisClass.rewards = [];
@@ -41,6 +44,16 @@ export class TClassComponent implements OnInit {
 
   public subInfo(info: String) {
     this.service.goSubInfo(this.thisTeacher._id, this.thisClass._id, info);
+  }
+
+  public sumPoints() {
+    let sum = 0;
+    for (let i = 0; i < this.thisClass.classStudents.length; i++) {
+      for (let z = 0; z < this.thisClass.classStudents[i].subPoints.length; z++)
+        sum += Number(this.thisClass.classStudents[i].subPoints[z].points);
+      this.thisClass.classStudents[i].classPoints = sum;
+      sum = 0;
+    }
   }
 
 }

@@ -1,21 +1,25 @@
-<h2>{{info}}</h2>
+<div class="all">
+    <h2>{{info.name}}</h2>
 
-<table border="1">
-    <title>Students</title>
-    <tr *ngFor="let s of thisClass.classStudents">
-        <td>
-            {{s.firstName}}
-            {{s.lastName}}
+    <table border="1">
+        <title>Students</title>
+        <td *ngFor="let s of thisClass.classStudents">
+            <tr>
+                {{s.firstName}}
+                {{s.lastName}}
+            </tr>
+            <tr *ngFor="let p of s.subPoints">
+                <div *ngIf="p.subName == info.name">
+                    {{p.points}}
+                </div>
+            </tr>
         </td>
-        <td *ngFor="let p of s.points">
-            <div *ngIf="p.name == info">
-                {{p.points}}
-            </div>
-        </td>
-    </tr>
-</table>
+    </table>
 
-<button (click)="complete()">Complete Subject</button>
-<br>
-<br>
-<button (click)="back()">Back</button>
+    <button [disabled]="info.comp" (click)="complete()">Complete Subject</button>
+
+    <br>
+    <br>
+
+    <button (click)="back()">Back</button>
+</div>

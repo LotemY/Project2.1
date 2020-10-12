@@ -33,11 +33,16 @@ classP.post("/api/teacherHP/:id/newClass", auth, async (req, res) => {
         while (reqCounter < req.body.classStudents.length) {
             let user = await userCollection.findOne({ _id: String(req.body.classStudents[reqCounter]._id) })
             if (user) {
-                user.points = [];
+                user.subPoints = [];
+                user.classPoints = 0;
                 for (let s = 0; s < newClass.classSubject.length; s++) {
-                    pointsObj.name = newClass.classSubject[s].name;
+                    user.email = undefined;
+                    user.password = undefined;
+                    user.nickName = undefined;
+                    user.token = undefined;
+                    pointsObj.subName = newClass.classSubject[s].name;
                     pointsObj.points = 0;
-                    user.points[s] = pointsObj;
+                    user.subPoints[s] = pointsObj;
                     pointsObj = {};
                 }
                 newClass.classStudents[sutdentCounter] = user;

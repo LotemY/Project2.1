@@ -27,9 +27,13 @@ const userPostSchema = mongoose.Schema({
     token: {
         type: String
     },
-    points: {
+    classPoints: {
+        type: Array
+    },
+    totalPoints: {
         type: Number
     }
+   
 });
 
 let userSchema = mongoose.model('user', userPostSchema, "user");

@@ -1,94 +1,100 @@
-<div class="card-body">
-    <div>
-        <h5>Class Name</h5>
-        <input #name list="name">
-        <datalist id="name">
-            <option *ngFor="let name of classNames">{{name}}</option>
-        </datalist>
-    </div>
+<div class="all">
+    <div class="card-body">
+        <div>
+            <h5>Class Name</h5>
+            <input #name list="name">
+            <datalist id="name">
+                <option *ngFor="let name of classNames">{{name}}</option>
+            </datalist>
+        </div>
 
-    <br>
-    <br>
+        <br>
+        <br>
 
-    <div>
-        <h5>Class Grade</h5>
-        <select #grade>
-            <option *ngFor="let grad of grades">{{grad}}</option>
-        </select>
-    </div>
+        <div>
+            <h5>Class Grade</h5>
+            <select #grade>
+                <option *ngFor="let grad of grades">{{grad}}</option>
+            </select>
+        </div>
 
-    <br>
-    <br>
+        <br>
+        <br>
 
-    <div>
-        <h5>Class Subjects</h5>
-        <input #sub onfocus="this.value=''"> <button (click)="addSub(sub.value)">+</button>
-        <table border="1" *ngIf="newClass.classSubject[0]">
-            <td>
-                <tr *ngFor="let sub of newClass.classSubject">
-                    <button (click)="removeElement(sub.name)">-</button>
-                    {{sub.name}}
-                    <button (click)="addSubsub(sub.name)">+</button>
-
-                    <td *ngIf="sub.subsubject[0]">
-                        <table>
-                            <tr *ngFor="let s of sub.subsubject">
-                                <button (click)="removeElement(sub.name,s.name)">-</button>
-                                {{s.name}}
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-
-            </td>
-        </table>
-    </div>
-
-    <br>
-    <br>
-    
-    <div>
-        <label>Reward type</label>
-        <input #reward onfocus="this.value=''">
-        <label>Reward cost</label>
-        <input type="number" #reCost onfocus="this.value=''">
-        <button (click)="addReward(reward.value,reCost.value)">Add</button>
-    </div>
-    <div *ngIf="newClass.rewards[0]">
-        <h5>Reward List</h5>
-        <table border="1">
-            <tr *ngFor="let re of newClass.rewards">
+        <div>
+            <h5>Class Subjects</h5>
+            <input #sub onfocus="this.value=''"> <button (click)="addSub(sub.value)">+</button>
+            <table border="1" *ngIf="newClass.classSubject[0]">
                 <td>
-                    {{re.item}}
-                    {{re.cost}}
-                    <button (click)="removeReward(re.item)">-</button>
+                    <tr *ngFor="let sub of newClass.classSubject">
+                        <button (click)="removeElement(sub.name)">-</button>
+                        {{sub.name}}
+                        <button (click)="addSubsub(sub.name)">+</button>
+
+                        <td *ngIf="sub.subsubject[0]">
+                            <table border="1">
+                                <tr *ngFor="let s of sub.subsubject">
+                                    <button (click)="removeElement(sub.name,s.name)">-</button>
+                                    {{s.name}}
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
                 </td>
-            </tr>
-        </table>
-    </div>
-    <br>
-    <br>
+            </table>
+        </div>
 
-    <div>
-        <h5>Class Students</h5>
-        <input #student type="number" onfocus="this.value=''"> <button (click)="addStudent(student.value)">+</button>
-        <table border="1" *ngIf="newClass.classStudents[0]">
-            <td>
-                <tr *ngFor="let student of newClass.classStudents">
-                    <button (click)="removeElement(student._id)">-</button>
-                    {{student._id}}
-                </tr>
-            </td>
-        </table>
-    </div>
+        <br>
+        <br>
 
-    <div class="text-center">
-        <button class="btn btn-primary mr-1" (click)="createClass(name.value,grade.value)">Create</button>
-    </div>
-    <br>
-    <br>
-    <div class="text-center">
-        <button class="btn btn-primary mr-1" (click)="goBack()">Cancel</button>
-    </div>
+        <div>
+            <label>Reward type</label>
+            <input #reward onfocus="this.value=''">
+            <label>Reward cost</label>
+            <input type="number" #reCost onfocus="this.value=''">
+            <button (click)="addReward(reward.value,reCost.value)">Add</button>
+        </div>
+        <div *ngIf="newClass.rewards[0]">
+            <h5>Reward List</h5>
+            <table border="1">
+                <td *ngFor="let re of newClass.rewards">
+                    <tr>
+                        {{re.item}}
+                        {{re.cost}}
+                        <button (click)="removeReward(re.item)">-</button>
+                    </tr>
+                </td>
+            </table>
+        </div>
 
+        <br>
+        <br>
+
+        <div>
+            <h5>Class Students</h5>
+            <input #student type="number" onfocus="this.value=''"> <button
+                (click)="addStudent(student.value)">+</button>
+            <table border="1" *ngIf="newClass.classStudents[0]">
+                <td>
+                    <tr *ngFor="let student of newClass.classStudents">
+                        <button (click)="removeElement(student._id)">-</button>
+                        {{student._id}}
+                    </tr>
+                </td>
+            </table>
+        </div>
+
+        <br>
+        <br>
+        
+        <div class="text-center">
+            <button class="btn btn-primary mr-1" (click)="createClass(name.value,grade.value)">Create</button>
+        </div>
+        <br>
+        <br>
+        <div class="text-center">
+            <button class="btn btn-primary mr-1" (click)="goBack()">Cancel</button>
+        </div>
+
+    </div>
 </div>

@@ -1,110 +1,121 @@
-<div class="card-body">
-    <div>
-        <h5>Class Name</h5>
-        <input #name list="name" value="{{thisClass.className}}">
-        <datalist id="name">
-            <option *ngFor="let name of classNames">{{name}}</option>
-        </datalist>
-    </div>
-
-    <br>
-    <br>
-
-    <div>
-        <h5>Class Grade</h5>
-        <br>
-        <label>Current Grade: {{thisClass.grade}}</label>
-        <br>
-        <select #grade>
-            <option *ngFor="let grad of grades">{{grad}}</option>
-        </select>
-    </div>
-
-    <br>
-    <br>
-
-    <div>
-        <h5>Class Subjects</h5>
-        <label *ngIf="totalPoints!=1000">&nbsp;points left&nbsp;{{1000-totalPoints}}</label>
-        <table border="1" *ngIf="thisClass.classSubject[0]">
-            <td *ngFor="let sub of thisClass.classSubject">Subjects
-                <tr>
-                    {{sub.name}}
-                </tr>
-
-                <tr>
-                    {{sub.points}}
-                    <button (click)="editPoints(sub)">Edit Points</button>
-                </tr>
-
-                <tr> <button (click)="removeElement(sub.name)">Remove Subject</button> </tr>
-                <tr>
-                    <table *ngFor="let s of sub.subsubject">
-                        <tr>
-                            <button (click)="removeElement(sub.name,s.name)">Remove</button>
-                            {{s.name}}
-                            <button (click)="editPoints(sub,s)">Edit Points</button>
-                        </tr>
-                    </table>
-                </tr>
-                <tr><button (click)="addSubsub(sub.name)">Add Subsubject</button></tr>
-            </td>
-        </table>
-        <input #sub onfocus="this.value=''"> <button (click)="addSub(sub.value)">Add Subject</button>
-    </div>
-
-    <br>
-    <br>
-
-    <div>
-        <h5>Class Rewards</h5>
-        <label>Reward type</label>
-        <input #reward onfocus="this.value=''">
-        <label>Reward cost</label>
-        <input type="number" #reCost onfocus="this.value=''">
-        <button (click)="addReward(reward.value,reCost.value)">Add</button>
-        <br>
-        <div *ngIf="thisClass.rewards[0]">
-            <h5>Reward List</h5>
-            <table border="1">
-                <tr *ngFor="let re of thisClass.rewards">
-                    <td>
-                        {{re.item}}
-                        {{re.cost}}
-                        <button (click)="removeReward(re.item)">-</button>
-                    </td>
-                </tr>
-            </table>
+<div class="all">
+    <div class="card-body">
+        <div>
+            <h5>Class Name</h5>
+            <input #name list="name" value="{{thisClass.className}}">
+            <datalist id="name">
+                <option *ngFor="let name of classNames">{{name}}</option>
+            </datalist>
         </div>
-    </div>
 
-    <br>
-    <br>
+        <br>
+        <br>
 
-    <div>
-        <h5>Class Students</h5>
-        <table border="1" *ngIf="thisClass.classStudents[0]">
-            <td>Students
-                <tr *ngFor="let student of thisClass.classStudents">
-                    {{student._id}}<button (click)="removeElement(student._id)">Remove</button>
-                </tr>
-            </td>
-        </table>
-        <input #student type="number" onfocus="this.value=''"> <button (click)="addStudent(student.value)">Add
-            Student</button>
-    </div>
+        <div>
+            <h5>Class Grade</h5>
+            <br>
+            <label>Current Grade: {{thisClass.grade}}</label>
+            <br>
+            <select #grade>
+                <option *ngFor="let grad of grades">{{grad}}</option>
+            </select>
+        </div>
 
-    <div class="text-center">
-        <button class="btn btn-primary mr-1" (click)="editClass(name.value,grade.value)">Update</button>
-    </div>
-    <br>
-    <br>
-    <div class="text-center">
-        <button class="btn btn-primary mr-1" (click)="goBack()">Cancel</button>
-    </div>
-    <br>
-    <br>
-    <div class="text-center">
-        <button class="btn btn-primary mr-1" (click)="deleteClass()">Delete</button>
+        <br>
+        <br>
+
+        <div>
+            <h5>Class Subjects</h5>
+            <label *ngIf="totalPoints!=1000">&nbsp;points left&nbsp;{{1000-totalPoints}}</label>
+            <table border="1" *ngIf="thisClass.classSubject[0]">
+                <td *ngFor="let sub of thisClass.classSubject">
+                    <tr>
+                        {{sub.name}}
+                    </tr>
+
+                    <tr>
+                        {{sub.points}}
+                        <button (click)="editPoints(sub)">Edit Points</button>
+                    </tr>
+
+                    <tr> <button (click)="removeElement(sub.name)">Remove Subject</button> </tr>
+                    <tr>
+                        <table border="1" *ngFor="let s of sub.subsubject">
+                            <tr>
+                                <button (click)="removeElement(sub.name,s.name)">Remove</button>
+                                {{s.name}}
+                                {{s.points}}
+                                <button (click)="editPoints(sub,s)">Edit Points</button>
+                            </tr>
+                        </table>
+                    </tr>
+                    <tr><button (click)="addSubsub(sub.name)">Add Subsubject</button></tr>
+                </td>
+            </table>
+            <input #sub onfocus="this.value=''"> <button (click)="addSub(sub.value)">Add Subject</button>
+        </div>
+
+        <br>
+        <br>
+
+        <div>
+            <h5>Class Rewards</h5>
+            <label>Reward type</label>
+            <input #reward onfocus="this.value=''">
+            <label>Reward cost</label>
+            <input type="number" #reCost onfocus="this.value=''">
+            <button (click)="addReward(reward.value,reCost.value)">Add</button>
+            
+            <br>
+            <br>
+
+            <div *ngIf="thisClass.rewards[0]">
+                <h5>Reward List</h5>
+                <table border="1">
+                    <td *ngFor="let re of thisClass.rewards">
+                        <tr>
+                            {{re.item}}
+                            {{re.cost}}
+                            <button (click)="removeReward(re.item)">-</button>
+                        </tr>
+                    </td>
+                </table>
+            </div>
+        </div>
+
+        <br>
+        <br>
+
+        <div>
+            <h5>Class Students</h5>
+            <table border="1" *ngIf="thisClass.classStudents[0]">
+                <td>
+                    <tr *ngFor="let student of thisClass.classStudents">
+                        {{student._id}}<button (click)="removeElement(student._id)">Remove</button>
+                    </tr>
+                </td>
+            </table>
+            <input #student type="number" onfocus="this.value=''"> <button (click)="addStudent(student.value)">Add
+                Student</button>
+        </div>
+
+        <br>
+        <br>
+
+        <div class="text-center">
+            <button class="btn btn-primary mr-1" (click)="editClass(name.value,grade.value)">Update</button>
+        </div>
+        <br>
+
+        <div class="text-center">
+            <button class="btn btn-primary mr-1" (click)="goBack()">Cancel</button>
+        </div>
+
+        <br>
+        <br>
+
+        <div class="text-center">
+            <button class="btn btn-primary mr-1" (click)="deleteClass()">Delete</button>
+        </div>
     </div>
 </div>

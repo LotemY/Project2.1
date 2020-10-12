@@ -32,7 +32,8 @@ userP.post("/api/register", async (req, res) => {
     });
     if (req.body.nickName) {
         newUser.nickName = req.body.nickName;
-        newUser.points = 0;
+        newUser.totalPoints = 0;
+        newUser.classPoints = [];
     }
 
     try {

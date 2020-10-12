@@ -95,20 +95,41 @@ export class EditClassComponent implements OnInit {
     }
   }
 
-  public editPoints(sub: classSubject, subsub?: String) {
+  public editPoints(sub: classSubject, subsub?: any) {
     let points = Number(prompt("Enter points"));
+    let subPoints = 0;
     if (points == 0)
       return;
-    for (let i = 0; i < this.thisClass.classSubject.length; i++)
-      if (this.thisClass.classSubject[i].name == sub.name) {
-        if (points + this.totalPoints - Number(this.thisClass.classSubject[i].points) > 1000)
-          return alert("total points cannot be above 1000");
-        else {
-          this.thisClass.classSubject[i].points = points;
-          break;
+    if (subsub) {
+      for (let i = 0; i < this.thisClass.classSubject.length; i++)
+        if (this.thisClass.classSubject[i].name == sub.name) {
+          for (let j = 0; j < this.thisClass.classSubject[i].subsubject.length; j++)
+            subPoints += Number(this.thisClass.classSubject[i].subsubject[j].points);
+          for (let x = 0; x < this.thisClass.classSubject[i].subsubject.length; x++)
+            if (this.thisClass.classSubject[i].subsubject[x].name == subsub.name) {
+              if ((subPoints - Number(this.thisClass.classSubject[i].subsubject[x].points) + points) > sub.points)
+                return alert("Too much points");
+              this.thisClass.classSubject[i].subsubject[x].points = points;
+              break;
+            }
         }
-      }
-    this.checkPoints();
+    }
+    else {
+      if (Number(sub))
+        return alert("Cant put only numbers");
+      for (let i = 0; i < this.thisClass.classSubject.length; i++)
+        if (this.thisClass.classSubject[i].name == sub.name) {
+          if (points + this.totalPoints - Number(this.thisClass.classSubject[i].points) > 1000)
+            return alert("total points cannot be above 1000");
+          else {
+            this.thisClass.classSubject[i].points = points;
+            for (let j = 0; j < this.thisClass.classSubject[i].subsubject.length; j++)
+              this.thisClass.classSubject[i].subsubject[j].points = 0;
+            break;
+          }
+        }
+      this.checkPoints();
+    }
   }
 
   public addStudent(id: String) {
@@ -122,7 +143,7 @@ export class EditClassComponent implements OnInit {
             return alert("Student already exists");
       let student: Student = new Student();
       student._id = id;
-      student.points = [];
+      student.subPoints = [];
       this.thisClass.classStudents[counter] = student;
     }
   }

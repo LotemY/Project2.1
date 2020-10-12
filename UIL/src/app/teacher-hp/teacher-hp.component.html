@@ -1,7 +1,11 @@
-<div>
-    <br><br>
+<div class="all">
+    <br>
+    <br>
+
     <button class="button" (click)="goCreateClass()"><span>create new class</span></button>
-    <br><br>
+
+    <br>
+    <br>
 
     <section class="card-list">
         <div *ngFor="let c of myClasses">
@@ -9,7 +13,7 @@
                 <img src={{c.img}}>
                 <p> {{c.className}}</p>
                 <div id="myProgress">
-                    <div id="myBar">{{c.grade}}</div>
+                    <div id="mygrade">{{c.grade}}</div>
                 </div>
             </button>
         </div>

@@ -48,6 +48,8 @@ export class NewClassComponent implements OnInit {
 
   public addSub(sub: String) {
     if (sub) {
+      if (Number(sub))
+        return alert("Cant put only numbers");
       let counter = this.newClass.classSubject.length
       for (let i = 0; i < counter; i++)
         if (this.newClass.classSubject[i].name == sub)
@@ -113,7 +115,7 @@ export class NewClassComponent implements OnInit {
 
         this.newClass.classStudents[counter] = new Student();
         this.newClass.classStudents[counter]._id = id;
-        this.newClass.classStudents[counter].points = [];
+        this.newClass.classStudents[counter].subPoints = [];
       }
     }
     else
