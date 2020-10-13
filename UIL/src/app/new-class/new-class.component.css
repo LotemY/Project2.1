@@ -5,7 +5,7 @@
   text-align: center;
 }
 
-td tr {
+td, tr, th {
   color: white;
 }
 

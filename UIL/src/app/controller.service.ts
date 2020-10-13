@@ -12,6 +12,7 @@ import { Student } from './shared/models/Student';
 
 /*
   -TASKS-
+  sub-info table
 -- error to right response
    *refrash token*
 */
@@ -196,17 +197,6 @@ export class ControllerService {
       )
   }
 
-  public comp(c: Class) {
-    this.http.patch(`${this.localHost}api/complete/${c.classTeacher}`, c, this.getToken()).
-      subscribe(
-        res => { },
-        err => {
-          console.log(err);
-          this.noAccess();
-        }
-      )
-  }
-
   //************************  GET  ************************//
 
   public getUser(id: String) {
@@ -340,13 +330,12 @@ export class ControllerService {
         for (i = 0; i < classSub.length; i++) {
           if (classSub[i].name == element) {
             temp.name = classSub[i].name;
-            temp.points = 100;
+            temp.points = classSub[i].points;
             for (j = 0; j < classSub[i].subsubject.length; j++)
               if (classSub[i].subsubject[j].name != subsub) {
                 temp.subsubject[tempCounter] = classSub[i].subsubject[j];
                 tempCounter++;
               }
-
             classSub[i] = temp;
             break;
           }

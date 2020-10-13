@@ -1,5 +1,5 @@
 h3 {
-    -webkit-text-fill-color:white;
+    -webkit-text-fill-color: white;
 }
 
 .all {
@@ -19,6 +19,6 @@ table {
     border-color: white;
 }
 
-td tr {
+td, tr, th {
     color: white;
 }

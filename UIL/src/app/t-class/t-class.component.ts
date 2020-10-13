@@ -3,7 +3,7 @@ import { ControllerService } from '../controller.service';
 import { ActivatedRoute } from '@angular/router';
 import { Class } from '../shared/models/Class';
 import { Person } from '../shared/models/Person';
-import { classSubject } from '../shared/models/classSubject';
+import { Student } from '../shared/models/Student';
 
 @Component({
   selector: 'app-t-class',
@@ -20,7 +20,6 @@ export class TClassComponent implements OnInit {
     this.service.teacherEmitter.subscribe(t => this.thisTeacher = t);
     this.service.classEmitter.subscribe(c => {
       this.thisClass = c;
-      this.sumPoints();
     });
     this.thisClass.classStudents = [];
     this.thisClass.classSubject = [];
@@ -46,14 +45,12 @@ export class TClassComponent implements OnInit {
     this.service.goSubInfo(this.thisTeacher._id, this.thisClass._id, info);
   }
 
-  public sumPoints() {
-    let sum = 0;
-    for (let i = 0; i < this.thisClass.classStudents.length; i++) {
-      for (let z = 0; z < this.thisClass.classStudents[i].subPoints.length; z++)
-        sum += Number(this.thisClass.classStudents[i].subPoints[z].points);
-      this.thisClass.classStudents[i].classPoints = sum;
-      sum = 0;
-    }
+  public editPoints(s: Student) {
+    let temp = Number(prompt(`Current points: ${s.classPoints}`));
+    if (temp < 0)
+      return alert("Cant be below 0");
+    s.classPoints = temp;
+    this.service.updatePoints(this.thisClass);
   }
 
 }

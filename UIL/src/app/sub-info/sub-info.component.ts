@@ -53,12 +53,13 @@ export class SubInfoComponent implements OnInit {
           this.thisClass.classSubject[c] = this.info;
           break;
         }
-      this.service.comp(this.thisClass);
-      for (let i = 0; i < this.thisClass.classStudents.length; i++)
+
+      for (let i = 0; i < this.thisClass.classStudents.length; i++) {
+        this.thisClass.classStudents[i].classPoints += Number(this.info.points);
         for (let j = 0; j < this.thisClass.classStudents[i].subPoints.length; j++)
           if (this.thisClass.classStudents[i].subPoints[j].subName == this.info.name)
             this.thisClass.classStudents[i].subPoints[j].points = this.info.points;
-
+      }
       this.service.updatePoints(this.thisClass);
     }
   }

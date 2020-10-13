@@ -2,18 +2,22 @@
     <h2>{{info.name}}</h2>
 
     <table border="1">
-        <title>Students</title>
-        <td *ngFor="let s of thisClass.classStudents">
-            <tr>
-                {{s.firstName}}
-                {{s.lastName}}
-            </tr>
-            <tr *ngFor="let p of s.subPoints">
-                <div *ngIf="p.subName == info.name">
-                    {{p.points}}
-                </div>
-            </tr>
-        </td>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Points</th>
+        </tr>
+        <tr *ngFor="let s of thisClass.classStudents">
+            <td>{{s.firstName}}</td>
+            <td>{{s.lastName}}</td>
+            <td *ngFor="let p of s.subPoints">
+                <table *ngIf="p.subName == info.name">
+                    <tr>
+                        <td>{{p.points}}</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
     </table>
 
     <button [disabled]="info.comp" (click)="complete()">Complete Subject</button>

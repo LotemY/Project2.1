@@ -9,14 +9,23 @@ h5 {
     color: white;
 }
 
-td tr {
+td, tr, th {
     color: white;
+    border-color: white;
+    border: 1px solid white;
+    padding: 8px;
+}
+
+th {
+    background-color: grey;
 }
 
 table {
     margin-left: auto;
     margin-right: auto;
     border-color: white;
+    font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
 }
 
 label {

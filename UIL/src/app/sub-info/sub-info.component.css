@@ -19,6 +19,6 @@ table {
     border-color: white;
 }
 
-td tr {
+td, tr, th {
     color: white;
 }

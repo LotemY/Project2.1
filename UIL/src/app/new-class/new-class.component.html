@@ -23,24 +23,26 @@
 
         <div>
             <h5>Class Subjects</h5>
-            <input #sub onfocus="this.value=''"> <button (click)="addSub(sub.value)">+</button>
+            <input #sub onfocus="this.value=''">&nbsp;
+            <button (click)="addSub(sub.value)">+</button>
+            <br>
             <table border="1" *ngIf="newClass.classSubject[0]">
-                <td>
-                    <tr *ngFor="let sub of newClass.classSubject">
-                        <button (click)="removeElement(sub.name)">-</button>
-                        {{sub.name}}
-                        <button (click)="addSubsub(sub.name)">+</button>
-
-                        <td *ngIf="sub.subsubject[0]">
-                            <table border="1">
-                                <tr *ngFor="let s of sub.subsubject">
-                                    <button (click)="removeElement(sub.name,s.name)">-</button>
-                                    {{s.name}}
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                </td>
+                <tr>
+                    <th>Subject</th>
+                </tr>
+                <tr *ngFor="let sub of newClass.classSubject">
+                    <td>{{sub.name}}</td>
+                    <td><button (click)="addSubsub(sub.name)">+</button></td>
+                    <td><button (click)="removeElement(sub.name)">-</button></td>
+                    <td *ngIf="sub.subsubject[0]">
+                        <table border="1">
+                            <tr *ngFor="let s of sub.subsubject">
+                                <td>{{s.name}}</td>
+                                <td><button (click)="removeElement(sub.name,s.name)">-</button></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
             </table>
         </div>
 
@@ -48,22 +50,24 @@
         <br>
 
         <div>
-            <label>Reward type</label>
-            <input #reward onfocus="this.value=''">
-            <label>Reward cost</label>
-            <input type="number" #reCost onfocus="this.value=''">
+            <label>Reward type</label>&nbsp;
+            <input #reward onfocus="this.value=''">&nbsp;
+            <label>Reward cost</label>&nbsp;
+            <input type="number" #reCost onfocus="this.value=''">&nbsp;
             <button (click)="addReward(reward.value,reCost.value)">Add</button>
         </div>
         <div *ngIf="newClass.rewards[0]">
             <h5>Reward List</h5>
             <table border="1">
-                <td *ngFor="let re of newClass.rewards">
-                    <tr>
-                        {{re.item}}
-                        {{re.cost}}
-                        <button (click)="removeReward(re.item)">-</button>
-                    </tr>
-                </td>
+                <tr>
+                    <th>Reward</th>
+                    <th>Cost</th>
+                </tr>
+                <tr *ngFor="let re of newClass.rewards">
+                    <td>{{re.item}}</td>
+                    <td>{{re.cost}}</td>
+                    <td><button (click)="removeReward(re.item)">-</button></td>
+                </tr>
             </table>
         </div>
 
@@ -72,21 +76,23 @@
 
         <div>
             <h5>Class Students</h5>
-            <input #student type="number" onfocus="this.value=''"> <button
-                (click)="addStudent(student.value)">+</button>
+            <input #student type="number" onfocus="this.value=''">&nbsp;
+            <button (click)="addStudent(student.value)">+</button>&nbsp;
             <table border="1" *ngIf="newClass.classStudents[0]">
-                <td>
-                    <tr *ngFor="let student of newClass.classStudents">
-                        <button (click)="removeElement(student._id)">-</button>
-                        {{student._id}}
-                    </tr>
-                </td>
+                <tr>
+                    <th>Student ID</th>
+                    <th> </th>
+                </tr>
+                <tr *ngFor="let student of newClass.classStudents">
+                    <td>{{student._id}}</td>
+                    <td><button (click)="removeElement(student._id)">-</button></td>
+                </tr>
             </table>
         </div>
 
         <br>
         <br>
-        
+
         <div class="text-center">
             <button class="btn btn-primary mr-1" (click)="createClass(name.value,grade.value)">Create</button>
         </div>

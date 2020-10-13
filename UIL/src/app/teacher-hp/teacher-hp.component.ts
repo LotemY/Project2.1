@@ -26,7 +26,6 @@ export class TeacherHPComponent implements OnInit {
       this.service.getUser(params.get('id'));
       this.service.getClasses(params.get('id'));
     })
-    
   }
 
   public goCreateClass() {

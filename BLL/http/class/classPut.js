@@ -31,17 +31,20 @@ classPut.patch("/api/teacherHP/:id/tClass/:cId/edit", auth, async (req, res) => 
                 temp._id = user._id;
                 temp.firstName = user.firstName;
                 temp.lastName = user.lastName;
-                temp.points = [];
-                for (let s = 0; s < req.body.classStudents.length; s++)
-                    for (let p = 0; p < req.body.classStudents[s].points.length; p++)
-                        for (let f = 0; f < req.body.classSubject.length; f++)
-                            if (req.body.classStudents[s].points[p].name == req.body.classSubject[f].name) {
-                                pointsObj.name = req.body.classStudents[s].points[p].name;
-                                pointsObj.points = req.body.classStudents[s].points[p].points;
-                                temp.points[f] = pointsObj;
-                                pointsObj = {};
-                                break;
-                            }
+                temp.subPoints = [];
+                temp.classPoints = 0;
+
+                if (req.body.classStudents[i]._id == temp._id)
+                    temp.classPoints = req.body.classStudents[i].classPoints;
+                for (let p = 0; p < req.body.classStudents[i].subPoints.length; p++)
+                    for (let f = 0; f < req.body.classSubject.length; f++)
+                        if (req.body.classStudents[i].subPoints[p].subName == req.body.classSubject[f].name) {
+                            pointsObj.subName = req.body.classStudents[i].subPoints[p].subName;
+                            pointsObj.points = req.body.classStudents[i].subPoints[p].points;
+                            temp.subPoints[f] = pointsObj;
+                            pointsObj = {};
+                            break;
+                        }
                 tempClass[reqCounter] = temp;
                 reqCounter++;
             }
@@ -57,18 +60,8 @@ classPut.patch("/api/teacherHP/:id/tClass/:cId/edit", auth, async (req, res) => 
 
 classPut.patch("/api/updatePoints/:id", auth, async (req, res) => {
     try {
-        await classCollection.updateOne({ _id: req.body._id }, { $set: { classStudents: req.body.classStudents } });
-    }
-    catch (err) {
-        console.log(err)
-        res.status(400).send();
-    }
-    res.status(200).send();
-})
-
-classPut.patch("/api/complete/:id", auth, async (req, res) => {
-    try {
         await classCollection.updateOne({ _id: req.body._id }, { $set: { classSubject: req.body.classSubject } });
+        await classCollection.updateOne({ _id: req.body._id }, { $set: { classStudents: req.body.classStudents } });
     }
     catch (err) {
         console.log(err)

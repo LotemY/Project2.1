@@ -3,8 +3,8 @@ import { ControllerService } from '../controller.service'
 import { ActivatedRoute } from '@angular/router';
 import { Class } from '../shared/models/Class';
 import { classSubject } from '../shared/models/classSubject';
-import { Person } from '../shared/models/Person';
 import { Student } from '../shared/models/Student';
+import { subPoints } from '../shared/models/subPoints';
 
 @Component({
   selector: 'app-edit-class',
@@ -38,15 +38,10 @@ export class EditClassComponent implements OnInit {
     if (this.totalPoints != 1000)
       return alert("Must use all the points");
 
-    for (let i = 0; i < this.thisClass.classSubject.length; i++)
-      if (this.thisClass.classSubject[i].points < 100)
-        return alert("Min 100 point per class)");
-
     if (grade != "")
       this.thisClass.grade = grade;
     this.thisClass.className = name;
     this.service.editClass(this.thisClass);
-
   }
 
   public addSub(sub: String) {
@@ -65,6 +60,14 @@ export class EditClassComponent implements OnInit {
       subject.points = 0;
       subject.subsubject = [];
       this.thisClass.classSubject[counter] = subject;
+      let temp: subPoints = new subPoints();
+      temp.subName = sub;
+      temp.points = 0;
+      let t = 0;
+      for (let j = 0; j < this.thisClass.classStudents.length; j++) {
+        for (t = 0; t < this.thisClass.classStudents[j].subPoints.length; t++);
+        this.thisClass.classStudents[j].subPoints[t] = temp;
+      }
     }
   }
 
@@ -98,8 +101,8 @@ export class EditClassComponent implements OnInit {
   public editPoints(sub: classSubject, subsub?: any) {
     let points = Number(prompt("Enter points"));
     let subPoints = 0;
-    if (points == 0)
-      return;
+    if (points < 0)
+      return alert("Cant be nagtive number");
     if (subsub) {
       for (let i = 0; i < this.thisClass.classSubject.length; i++)
         if (this.thisClass.classSubject[i].name == sub.name) {
@@ -117,6 +120,10 @@ export class EditClassComponent implements OnInit {
     else {
       if (Number(sub))
         return alert("Cant put only numbers");
+      if (points < 100)
+        return alert("Cant be less then 100 points");
+      if (points > 1000)
+        return alert("Cant be above 1000")
       for (let i = 0; i < this.thisClass.classSubject.length; i++)
         if (this.thisClass.classSubject[i].name == sub.name) {
           if (points + this.totalPoints - Number(this.thisClass.classSubject[i].points) > 1000)
@@ -143,7 +150,14 @@ export class EditClassComponent implements OnInit {
             return alert("Student already exists");
       let student: Student = new Student();
       student._id = id;
+      student.classPoints = 0;
       student.subPoints = [];
+      for (let i = 0; i < this.thisClass.classSubject.length; i++) {
+        let temp: subPoints = new subPoints();
+        temp.subName = this.thisClass.classSubject[i].name;
+        temp.points = 0;
+        student.subPoints[i] = temp;
+      }
       this.thisClass.classStudents[counter] = student;
     }
   }
