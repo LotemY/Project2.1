@@ -30,7 +30,8 @@ const appRoutes: Routes = [
   { path: "studentHP/:id", component: StudentHPComponent },
   { path: "studentHP/:id/sClass/:cId", component: SClassComponent },
   { path: "teacherHP/:id/tClass/:cId/:info", component: SubInfoComponent },
-  //{ path: "NoAccess/:id", component: NoAccessComponent },
+  { path: "studentHP/:id/sClass/:cId/:info", component: SubInfoComponent },
+  { path: "NoAccess/:id", component: NoAccessComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' }
 ];
 

@@ -3,6 +3,7 @@ import { ControllerService } from '../controller.service';
 import { ActivatedRoute } from '@angular/router';
 import { Person } from '../shared/models/Person';
 import { Class } from '../shared/models/Class';
+import { totalPoints } from '../shared/models/totalPoints';
 
 @Component({
   selector: 'app-student-hp',
@@ -18,6 +19,15 @@ export class StudentHPComponent implements OnInit {
     this.myClasses = this.service.classArr;
     this.service.studentEmitter.subscribe(s => this.thisStudent = s);
     this.service.classesEmitter.subscribe(c => this.myClasses = c);
+    this.thisStudent.totalPoints = new totalPoints();
+
+    setTimeout(() => {
+      let elem: HTMLElement = document.getElementById('myBar');
+      if (Number(this.thisStudent.totalPoints.xp) != 0)
+        elem.style.width = (Number(this.thisStudent.totalPoints.xp) / 10) + "%";
+      else
+        elem.style.width = "0%";
+    }, 200)
   }
 
   ngOnInit() {

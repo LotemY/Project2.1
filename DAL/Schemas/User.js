@@ -31,7 +31,7 @@ const userPostSchema = mongoose.Schema({
         type: Array
     },
     totalPoints: {
-        type: Number
+        type: Object
     }
    
 });

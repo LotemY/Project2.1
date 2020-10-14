@@ -10,17 +10,32 @@
         <tr *ngFor="let s of thisClass.classStudents">
             <td>{{s.firstName}}</td>
             <td>{{s.lastName}}</td>
-            <td *ngFor="let p of s.subPoints">
-                <table *ngIf="p.subName == info.name">
-                    <tr>
-                        <td>{{p.points}}</td>
-                    </tr>
-                </table>
-            </td>
+            <td>{{findSub(s.subPoints)}}</td>
         </tr>
     </table>
 
-    <button [disabled]="info.comp" (click)="complete()">Complete Subject</button>
+    <br>
+    <br>
+
+    <h5>Subsubjects</h5>
+    <table border="1">
+        <tr>
+            <th>Subsub Name</th>
+            <th>Points</th>
+        </tr>
+        <tr *ngFor="let s of info.subsubject">
+            <td>{{s.name}}</td>
+            <td>{{s.points}}</td>
+        </tr>
+    </table>
+
+    <br>
+    <br>
+
+    <div *ngIf="thisPerson._id==thisClass.classTeacher">
+        <button [disabled]="info.comp" (click)="complete()">Complete Subject</button>
+    </div>
+
 
     <br>
     <br>

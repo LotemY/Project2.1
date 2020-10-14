@@ -12,7 +12,11 @@ import { Student } from './shared/models/Student';
 
 /*
   -TASKS-
-  sub-info table
+  totalPoints update
+  leavels?
+  no accses
+  tables fix
+  table scroll
 -- error to right response
    *refrash token*
 */
@@ -295,7 +299,10 @@ export class ControllerService {
         break;
       }
     this.infoEmitter.emit(this.info);
-    this.router.navigate([`teacherHP/${id}/tClass/${cId}/${info}`]);
+    if (id == this.class.classTeacher)
+      this.router.navigate([`teacherHP/${id}/tClass/${cId}/${info}`]);
+    else 
+      this.router.navigate([`studentHP/${id}/sClass/${cId}/${info}`]);
   }
 
   //************************  FUNCTION  ************************//

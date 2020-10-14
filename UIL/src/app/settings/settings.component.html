@@ -1,42 +1,57 @@
-<div class="card-body">
+<div class="all">
     <form [formGroup]="personForm" class="form-register" (ngSubmit)="save()">
-        <div class="form-row">
-            <div class="form-group col">
-                <label>Email</label>
-                <input formControlName="email" class="form-control"
-                    [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
-                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                    <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
-                </div>
-            </div>
-            <div class="form-group col">
-                <label>Password</label>
-                <input type="password" formControlName="password" class="form-control"
-                    [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                    <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
-                    <div *ngIf="f.password.errors.maxlength">Password can't be more then 11 characters</div>
-                    <div *ngIf="f.password.errors.pattern">Password must contain a mix of characters & numbers</div>
-                </div>
-                <div *ngIf="thisUser.nickName">
-                    <label>Nickname</label>
-                    <input formControlName="nickName" class="form-control"
-                        [ngClass]="{ 'is-invalid': submitted && f.nickName.errors }" value="thisUser.nickName" />
-                    <div *ngIf="submitted && f.nickName.errors" class="invalid-feedback">
-                        <div *ngIf="f.nickName.errors.minlength">Nickname must be at least 3 characters</div>
-                        <div *ngIf="f.nickName.errors.maxlength">Nickname can't be more then 8 characters</div>
-                    </div>
-                </div>
-                <div class="text-center">
-                    <button class="btn btn-primary mr-1">Save</button>
-                </div>
+        <br>
+        <br>
+
+        <h5>Email</h5>
+        <input formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+            <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+        </div>
+
+        <br>
+        <br>
+
+        <h5>Password</h5>
+        <input type="password" formControlName="password" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+            <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+            <div *ngIf="f.password.errors.maxlength">Password can't be more then 11 characters</div>
+            <div *ngIf="f.password.errors.pattern">Password must contain a mix of characters & numbers</div>
+        </div>
+
+        <br>
+        <br>
+
+        <div *ngIf="thisUser.nickName">
+            <h5>Nickname</h5>
+            <input formControlName="nickName" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.nickName.errors }" value="thisUser.nickName" />
+            <div *ngIf="submitted && f.nickName.errors" class="invalid-feedback">
+                <div *ngIf="f.nickName.errors.minlength">Nickname must be at least 3 characters</div>
+                <div *ngIf="f.nickName.errors.maxlength">Nickname can't be more then 8 characters</div>
             </div>
         </div>
+
+        <br>
+        <br>
+        <div class="text-center">
+            <button class="btn btn-primary mr-1">Save</button>
+        </div>
     </form>
+
+    <br>
+    <br>
+
     <div class="text-center">
-        <button (click)="del()">Delete</button>
+        <button class="btn btn-primary mr-1" (click)="goBack()">Back</button>
     </div>
+
+    <br>
+    <br>
+
     <div class="text-center">
-        <button (click)="goBack()">Back</button>
+        <button class="btn btn-primary mr-1" style="background-color: red;" (click)="del()">Delete</button>
     </div>
 </div>

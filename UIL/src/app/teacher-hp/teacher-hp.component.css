@@ -1,4 +1,3 @@
-
 .card-list {
   display: flex;
   padding: 5rem;
@@ -119,4 +118,8 @@
   margin-left: 300px;
   margin-right: 300px;
   text-align: center;
+}
+
+h3 {
+  color: white;
 }

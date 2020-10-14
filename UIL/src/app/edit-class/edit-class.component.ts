@@ -207,6 +207,7 @@ export class EditClassComponent implements OnInit {
     this.service.goTeacherClass(this.thisClass.classTeacher, this.thisClass._id);
   }
   public deleteClass() {
-    this.service.deleteClass(this.thisClass);
+    if ("yes" == prompt("Are you sure? (Enter yes to confirm)"))
+      this.service.deleteClass(this.thisClass);
   }
 }

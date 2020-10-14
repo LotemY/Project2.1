@@ -12,15 +12,15 @@ import { Student } from '../shared/models/Student';
   styleUrls: ['./sub-info.component.css']
 })
 export class SubInfoComponent implements OnInit {
-  public thisTeacher: Person;
+  public thisPerson: Person;
   public thisClass: Class;
   public info: classSubject = new classSubject();
 
   constructor(private service: ControllerService, private route: ActivatedRoute) {
-    this.thisTeacher = this.service.person;
+    this.thisPerson = this.service.person;
     this.thisClass = this.service.class;
     this.info = this.service.info;
-    this.service.teacherEmitter.subscribe(t => this.thisTeacher = t);
+    this.service.teacherEmitter.subscribe(p => this.thisPerson = p);
     this.service.classEmitter.subscribe(c => this.thisClass = c);
     this.service.infoEmitter.subscribe(i => this.info = i);
   }
@@ -64,7 +64,17 @@ export class SubInfoComponent implements OnInit {
     }
   }
 
+  public findSub(subs: any[]) {
+    for (let i = 0; i < subs.length; i++)
+      if (subs[i].subName == this.info.name)
+        return subs[i].points;
+  }
+
   public back() {
-    this.service.goTeacherClass(this.thisTeacher._id, this.thisClass._id);
+    if (this.thisPerson._id == this.thisClass.classTeacher)
+      this.service.goTeacherClass(this.thisPerson._id, this.thisClass._id);
+    else {
+      this.service.goStudentClass(this.thisPerson._id, this.thisClass._id);
+    }
   }
 }

@@ -68,8 +68,7 @@ export class SettingsComponent implements OnInit {
   }
 
   public del() {
-    let answer = prompt("Are you sure?\nEnter yes to delete");
-    if (answer == "yes")
+    if (prompt("Are you sure?\nEnter yes to delete") == "yes")
       this.service.deleteUser(this.thisUser);
   }
 

@@ -1,0 +1,108 @@
+.card-list {
+    display: flex;
+    padding: 5rem;
+    overflow-x: auto;
+}
+
+.card-header {
+    font-size: 10px;
+}
+
+.card-list::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+.card-list::-webkit-scrollbar-thumb {
+    background: #201c29;
+    border-radius: 10px;
+    box-shadow: inset 2px 2px 2px rgba(255, 255, 255, 0.25), inset -2px -2px 2px rgba(0, 0, 0, .25);
+}
+
+.card-list::-webkit-scrollbar-track {
+    background: linear-gradient(90deg, #201c29, #201c29 1px, #17141d 0, #17141d);
+}
+
+.card {
+    font-family: 'DM Mono', monospace;
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    height: 200px;
+    width: 200px;
+    min-width: 200px;
+    padding: 3rem;
+    border-radius: 50px;
+    box-shadow: 0rem 0 3rem rgb(255, 245, 99);
+    transition: .3s;
+}
+
+.card:hover {
+    transform: translateY(-3rem);
+}
+
+.card:hover~.card {
+    transform: translateX(200px);
+}
+
+.card:not(:first-child) {
+    margin-left: -50px;
+}
+
+.card-list .pic {
+    position: absolute;
+    height: 70px;
+    top: 25px;
+}
+
+.card-list .param {
+    position: relative;
+    top: 50px;
+}
+
+.card-list .mygrade {
+    width: 10%;
+    height: 30px;
+    text-align: center;
+    /* To center it horizontally (if you want) */
+    line-height: 30px;
+    /* To center it vertically */
+    color: rgb(0, 0, 0);
+    left: 43px;
+    position: relative;
+    top: 60px;
+}
+
+.all {
+    background-color: rgba(46, 43, 46, 0.75);
+    margin-left: 300px;
+    margin-right: 300px;
+    text-align: center;
+}
+
+h3, h6 {
+    color: white;
+}
+
+#myBar {
+    width: 50%;
+    background-color: blue;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    height: 30px;
+}
+
+#myProgress {
+    position: absolute;
+    left: 46.1%;
+}
+
+.outerBar {
+    width: 350px;
+    text-align: center;
+    background-color: #ddd;
+    height: 30px;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+}
