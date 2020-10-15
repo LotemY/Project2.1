@@ -28,7 +28,7 @@ userP.post("/api/register", async (req, res) => {
         lastName: req.body.lastName,
         email: req.body.email,
         password: hashedPassword,
-        points: undefined
+        classPoints: undefined
     });
     if (req.body.nickName) {
         newUser.nickName = req.body.nickName;

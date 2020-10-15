@@ -14,9 +14,11 @@ import { Student } from './shared/models/Student';
   -TASKS-
   totalPoints update
   leavels?
+  img
   no accses
   tables fix
   table scroll
+  reward minus (button check)
 -- error to right response
    *refrash token*
 */
@@ -301,7 +303,7 @@ export class ControllerService {
     this.infoEmitter.emit(this.info);
     if (id == this.class.classTeacher)
       this.router.navigate([`teacherHP/${id}/tClass/${cId}/${info}`]);
-    else 
+    else
       this.router.navigate([`studentHP/${id}/sClass/${cId}/${info}`]);
   }
 
