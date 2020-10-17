@@ -19,6 +19,9 @@ classD.delete("/api/teacherHP/:id/tClass/:cId/edit", auth, async (req, res) => {
                 tempPoints[count] = user.classPoints[c];
                 count++;
             }
+            else 
+                user.classPoints[0].points += user.classPoints[c].points;
+            
         await userCollection.updateOne({ _id: user._id }, { $set: { classPoints: tempPoints } });
     }
 

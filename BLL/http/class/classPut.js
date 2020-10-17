@@ -36,6 +36,8 @@ classPut.patch("/api/teacherHP/:id/tClass/:cId/edit", auth, async (req, res) => 
                         tempPoints[count] = userPoints.classPoints[c];
                         count++;
                     }
+                userPoints.classPoints = tempPoints;
+                pointsRefresh(userPoints);
                 await userCollection.updateOne({ _id: userPoints._id }, { $set: { classPoints: tempPoints } });
             }
         }
@@ -58,11 +60,10 @@ classPut.patch("/api/teacherHP/:id/tClass/:cId/edit", auth, async (req, res) => 
                     tempSub.subName = req.body.classSubject[a].name;
                     tempSub.points = 0;
 
-                    for (let b = 0; b < iClass.classStudents[j].subPoints.length; b++) {
-                        if (iClass.classStudents[j].subPoints[b].subName == tempSub.subName) {
+                    for (let b = 0; b < iClass.classStudents[j].subPoints.length; b++)
+                        if (iClass.classStudents[j].subPoints[b].subName == tempSub.subName)
                             tempSub.points = iClass.classStudents[j].subPoints[b].points;
-                        }
-                    }
+
                     subArr[a] = {};
                     subArr[a].subName = tempSub.subName;
                     subArr[a].points = tempSub.points;
@@ -114,10 +115,11 @@ classPut.patch("/api/updatePoints/:id", auth, async (req, res) => {
             let user = await userCollection.findOne({ _id: req.body.classStudents[i]._id });
             for (let j = 0; j < user.classPoints.length; j++)
                 if (req.body._id == user.classPoints[j].id) {
-                    user.classPoints.points = req.body.classStudents[i].classPoints;
+                    user.classPoints[j].points = req.body.classStudents[i].classPoints;
                     await userCollection.updateOne({ _id: user._id }, { $set: { classPoints: user.classPoints } });
                     break;
                 }
+            pointsRefresh(user);
         }
     }
     catch (err) {
@@ -126,5 +128,18 @@ classPut.patch("/api/updatePoints/:id", auth, async (req, res) => {
     }
     res.status(200).send();
 })
+
+async function pointsRefresh(user) {
+    user.totalPoints.level = 1;
+    user.totalPoints.xp = 0;
+    for (let x = 0; x < user.classPoints.length; x++)
+        user.totalPoints.xp += user.classPoints[x].points;
+
+    while (user.totalPoints.xp >= 1000) {
+        user.totalPoints.xp -= 1000;
+        user.totalPoints.level += 1;
+    }
+    await userCollection.updateOne({ _id: user._id }, { $set: { totalPoints: user.totalPoints } });
+}
 
 module.exports = classPut;

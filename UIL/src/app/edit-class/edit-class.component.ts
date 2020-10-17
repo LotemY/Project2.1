@@ -13,7 +13,7 @@ import { subPoints } from '../shared/models/subPoints';
 })
 export class EditClassComponent implements OnInit {
   public thisClass: Class;
-  public classNames: String[] = ["History", "Math", "English"];
+  public classNames: String[] = [`אזרחות`, `אנגלית`, `ביולוגיה`, `גיאוגרפיה`, `היסטוריה`, `חנ"ג`, `מתמטיקה`, `ספרות`, `עברית`, `תנ"ך`];
   public grades: String[] = ["", "a", "b", "c"];
   public totalPoints = 0;
 
@@ -183,7 +183,9 @@ export class EditClassComponent implements OnInit {
     if (!item || !cost)
       return alert("must put all parameters");
     if (cost >= 1000)
-      return alert("The cost is too high")
+      return alert("The cost is too high");
+    if (cost <= 0)
+      return alert("The cost is too low");
     for (let i = 0; i < this.thisClass.rewards.length; i++)
       if (this.thisClass.rewards[i].item == item)
         return alert("Item is in the list");

@@ -19,8 +19,19 @@ classP.post("/api/teacherHP/:id/newClass", auth, async (req, res) => {
         className: req.body.className,
         grade: req.body.grade,
         classTeacher: req.body.classTeacher,
-        rewards: req.body.rewards
+        rewards: req.body.rewards,
+        img: "../../assets/gen.jpg"
     });
+
+    let hebrewArr = [`אזרחות`, `אנגלית`, `ביולוגיה`, `גיאוגרפיה`, `היסטוריה`, `חנ"ג`, `מתמטיקה`, `ספרות`, `עברית`, `תנ"ך`];
+    let englishArr = ["Citizenship.jpg", "English.jpg", "Biology.jpg", "Geography.jpg", "History.jpg", "Sport.jpg", "Math.jpg", "Literature.jpg", "Hebrew.jpg", "Tanach.jpg"];
+
+
+    for (let i = 0; i < hebrewArr.length; i++)
+        if (req.body.className.split(" ")[0] == hebrewArr[i]) {
+            newClass.img = "../../assets/" + englishArr[i];
+            break;
+        }
 
     if (req.body.classSubject)
         newClass.classSubject = req.body.classSubject;

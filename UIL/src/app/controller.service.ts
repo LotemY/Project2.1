@@ -12,9 +12,7 @@ import { Student } from './shared/models/Student';
 
 /*
   -TASKS-
-  totalPoints update
-  leavels?
-  img
+  img fix in HP
   no accses
   tables fix
   table scroll
@@ -228,7 +226,6 @@ export class ControllerService {
         res => {
           this.logInEmitter.emit(true);
           this.classArr = res;
-          this.classImgs()
           this.classesEmitter.emit(res);
         },
         err => {
@@ -351,12 +348,6 @@ export class ControllerService {
         }
         return classSub;
       }
-    }
-  }
-
-  public classImgs() {
-    for (let i = 0; i < this.classArr.length; i++) {
-      this.classArr[i].img = `../../assets/${this.classArr[i].className}.jpg`;
     }
   }
 }

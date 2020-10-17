@@ -25,6 +25,10 @@ const classPostSchema = mongoose.Schema({
     },
     rewards: {
         type: Array
+    },
+    img: {
+        type: String,
+        required: true
     }
 });
 

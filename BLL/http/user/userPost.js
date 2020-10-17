@@ -36,6 +36,7 @@ userP.post("/api/register", async (req, res) => {
         newUser.totalPoints.level = 1;
         newUser.totalPoints.xp = 0;
         newUser.classPoints = [];
+        newUser.classPoints[0] = { id: 1, points: 0 };
     }
 
     try {
