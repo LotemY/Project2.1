@@ -33,7 +33,8 @@
                 <td>{{s.firstName}}</td>
                 <td>{{s.lastName}}</td>
                 <td>{{s.classPoints}}</td>
-                <td><button (click)="editPoints(s)">עריכת נקודות</button></td>
+                <td><button (click)="editPoints(s,1)">+</button></td>
+                <td><button (click)="editPoints(s,0)">-</button></td>
             </tr>
         </table>
     </div>

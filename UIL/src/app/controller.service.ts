@@ -12,11 +12,10 @@ import { Student } from './shared/models/Student';
 
 /*
   -TASKS-
-  img fix in HP
   no accses
   tables fix
   table scroll
-  reward minus (button check)
+  (button check)
 -- error to right response
    *refrash token*
 */

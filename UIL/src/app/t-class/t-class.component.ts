@@ -45,15 +45,23 @@ export class TClassComponent implements OnInit {
     this.service.goSubInfo(this.thisTeacher._id, this.thisClass._id, info);
   }
 
-  public editPoints(s: Student) {
-    let temp = prompt(`${s.classPoints} :נקודות כרגע`);
+  public editPoints(s: Student, num: Number) {
+    let temp = prompt(`נקודות כרגע: ${s.classPoints}`);
     if (temp == null || temp == "")
       return;
-    else {
-      if (Number(temp) < 0)
-        return alert("לא יכול להיות שלילי");
-      s.classPoints = Number(temp);
-      this.service.updatePoints(this.thisClass);
+    if (Number(temp) < 0)
+      return alert("לא יכול להיות שלילי");
+
+    if (num == 1) {
+      if (s.classPoints + Number(temp) > 1000)
+        return alert("הגעת למקסימום");
+      s.classPoints += Number(temp);
     }
+    else {
+      if (s.classPoints - Number(temp) < 0)
+        return alert("לא יכול להיות שלילי");
+      s.classPoints -= Number(temp);
+    }
+    this.service.updatePoints(this.thisClass);
   }
 }
