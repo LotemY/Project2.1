@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Class } from '../shared/models/Class';
 import { Person } from '../shared/models/Person';
 import { classSubject } from '../shared/models/classSubject';
-import { Student } from '../shared/models/Student';
 
 @Component({
   selector: 'app-sub-info',
@@ -44,9 +43,9 @@ export class SubInfoComponent implements OnInit {
   }
 
   public complete() {
-    alert("This is one time button, Are you sure you finished the subject?")
-    let answer = prompt("Enter yes to procced")
-    if (answer == "yes") {
+    alert("?זהו כפתור חד פעמי, האם אתה בטוח שאתה רוצה להשלים את הנושא")
+    let answer = prompt("הכנס כן כדי להשלים")
+    if (answer == "כן") {
       this.info.comp = true;
       for (let c = 0; c < this.thisClass.classSubject.length; c++)
         if (this.thisClass.classSubject[c].name == this.info.name) {

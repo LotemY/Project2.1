@@ -2,20 +2,20 @@
     <div class="text-center">
         <form class="form-signin">
             <img src="./../../assets/L&E.ico" class="mb-4" alt="">
-            <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-            <label for="inputEmail" class="sr-only">Email address</label>
-            <input #email type="email" class="form-control" placeholder="Email address" required autofocus>
+            <h1 class="h3 mb-3 font-weight-normal">התחברות</h1>
+            <label for="inputEmail" class="sr-only">כתובת מייל</label>
+            <input #email type="email" class="form-control" placeholder="כתובת מייל" required autofocus>
             <br>
-            <label for="inputPassword" class="sr-only">Password</label>
-            <input #password type="password" class="form-control" placeholder="Password" required>
+            <label for="inputPassword" class="sr-only">סיסמא</label>
+            <input #password type="password" class="form-control" placeholder="סיסמא" required>
             <br>
             <div class="checkbox mb-3">
                 <label>
-                    <input type="checkbox" value="remember-me"> Remember me
+                    <input type="checkbox" value="remember-me"> זכור אותי
                 </label>
             </div>
             <button (click)="loginReq(email.value,password.value)" class="btn btn-lg btn-primary btn-block"
-                type="submit">Sign in</button>
+                type="submit">התחברות</button>
             <p class="muted">&copy; 2017-2020</p>
         </form>
     </div>

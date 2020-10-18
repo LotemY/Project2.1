@@ -3,9 +3,9 @@
 
     <table border="1">
         <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Points</th>
+            <th>שם פרטי</th>
+            <th>שם משפחה</th>
+            <th>נקודות</th>
         </tr>
         <tr *ngFor="let s of thisClass.classStudents">
             <td>{{s.firstName}}</td>
@@ -17,11 +17,11 @@
     <br>
     <br>
 
-    <h5>Subsubjects</h5>
+    <h5>תת נושאים</h5>
     <table border="1">
         <tr>
-            <th>Subsub Name</th>
-            <th>Points</th>
+            <th>שם</th>
+            <th>נקודות</th>
         </tr>
         <tr *ngFor="let s of info.subsubject">
             <td>{{s.name}}</td>
@@ -33,12 +33,12 @@
     <br>
 
     <div *ngIf="thisPerson._id==thisClass.classTeacher">
-        <button [disabled]="info.comp" (click)="complete()">Complete Subject</button>
+        <button [disabled]="info.comp" (click)="complete()">השלם נושא</button>
     </div>
 
 
     <br>
     <br>
 
-    <button (click)="back()">Back</button>
+    <button (click)="back()">חזרה</button>
 </div>

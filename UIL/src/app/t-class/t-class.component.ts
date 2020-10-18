@@ -46,12 +46,12 @@ export class TClassComponent implements OnInit {
   }
 
   public editPoints(s: Student) {
-    let temp = prompt(`Current points: ${s.classPoints}`);
+    let temp = prompt(`${s.classPoints} :נקודות כרגע`);
     if (temp == null || temp == "")
       return;
     else {
       if (Number(temp) < 0)
-        return alert("Cant be below 0");
+        return alert("לא יכול להיות שלילי");
       s.classPoints = Number(temp);
       this.service.updatePoints(this.thisClass);
     }

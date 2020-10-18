@@ -5,11 +5,11 @@
     <br>
 
     <div *ngIf="thisClass.classSubject[0]">
-        <h5>Class Subjects</h5>
+        <h5>רשימת נושאים</h5>
         <table border="1">
             <tr>
-                <th>Name</th>
-                <th>Points</th>
+                <th>שם</th>
+                <th>נקודות</th>
             </tr>
             <tr *ngFor="let s of thisClass.classSubject">
                 <td><button (click)="subInfo(s.name)">{{s.name}}</button></td>
@@ -22,12 +22,12 @@
     <br>
 
     <div *ngIf="thisClass.classStudents[0]">
-        <h5>Class Students</h5>
+        <h5>רשימת תלמידים</h5>
         <table border="1">
             <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Points</th>
+                <th>שם פרטי</th>
+                <th>שם משפחה</th>
+                <th>נקודות</th>
             </tr>
             <tr *ngFor="let s of thisClass.classStudents">
                 <td>{{s.firstName}}</td>
@@ -41,11 +41,11 @@
     <br>
 
     <div *ngIf="thisClass.rewards[0]">
-        <h5>Class Rewards</h5>
+        <h5>רשימת הטבות</h5>
         <table border="1">
             <tr>
-                <th>Reward</th>
-                <th>Cost</th>
+                <th>הטבה</th>
+                <th>עלות</th>
             </tr>
             <tr *ngFor="let r of thisClass.rewards">
                 <td>{{r.item}}</td>
@@ -57,5 +57,5 @@
     <br>
     <br>
 
-    <button class="oo" (click)="goBack()">Back</button>
+    <button class="oo" (click)="goBack()">חזרה</button>
 </div>

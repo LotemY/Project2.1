@@ -15,8 +15,8 @@ export class NewClassComponent implements OnInit {
 
   public newClass: Class;
   public thisTeacher: Person;
-  public classNames: String[] = [`אזרחות`, `אנגלית`, `ביולוגיה`, `גיאוגרפיה`, `היסטוריה`, `חנ"ג`, `מתמטיקה`, `ספרות`, `עברית`, `תנ"ך`];
-  public grades: String[] = ["", "a", "b", "c"];
+  public classNames = [`אזרחות`, `אנגלית`, `ביולוגיה`, `גיאוגרפיה`, `היסטוריה`, `חנ"ג`, `כימיה`, `מוסיקה`, `מתמטיקה`, `פיזיקה`, `ספרות`, `עברית`, `תנ"ך`];
+  public grades: String[] = ["", "א", "ב", "ג", "ד", "ה", "ו", "ז", "ח", "ט", "י", "יא", "יב",];
 
   constructor(private service: ControllerService, private route: ActivatedRoute) {
     this.newClass = this.service.class;
@@ -36,9 +36,13 @@ export class NewClassComponent implements OnInit {
 
   public createClass(name: String, grade: String) {
     if (name == "")
-      return alert("Please enter a name");
+      return alert("הכנס שם");
+    if (Number(name))
+      return alert("השם לא יכול להיות מספר");
+    if (name.length > 11)
+      return alert("השם ארוך מדי");
     if (grade == "")
-      return alert("Please select a grade");
+      return alert("הכנס שכבת הכיתה");
 
     this.newClass.className = name;
     this.newClass.grade = grade;
@@ -49,11 +53,11 @@ export class NewClassComponent implements OnInit {
   public addSub(sub: String) {
     if (sub) {
       if (Number(sub))
-        return alert("Cant put only numbers");
+        return alert("לא ניתן להכניס מספר");
       let counter = this.newClass.classSubject.length
       for (let i = 0; i < counter; i++)
         if (this.newClass.classSubject[i].name == sub)
-          return alert("Subject already exist");
+          return alert("הנושא כבר קיים");
 
       if (counter < 10) {
         if (sub) {
@@ -66,7 +70,7 @@ export class NewClassComponent implements OnInit {
         }
       }
       else
-        alert("Max class subjects has reached");
+        alert("הגעת למספר נושאים מקסימאלי");
     }
   }
 
@@ -79,19 +83,19 @@ export class NewClassComponent implements OnInit {
   }
 
   public addSubsub(name: String) {
-    let thisSubsub = prompt("Enter name of the subject");
+    let thisSubsub = prompt("הכנס את שם התת נושא");
 
     for (let i = 0; i < this.newClass.classSubject.length; i++) {
       if (name == this.newClass.classSubject[i].name) {
         if (this.newClass.classSubject[i].subsubject.length >= 5)
-          return alert("Max class subjects has reached");
+          return alert("הגעת למספר תת נושאים מקסימאלי");
 
         if (name == thisSubsub)
-          return alert("Duplicate name");
+          return alert("השם קיים");
 
         for (let j = 0; j < this.newClass.classSubject[i].subsubject.length; j++)
           if (this.newClass.classSubject[i].subsubject[j].name == thisSubsub)
-            return alert("Name already exist");
+            return alert("שם לא יכול להיות דומה לשם הכיתה");
 
         let sub: classSubject = {
           name: thisSubsub,
@@ -111,7 +115,7 @@ export class NewClassComponent implements OnInit {
       if (id) {
         for (let i = 0; i < counter; i++)
           if (this.newClass.classStudents[i]._id == id)
-            return alert("Student already exists");
+            return alert("התלמיד כבר קיים");
 
         this.newClass.classStudents[counter] = new Student();
         this.newClass.classStudents[counter]._id = id;
@@ -119,21 +123,23 @@ export class NewClassComponent implements OnInit {
       }
     }
     else
-      alert("Max class students has reached");
+      return alert("הגעת לכמות תלמידים מקסימאלי");
   }
 
   public addReward(item: String, cost: Number) {
     if (this.newClass.rewards.length >= 5)
-      return alert("Max reward is 5");
+      return alert("הגעת למספר הטבות מקסימאלי");
     if (!item || !cost)
-      return alert("must put all parameters");
+      return alert("חייב להכניס את כל הפרמטרים");
+    if (Number(item))
+      return alert("שם ההטבה לא יכול להיות מספר");
     if (cost >= 1000)
-      return alert("The cost is too high");
+      return alert("עלות ההטבה גבוהה מדי");
     if (cost <= 0)
-      return alert("The cost is too low");
+      return alert("לא ניתן להכניס מספר שלילי");
     for (let i = 0; i < this.newClass.rewards.length; i++)
       if (this.newClass.rewards[i].item == item)
-        return alert("Item is in the list");
+        return alert("ההטבה כבר נמצאת");
 
     let reward = { item, cost };
     reward.item = item;

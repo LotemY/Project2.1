@@ -3,68 +3,68 @@
         <form [formGroup]="personForm" class="form-register" (ngSubmit)="onSubmit()">
             <div class="form-row">
                 <div class="form-group col">
-                    <label>First Name</label>
+                    <label>שם פרטי</label>
                     <input formControlName="firstName" class="form-control"
                         [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
                     <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
-                        <div *ngIf="f.firstName.errors.required">First Name is required</div>
-                        <div *ngIf="f.firstName.errors.minlength">First Name must be at least 2 characters</div>
-                        <div *ngIf="f.firstName.errors.maxlength">First Name can't be more then 8 characters</div>
+                        <div *ngIf="f.firstName.errors.required">שם פרטי חובה</div>
+                        <div *ngIf="f.firstName.errors.minlength">שם פרטי חייב להיות לפחות 2 תווים</div>
+                        <div *ngIf="f.firstName.errors.maxlength">שם פרטי לא יכול להיות מעל 8 תווים</div>
                     </div>
                 </div>
 
                 <div class="form-group col">
-                    <label>Last Name</label>
+                    <label>שם משפחה</label>
                     <input formControlName="lastName" class="form-control"
                         [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
                     <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
-                        <div *ngIf="f.lastName.errors.required">Last Name is required</div>
-                        <div *ngIf="f.lastName.errors.minlength">Last Name must be at least 2 characters</div>
-                        <div *ngIf="f.lastName.errors.maxlength">Last Name can't be more then 8 characters</div>
+                        <div *ngIf="f.lastName.errors.required">שם משפחה חובה</div>
+                        <div *ngIf="f.lastName.errors.minlength">שם משפחה חייב להיות לפחות 2 תווים</div>
+                        <div *ngIf="f.lastName.errors.maxlength">שם משפחה לא יכול להיות מעל 8 תווים</div>
                     </div>
                 </div>
             </div>
 
             <div class="form-group col">
-                <label>Email</label>
+                <label>אימייל</label>
                 <input formControlName="email" class="form-control"
                     [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
                 <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                    <div *ngIf="f.email.errors.required">Email is required</div>
-                    <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                    <div *ngIf="f.email.errors.required">אימייל חובה</div>
+                    <div *ngIf="f.email.errors.email">האימייל חייב להיות תיקני</div>
                 </div>
             </div>
 
             <div class="form-group col">
-                <label>Password</label>
+                <label>סיסמא</label>
                 <input type="password" formControlName="password" class="form-control"
                     [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
                 <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                    <div *ngIf="f.password.errors.required">Password is required</div>
-                    <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
-                    <div *ngIf="f.password.errors.maxlength">Password can't be more then 11 characters</div>
-                    <div *ngIf="f.password.errors.pattern">Password must contain a mix of characters & numbers</div>
+                    <div *ngIf="f.password.errors.required">סיסמא חובה</div>
+                    <div *ngIf="f.password.errors.minlength">סיסמא חייבת להיות בעלת 6 תווים לפחות</div>
+                    <div *ngIf="f.password.errors.maxlength">סיסמא לא יכולה להיות מעל 11 תווים</div>
+                    <div *ngIf="f.password.errors.pattern">סיסמא חייבת להכיל מספרים ואותיות באנגלית בלבד</div>
                 </div>
             </div>
 
             <div>
                 <input type="checkbox" formControlName="isStudent" class="form-control"
                     [checked]="personForm.get('isStudent').value">
-                <label>Are you a Student?</label><br>
+                <label>?האם אתה תלמיד</label><br>
             </div>
 
             <div *ngIf="personForm.get('isStudent').value">
-                <label>Nickname</label>
+                <label>כינוי</label>
                 <input formControlName="nickName" class="form-control"
                     [ngClass]="{ 'is-invalid': submitted && f.nickName.errors }">
                 <div *ngIf="submitted && f.nickName.errors" class="invalid-feedback">
-                    <div *ngIf="f.nickName.errors.minlength">nickName must be at least 3 characters</div>
-                    <div *ngIf="f.nickName.errors.maxlength">nickName can't be more then 8 characters</div>
+                    <div *ngIf="f.nickName.errors.minlength">כינוי חייב להכיל 3 אותיות לפחות</div>
+                    <div *ngIf="f.nickName.errors.maxlength">כינוי לא יכול להכיל יותר מ-8 תווים</div>
                 </div>
             </div>
 
             <div class="text-center">
-                <button class="btn btn-primary mr-1">Register</button>
+                <button class="btn btn-primary mr-1">הרשמה</button>
             </div>
         </form>
     </div>

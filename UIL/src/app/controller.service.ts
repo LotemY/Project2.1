@@ -84,7 +84,7 @@ export class ControllerService {
         },
         err => {
           console.log(err);
-          alert("Something is wrong");
+          alert("שגיאה ביצירת משתמש");
         }
       )
   }
@@ -105,7 +105,7 @@ export class ControllerService {
           }
         },
         err => {
-          alert("Email or password are incorrect");
+          alert("האימייל או הסיסמא שגויים");
         }
       )
   }
@@ -133,7 +133,6 @@ export class ControllerService {
         res => {
           localStorage.removeItem('token');
           localStorage.removeItem('userI');
-          console.log("User deleted");
           this.loginNavigate();
         },
         err => {
@@ -147,7 +146,6 @@ export class ControllerService {
     this.http.delete(`${this.localHost}api/teacherHP/${c.classTeacher}/tClass/${c._id}/edit`, this.getToken()).
       subscribe(
         res => {
-          console.log("Class deleted");
           this.tNavigate(c.classTeacher);
         },
         err => {
@@ -164,7 +162,6 @@ export class ControllerService {
     this.http.patch(`${this.localHost}api/user/${p._id}/settings/edit`, p, this.getToken()).
       subscribe(
         res => {
-          console.log("User edit");
           if (p.nickName)
             this.sNavigate(p._id);
           else

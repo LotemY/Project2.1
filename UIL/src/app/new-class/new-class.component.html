@@ -1,7 +1,7 @@
 <div class="all">
     <div class="card-body">
         <div>
-            <h5>Class Name</h5>
+            <h5>שם כיתה</h5>
             <input #name list="name">
             <datalist id="name">
                 <option *ngFor="let name of classNames">{{name}}</option>
@@ -12,7 +12,7 @@
         <br>
 
         <div>
-            <h5>Class Grade</h5>
+            <h5>שכבה</h5>
             <select #grade>
                 <option *ngFor="let grad of grades">{{grad}}</option>
             </select>
@@ -22,13 +22,13 @@
         <br>
 
         <div>
-            <h5>Class Subjects</h5>
+            <h5>נושאים</h5>
             <input #sub onfocus="this.value=''">&nbsp;
             <button (click)="addSub(sub.value)">+</button>
             <br>
             <table border="1" *ngIf="newClass.classSubject[0]">
                 <tr>
-                    <th>Subject</th>
+                    <th>נושא</th>
                 </tr>
                 <tr *ngFor="let sub of newClass.classSubject">
                     <td>{{sub.name}}</td>
@@ -50,18 +50,18 @@
         <br>
 
         <div>
-            <label>Reward type</label>&nbsp;
+            <label>סוג הטבה</label>&nbsp;
             <input #reward onfocus="this.value=''">&nbsp;
-            <label>Reward cost</label>&nbsp;
+            <label>עלות הטבה</label>&nbsp;
             <input type="number" #reCost onfocus="this.value=''">&nbsp;
-            <button (click)="addReward(reward.value,reCost.value)">Add</button>
+            <button (click)="addReward(reward.value,reCost.value)">הוספה</button>
         </div>
         <div *ngIf="newClass.rewards[0]">
-            <h5>Reward List</h5>
+            <h5>רשימת הטבות</h5>
             <table border="1">
                 <tr>
-                    <th>Reward</th>
-                    <th>Cost</th>
+                    <th>הטבה</th>
+                    <th>עלות</th>
                 </tr>
                 <tr *ngFor="let re of newClass.rewards">
                     <td>{{re.item}}</td>
@@ -75,12 +75,12 @@
         <br>
 
         <div>
-            <h5>Class Students</h5>
+            <h5>רשימת תלמידים</h5>
             <input #student type="number" onfocus="this.value=''">&nbsp;
             <button (click)="addStudent(student.value)">+</button>&nbsp;
             <table border="1" *ngIf="newClass.classStudents[0]">
                 <tr>
-                    <th>Student ID</th>
+                    <th>ID תלמיד</th>
                     <th> </th>
                 </tr>
                 <tr *ngFor="let student of newClass.classStudents">
@@ -94,12 +94,12 @@
         <br>
 
         <div class="text-center">
-            <button class="btn btn-primary mr-1" (click)="createClass(name.value,grade.value)">Create</button>
+            <button class="btn btn-primary mr-1" (click)="createClass(name.value,grade.value)">יצירה</button>
         </div>
         <br>
         <br>
         <div class="text-center">
-            <button class="btn btn-primary mr-1" (click)="goBack()">Cancel</button>
+            <button class="btn btn-primary mr-1" (click)="goBack()">ביטול</button>
         </div>
 
     </div>

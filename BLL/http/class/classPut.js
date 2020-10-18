@@ -15,8 +15,21 @@ classPut.patch("/api/teacherHP/:id/tClass/:cId/edit", auth, async (req, res) => 
         if (iClass.grade != req.body.grade)
             await classCollection.updateOne({ _id: iClass._id }, { $set: { grade: req.body.grade } });
 
-        if (iClass.className != req.body.className)
+        if (iClass.className != req.body.className) {
             await classCollection.updateOne({ _id: iClass._id }, { $set: { className: req.body.className } });
+            let hebrewArr = [`אזרחות`, `אנגלית`, `ביולוגיה`, `גיאוגרפיה`, `היסטוריה`, `חנ"ג`, `כימיה`, `מוסיקה`, `מתמטיקה`, `פיזיקה`, `ספרות`, `עברית`, `תנ"ך`];
+            let englishArr = ["Citizenship.jpg", "English.jpg", "Biology.jpg", "Geography.jpg", "History.jpg", "Sport.jpg", "Chmistry.jpg", "Music.jpg", "Math.jpg", "Physics.jpg", "Literature.jpg", "Hebrew.jpg", "Tanach.jpg"];
+
+            iClass.img = "../../assets/gen.jpg";
+            await classCollection.updateOne({ _id: iClass._id }, { $set: { img: iClass.img } });
+
+            for (let i = 0; i < hebrewArr.length; i++)
+                if (req.body.className.split(" ")[0] == hebrewArr[i]) {
+                    iClass.img = "../../assets/" + englishArr[i];
+                    await classCollection.updateOne({ _id: iClass._id }, { $set: { img: iClass.img } });
+                    break;
+                }
+        }
 
         await classCollection.updateOne({ _id: iClass._id }, { $set: { rewards: req.body.rewards } });
         await classCollection.updateOne({ _id: iClass._id }, { $set: { classSubject: req.body.classSubject } });

@@ -58,7 +58,7 @@ export class SettingsComponent implements OnInit {
       this.edit.nickName = this.thisUser.nickName;
 
     if (!this.personForm.get('email').value && !this.personForm.get('password').value && !this.personForm.get('nickName').value)
-      alert("Nothing to change");
+      alert("אין מה לשנות");
 
     else {
       this.edit._id = this.thisUser._id;
@@ -68,7 +68,7 @@ export class SettingsComponent implements OnInit {
   }
 
   public del() {
-    if (prompt("Are you sure?\nEnter yes to delete") == "yes")
+    if (prompt("(רשום כן בכדי להמשיך)\n?האם אתה בטוח") == "כן")
       this.service.deleteUser(this.thisUser);
   }
 

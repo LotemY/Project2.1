@@ -3,22 +3,22 @@
         <br>
         <br>
 
-        <h5>Email</h5>
+        <h5>אימייל</h5>
         <input formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
         <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-            <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+            <div *ngIf="f.email.errors.email">האימייל חייב להיות תיקני</div>
         </div>
 
         <br>
         <br>
 
-        <h5>Password</h5>
+        <h5>סיסמא</h5>
         <input type="password" formControlName="password" class="form-control"
             [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
         <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-            <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
-            <div *ngIf="f.password.errors.maxlength">Password can't be more then 11 characters</div>
-            <div *ngIf="f.password.errors.pattern">Password must contain a mix of characters & numbers</div>
+            <div *ngIf="f.password.errors.minlength">סיסמא חייבת להיות בעלת 6 תווים לפחות</div>
+            <div *ngIf="f.password.errors.maxlength">סיסמא לא יכולה להיות מעל 11 תווים</div>
+            <div *ngIf="f.password.errors.pattern">סיסמא חייבת להכיל מספרים ואותיות באנגלית בלבד</div>
         </div>
 
         <br>
@@ -29,15 +29,15 @@
             <input formControlName="nickName" class="form-control"
                 [ngClass]="{ 'is-invalid': submitted && f.nickName.errors }" value="thisUser.nickName" />
             <div *ngIf="submitted && f.nickName.errors" class="invalid-feedback">
-                <div *ngIf="f.nickName.errors.minlength">Nickname must be at least 3 characters</div>
-                <div *ngIf="f.nickName.errors.maxlength">Nickname can't be more then 8 characters</div>
+                <div *ngIf="f.nickName.errors.minlength">כינוי חייב להכיל 3 אותיות לפחות</div>
+                <div *ngIf="f.nickName.errors.maxlength">כינוי לא יכול להכיל יותר מ-8 תווים</div>
             </div>
         </div>
 
         <br>
         <br>
         <div class="text-center">
-            <button class="btn btn-primary mr-1">Save</button>
+            <button class="btn btn-primary mr-1">שמירה</button>
         </div>
     </form>
 
@@ -45,13 +45,13 @@
     <br>
 
     <div class="text-center">
-        <button class="btn btn-primary mr-1" (click)="goBack()">Back</button>
+        <button class="btn btn-primary mr-1" (click)="goBack()">חזרה</button>
     </div>
 
     <br>
     <br>
 
     <div class="text-center">
-        <button class="btn btn-primary mr-1" style="background-color: red;" (click)="del()">Delete</button>
+        <button class="btn btn-primary mr-1" style="background-color: red;" (click)="del()">מחיקה</button>
     </div>
 </div>

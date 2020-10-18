@@ -23,8 +23,8 @@ classP.post("/api/teacherHP/:id/newClass", auth, async (req, res) => {
         img: "../../assets/gen.jpg"
     });
 
-    let hebrewArr = [`אזרחות`, `אנגלית`, `ביולוגיה`, `גיאוגרפיה`, `היסטוריה`, `חנ"ג`, `מתמטיקה`, `ספרות`, `עברית`, `תנ"ך`];
-    let englishArr = ["Citizenship.jpg", "English.jpg", "Biology.jpg", "Geography.jpg", "History.jpg", "Sport.jpg", "Math.jpg", "Literature.jpg", "Hebrew.jpg", "Tanach.jpg"];
+    let hebrewArr = [`אזרחות`, `אנגלית`, `ביולוגיה`, `גיאוגרפיה`, `היסטוריה`, `חנ"ג`, `כימיה`, `מוסיקה`, `מתמטיקה`, `פיזיקה`, `ספרות`, `עברית`, `תנ"ך`];
+    let englishArr = ["Citizenship.jpg", "English.jpg", "Biology.jpg", "Geography.jpg", "History.jpg", "Sport.jpg", "Chmistry.jpg", "Music.jpg", "Math.jpg", "Physics.jpg", "Literature.jpg", "Hebrew.jpg", "Tanach.jpg"];
 
 
     for (let i = 0; i < hebrewArr.length; i++)
