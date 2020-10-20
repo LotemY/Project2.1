@@ -1,12 +1,15 @@
 .all {
-    background-color: rgba(46, 43, 46, 0.75);
+    background-color: rgb(255, 255, 255);
     margin-left: 300px;
     margin-right: 300px;
     text-align: center;
+    width: 1200px;
+    height: 550px;
+    border-radius: 50px;
 }
 
 h5, h2 {
-    color: white;
+    color: rgb(10, 8, 8);
 }
 
 button{
