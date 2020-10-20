@@ -1,5 +1,7 @@
 <div class="all">
     <div class="card-body">
+        <h2> יצירת כיתה</h2>
+        <br><br>
         <div>
             <h5>שם כיתה</h5>
             <input #name list="name">
@@ -23,25 +25,29 @@
 
         <div>
             <h5>נושאים</h5>
-            <input #sub onfocus="this.value=''">&nbsp;
-            <button (click)="addSub(sub.value)">+</button>
-            <br>
+            <button (click)="addSub(sub.value)">הוספת נושא</button> &nbsp;
+            <input #sub onfocus="this.value=''">
+            
+            <br><br>
             <table border="1" *ngIf="newClass.classSubject[0]">
                 <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
                     <th>נושא</th>
                 </tr>
                 <tr *ngFor="let sub of newClass.classSubject">
-                    <td>{{sub.name}}</td>
-                    <td><button (click)="addSubsub(sub.name)">+</button></td>
-                    <td><button (click)="removeElement(sub.name)">-</button></td>
                     <td *ngIf="sub.subsubject[0]">
                         <table border="1">
                             <tr *ngFor="let s of sub.subsubject">
-                                <td>{{s.name}}</td>
-                                <td><button (click)="removeElement(sub.name,s.name)">-</button></td>
+                                <td><button class="addLess" (click)="removeElement(sub.name,s.name)">הסר</button></td>
+                                <td> {{s.name}}</td>
                             </tr>
                         </table>
                     </td>
+                    <td><button id="oo" class="addLess" (click)="removeElement(sub.name)">הסר</button></td>
+                    <td><button id="oo" class="addLess" (click)="addSubsub(sub.name)">הוספת תת נושא</button></td>
+                    <td>{{sub.name}}</td>
                 </tr>
             </table>
         </div>
@@ -50,23 +56,26 @@
         <br>
 
         <div>
-            <label>סוג הטבה</label>&nbsp;
-            <input #reward onfocus="this.value=''">&nbsp;
-            <label>עלות הטבה</label>&nbsp;
+            <h5>הטבות</h5>
+            <button (click)="addReward(reward.value,reCost.value)">הוספה</button>&nbsp;
             <input type="number" #reCost onfocus="this.value=''">&nbsp;
-            <button (click)="addReward(reward.value,reCost.value)">הוספה</button>
+            <label>עלות הטבה</label>&nbsp;
+            <input #reward onfocus="this.value=''">&nbsp;
+            <label>סוג הטבה</label>
         </div>
+        <br>
         <div *ngIf="newClass.rewards[0]">
-            <h5>רשימת הטבות</h5>
+            <h5>רשימת הטבות</h5> 
             <table border="1">
                 <tr>
-                    <th>הטבה</th>
+                    <th></th>
                     <th>עלות</th>
+                    <th>הטבה</th>
                 </tr>
                 <tr *ngFor="let re of newClass.rewards">
-                    <td>{{re.item}}</td>
+                    <td><button class="addLess" (click)="removeReward(re.item)">הסר</button></td>
                     <td>{{re.cost}}</td>
-                    <td><button (click)="removeReward(re.item)">-</button></td>
+                    <td>{{re.item}}</td>
                 </tr>
             </table>
         </div>
@@ -76,16 +85,18 @@
 
         <div>
             <h5>רשימת תלמידים</h5>
+            <button class="addLess" (click)="addStudent(student.value)">+</button>&nbsp;
             <input #student type="number" onfocus="this.value=''">&nbsp;
-            <button (click)="addStudent(student.value)">+</button>&nbsp;
+            <br><br>
             <table border="1" *ngIf="newClass.classStudents[0]">
                 <tr>
+                   
+                    <th></th>
                     <th>ID תלמיד</th>
-                    <th> </th>
                 </tr>
-                <tr *ngFor="let student of newClass.classStudents">
+                <tr *ngFor="let student of newClass.classStudents">    
+                    <td><button class="addLess" (click)="removeElement(student._id)">הסר</button></td>
                     <td>{{student._id}}</td>
-                    <td><button (click)="removeElement(student._id)">-</button></td>
                 </tr>
             </table>
         </div>

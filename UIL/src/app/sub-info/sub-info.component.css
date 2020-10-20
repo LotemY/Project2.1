@@ -1,4 +1,4 @@
-h2 {
+h2,h5 {
     -webkit-text-fill-color: rgb(255, 243, 243);
 }
 
@@ -9,16 +9,41 @@ h2 {
     text-align: center;
 }
 
-h5 {
-    color: white;
-}
-
 table {
     margin-left: auto;
     margin-right: auto;
     border-color: white;
+    font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100px;
+    height: 100px;
 }
 
 td, tr, th {
     color: white;
+    border-color: white;
+    border: 1px solid white;
+    padding: 8px;
+    width: 80px;
+    height: 50px;
+}
+
+th {
+    background-color: grey;
+  }
+  tr {
+    background-color: rgb(32, 32, 32);
+  }
+  td {
+    background-color: rgb(32, 32, 32);
+  }
+
+  button{
+    background-color: rgb(91, 86, 114);
+    color: white;
+    
+}
+
+input{
+    text-align: right;
 }

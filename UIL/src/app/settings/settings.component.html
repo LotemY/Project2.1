@@ -1,7 +1,8 @@
 <div class="all">
     <form [formGroup]="personForm" class="form-register" (ngSubmit)="save()">
-        <br>
-        <br>
+       
+       <h2>הגדרות</h2>
+        <br><br>
 
         <h5>אימייל</h5>
         <input formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
@@ -25,7 +26,7 @@
         <br>
 
         <div *ngIf="thisUser.nickName">
-            <h5>Nickname</h5>
+            <h5>כינוי</h5>
             <input formControlName="nickName" class="form-control"
                 [ngClass]="{ 'is-invalid': submitted && f.nickName.errors }" value="thisUser.nickName" />
             <div *ngIf="submitted && f.nickName.errors" class="invalid-feedback">
@@ -37,16 +38,10 @@
         <br>
         <br>
         <div class="text-center">
-            <button class="btn btn-primary mr-1">שמירה</button>
+            <button class="btn btn-primary mr-1">שמירה</button> &nbsp;
+            <button class="btn btn-primary mr-1" (click)="goBack()">חזרה</button>
         </div>
     </form>
-
-    <br>
-    <br>
-
-    <div class="text-center">
-        <button class="btn btn-primary mr-1" (click)="goBack()">חזרה</button>
-    </div>
 
     <br>
     <br>

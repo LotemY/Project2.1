@@ -5,7 +5,7 @@
     text-align: center;
 }
 
-h5 {
+h5,h2{
     color: white;
 }
 
@@ -14,11 +14,20 @@ td, tr, th {
     border-color: white;
     border: 1px solid white;
     padding: 8px;
+    width: 80px;
+    height: 50px;
 }
 
 th {
     background-color: grey;
-}
+  }
+  tr {
+    background-color: rgb(32, 32, 32);
+  }
+  td {
+    background-color: rgb(32, 32, 32);
+  }
+
 
 table {
     margin-left: auto;
@@ -26,6 +35,8 @@ table {
     border-color: white;
     font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;
     border-collapse: collapse;
+    width: 100px;
+    height: 100px;
 }
 
 label {
@@ -34,4 +45,13 @@ label {
 
 option {
     color: white;
+}
+
+button{
+    background-color: rgb(91, 86, 114);
+    color: white;
+}
+
+input{
+    text-align: right;
 }

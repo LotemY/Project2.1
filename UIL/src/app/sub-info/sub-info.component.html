@@ -3,14 +3,14 @@
 
     <table border="1">
         <tr>
-            <th>שם פרטי</th>
-            <th>שם משפחה</th>
             <th>נקודות</th>
+            <th>שם משפחה</th>
+            <th>שם פרטי</th>
         </tr>
         <tr *ngFor="let s of thisClass.classStudents">
-            <td>{{s.firstName}}</td>
-            <td>{{s.lastName}}</td>
             <td>{{findSub(s.subPoints)}}</td>
+            <td>{{s.lastName}}</td>
+            <td>{{s.firstName}}</td>
         </tr>
     </table>
 
@@ -20,12 +20,12 @@
     <h5>תת נושאים</h5>
     <table border="1">
         <tr>
-            <th>שם</th>
             <th>נקודות</th>
+            <th>שם</th>
         </tr>
         <tr *ngFor="let s of info.subsubject">
-            <td>{{s.name}}</td>
             <td>{{s.points}}</td>
+            <td>{{s.name}}</td>
         </tr>
     </table>
 
