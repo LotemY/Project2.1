@@ -1,21 +1,24 @@
 <div class="all">
-    <h3>{{thisClass.className}}</h3>
+    <h2>{{thisClass.className}} : {{thisClass.grade}} </h2>
 
     <br>
     <br>
 
     <div *ngIf="thisClass.classSubject[0]">
         <h5>רשימת נושאים</h5>
-        <table border="1">
-            <tr>
-                <th>שם</th>
-                <th>נקודות</th>
-            </tr>
-            <tr *ngFor="let s of thisClass.classSubject">
-                <td><button (click)="subInfo(s.name)">{{s.name}}</button></td>
-                <td>{{s.points}}</td>
-            </tr>
-        </table>
+        <br>
+        <div class="subList">
+            <table border="1">
+                <tr>
+                    <th>נקודות</th>
+                    <th>שם</th>
+                </tr>
+                <tr *ngFor="let s of thisClass.classSubject">
+                    <td>{{s.points}}</td>
+                    <td><button (click)="subInfo(s.name)">{{s.name}}</button></td>
+                </tr>
+            </table>
+        </div>
     </div>
 
     <br>
@@ -23,18 +26,21 @@
 
     <div *ngIf="thisClass.classStudents[0]">
         <h5>רשימת תלמידים</h5>
+        <br>
+        <div class="studentList">
         <table border="1">
             <tr>
-                <th>שם פרטי</th>
-                <th>שם משפחה</th>
                 <th>נקודות</th>
+                <th>שם משפחה</th>
+                <th>שם פרטי</th>
             </tr>
             <tr *ngFor="let s of thisClass.classStudents">
-                <td>{{s.firstName}}</td>
-                <td>{{s.lastName}}</td>
                 <td>{{s.classPoints}}</td>
+                <td>{{s.lastName}}</td>
+                <td>{{s.firstName}}</td>
             </tr>
         </table>
+    </div>
     </div>
 
     <br>
@@ -42,14 +48,15 @@
 
     <div *ngIf="thisClass.rewards[0]">
         <h5>רשימת הטבות</h5>
+        <br>
         <table border="1">
             <tr>
-                <th>הטבה</th>
                 <th>עלות</th>
+                <th>הטבה</th>
             </tr>
             <tr *ngFor="let r of thisClass.rewards">
-                <td>{{r.item}}</td>
                 <td>{{r.cost}}</td>
+                <td>{{r.item}}</td>
             </tr>
         </table>
     </div>

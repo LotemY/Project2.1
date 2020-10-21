@@ -55,3 +55,27 @@ button{
 input{
     text-align: right;
 }
+
+.studentList{
+    position: relative;
+    overflow-y: scroll;
+    width: 500px;
+    height: 300px;
+    left: 470px;
+  }
+  
+  .subList{
+    position: relative;
+    left: 230px;
+    overflow-y: scroll;
+    width: 750px;
+    height: 400px;
+  }
+  
+  .rewardList{
+      position: relative;
+    left: 470px;
+    overflow-y: scroll;
+    width: 500px;
+    height: 300px;
+  }

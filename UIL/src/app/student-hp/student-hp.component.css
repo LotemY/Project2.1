@@ -1,7 +1,5 @@
 .card-list {
-    display: flex;
     padding: 5rem;
-    overflow-x: auto;
 }
 
 .card-header {
@@ -32,10 +30,12 @@
     width: 200px;
     min-width: 200px;
     padding: 3rem;
-    border-radius: 50px;
+    border-radius: 100px;
     box-shadow: 0rem 0 3rem rgb(255, 245, 99);
     transition: .3s;
-}
+    bottom: 50px;
+    left: 120px;
+  }
 
 .card:hover {
     transform: translateY(-3rem);
@@ -78,12 +78,38 @@
     margin-left: 300px;
     margin-right: 300px;
     text-align: center;
-}
+    height: 1000px;
+    width: 1200px;
+  }
 
-h3, h6 {
+  .allCards{
+    position: relative;
+    width: 800px;
+    height: 500px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    top: 80px;
+    right: 400px;
+    left: 300px;
+  }
+
+h2, h3 ,h5{
     color: white;
 }
 
+.pic{
+    position: relative;
+    width: 100px;
+    height: 90px;
+    left: -40px;
+    right: 700px;
+  }
+
+  #mygrade{
+    position: relative;
+    right: 20px;
+  }
+  
 #myBar {
     width: 50%;
     background-color: blue;
@@ -94,7 +120,7 @@ h3, h6 {
 
 #myProgress {
     position: absolute;
-    left: 46.1%;
+    left: 40%;
 }
 
 .outerBar {
@@ -106,3 +132,17 @@ h3, h6 {
     margin-left: auto;
     margin-right: auto;
 }
+
+.b1{
+    position: relative;
+    bottom: 0px;
+    left: 300px;
+    height: 195px;
+    }
+    
+    .b2{
+    position: relative;
+    bottom: 200px;
+    right: 30px;
+    height: 100px;
+    }

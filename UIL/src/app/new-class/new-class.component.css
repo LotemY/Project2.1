@@ -53,3 +53,27 @@ button{
   background-color: rgb(91, 86, 114);
   color: white;
 }
+
+.studentList{
+  position: relative;
+  overflow-y: scroll;
+  width: 500px;
+  height: 300px;
+  left: 470px;
+}
+
+.subList{
+  position: relative;
+  left: 380px;
+  overflow-y: scroll;
+  width: 600px;
+  height: 400px;
+}
+
+.rewardList{
+    position: relative;
+  left: 470px;
+  overflow-y: scroll;
+  width: 500px;
+  height: 300px;
+}

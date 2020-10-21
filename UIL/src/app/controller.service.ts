@@ -12,9 +12,10 @@ import { Student } from './shared/models/Student';
 
 /*
   -TASKS-
-  no accses
-  tables fix
-  table scroll
+  edit points subsub more than the subject
+  the scroll getout from all(name) div
+  create new class and display two new classes
+  create studnte after few they dont get token
   (button check)
 -- error to right response
    *refrash token*

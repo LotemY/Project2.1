@@ -13,6 +13,8 @@ export class TeacherHPComponent implements OnInit {
 
   public myClasses: Class[] = [];
   public thisTeacher: Person;
+  public positiveReason: String[] = ["הגשת שיעורי בית","עזרה לחבר","השתתפות בשיעור","הגשת מבחן"];
+  public negativeReason: String[] = ["התחצפות למורה","אי הכנת שיעורי בית","אי הגעה לשיעור","איחור"];
 
   constructor(private service: ControllerService, private route: ActivatedRoute) {
     this.thisTeacher = this.service.person;

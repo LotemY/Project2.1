@@ -1,26 +1,40 @@
 <div class="all">
 
-        <h3>{{thisStudent.lastName}}&nbsp;{{thisStudent.firstName}}</h3>
-        <h6>ID: {{thisStudent._id}}</h6>
+        <h2>{{thisStudent.lastName}}&nbsp;{{thisStudent.firstName}}</h2>
+        <h5>ID: {{thisStudent._id}}</h5>
         <br>
-        <br>
+        <h3>{{thisStudent.totalPoints.level}} רמה</h3>
+        &nbsp;
         <div class="outerBar">
-            <span id="myProgress">{{thisStudent.totalPoints.xp}}</span>
+            <span id="myProgress">{{thisStudent.totalPoints.xp}}/1000</span>
             <div id="myBar"></div>
         </div>
-        <h3>{{thisStudent.totalPoints.level}} רמה</h3>
 
     <br>
     <br>
 
-    <section class="card-list">
-        <div *ngFor="let c of myClasses">
-            <button class="card" (click)="goClass(c)">
-                <img src={{c.img}}>
-                <div id="myProgress">
-                    <p id="mygrade">{{c.className}} &nbsp; {{c.grade}}</p>
+    <div class="allCards">
+        <h5> רשימת כיתות </h5>
+        <section class="card-list">
+            <div *ngFor="let c of myClasses; let j=index">
+                <div class="b1">
+                    <button class="card" (click)="goClass(c)">
+                        <div id="myProgress">
+                            <img class="pic" src="{{c.img}}">
+                            <p id="mygrade">{{myClasses[j].className}} {{myClasses[j].grade}}</p>
+                        </div>
+                    </button>
                 </div>
-            </button>
-        </div>
-    </section>
+
+                <div *ngIf="myClasses[j+1]" class="b2">
+                    <button class="card" (click)="goClass(c)">
+                        <div id="myProgress">
+                            <img class="pic" src="{{c.img}}">
+                            <p id="mygrade">{{myClasses[j+1].className}} {{myClasses[j+1].grade}}</p>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </div>
 </div>

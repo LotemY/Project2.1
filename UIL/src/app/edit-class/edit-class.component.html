@@ -30,35 +30,37 @@
             <h5>נושאים</h5>
             <label *ngIf="totalPoints!=1000">&nbsp;{{1000-totalPoints}}&nbsp;:נקודות נותרות</label>
             <br>
-            <button (click)="addSub(sub.value)">הוספת נושא</button> &nbsp; <input #sub onfocus="this.value=''"> 
+            <button (click)="addSub(sub.value)">הוספה</button> &nbsp; <input #sub onfocus="this.value=''">
             <br><br>
-            <table border="1" *ngIf="thisClass.classSubject[0]">
-                <tr>
-                    <th></th>
-                    <th>תת נושא</th>
-                    <th></th>
-                    <th></th>
-                    <th>נקודות</th>
-                    <th>נושא</th>
-                </tr>
-                <tr *ngFor="let sub of thisClass.classSubject">
-                    <td><button (click)="addSubsub(sub.name)">הוספת תת הנושא</button></td>
-                    <td>
-                        <table border="1" *ngFor="let s of sub.subsubject">
-                            <tr>
-                                <td><button (click)="removeElement(sub.name,s.name)">הסר תת נושא</button></td>
-                                <td><button (click)="editPoints(sub,s)">עריכת נקודות</button></td>
-                                <td>{{s.points}}</td>
-                                <td>{{s.name}}</td>
-                            </tr>
-                        </table>
-                    </td>
-                    <td> <button (click)="removeElement(sub.name)">הסר נושא</button> </td>
-                    <td> <button (click)="editPoints(sub)">עריכת נקודות</button> </td>
-                    <td>{{sub.points}}</td>
-                    <td>{{sub.name}}</td>
-                </tr>
-            </table>
+            <div class="subList">
+                <table border="1" *ngIf="thisClass.classSubject[0]">
+                    <tr>
+                        <th></th>
+                        <th>תת נושא</th>
+                        <th></th>
+                        <th></th>
+                        <th>נקודות</th>
+                        <th>נושא</th>
+                    </tr>
+                    <tr *ngFor="let sub of thisClass.classSubject">
+                        <td><button (click)="addSubsub(sub.name)">הוספת תת הנושא</button></td>
+                        <td>
+                            <table border="1" *ngFor="let s of sub.subsubject">
+                                <tr>
+                                    <td><button (click)="removeElement(sub.name,s.name)">הסר תת נושא</button></td>
+                                    <td><button (click)="editPoints(sub,s)">עריכת נקודות</button></td>
+                                    <td>{{s.points}}</td>
+                                    <td>{{s.name}}</td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td> <button (click)="removeElement(sub.name)">הסר נושא</button> </td>
+                        <td> <button (click)="editPoints(sub)">עריכת נקודות</button> </td>
+                        <td>{{sub.points}}</td>
+                        <td>{{sub.name}}</td>
+                    </tr>
+                </table>
+            </div>
         </div>
 
         <br>
@@ -70,13 +72,12 @@
             <input type="number" #reCost onfocus="this.value=''">&nbsp;
             <label>:עלות ההטבה</label>&nbsp;
             <input #reward onfocus="this.value=''">&nbsp;
-            <label>:סוג ההטבה</label> 
-        
+            <label>:סוג ההטבה</label>
+
             <br>
             <br>
 
-            <div *ngIf="thisClass.rewards[0]">
-                <h5>רשימת הטבות</h5>
+            <div class="rewardList" *ngIf="thisClass.rewards[0]">
                 <table border="1">
                     <tr>
                         <th> </th>
@@ -84,7 +85,7 @@
                         <th>הטבה</th>
                     </tr>
 
-                    <tr *ngFor="let re of thisClass.rewards">                
+                    <tr *ngFor="let re of thisClass.rewards">
                         <td> <button (click)="removeReward(re.item)">הסר</button></td>
                         <td>{{re.cost}} </td>
                         <td>{{re.item}}</td>
@@ -99,19 +100,22 @@
         <div>
             <h5>רשימת תלמידים</h5>
             <br>
-            <button (click)="addStudent(student.value)">הוספת תלמיד</button> &nbsp; <input #student type="number" onfocus="this.value=''">
+            <button (click)="addStudent(student.value)">הוספה</button> &nbsp; <input #student type="number"
+                onfocus="this.value=''">
             <br><br>
-            <table border="1" *ngIf="thisClass.classStudents[0]">
-                <tr>
-                   
-                    <th> </th>
-                    <th>מספר תלמידים</th>
-                </tr>
-                <tr *ngFor="let student of thisClass.classStudents">
-                    <td><button (click)="removeElement(student._id)"> הסר </button></td>
-                    <td>{{student._id}}</td>
-                </tr>
-            </table>
+            <div class="studentList">
+                <table border="1" *ngIf="thisClass.classStudents[0]">
+                    <tr>
+
+                        <th> </th>
+                        <th>מספר תלמידים</th>
+                    </tr>
+                    <tr *ngFor="let student of thisClass.classStudents">
+                        <td><button (click)="removeElement(student._id)"> הסר </button></td>
+                        <td>{{student._id}}</td>
+                    </tr>
+                </table>
+            </div>
         </div>
 
         <br>

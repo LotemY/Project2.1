@@ -1,4 +1,4 @@
-h3 {
+h2 {
     -webkit-text-fill-color: white;
 }
 
@@ -17,8 +17,49 @@ table {
     margin-left: auto;
     margin-right: auto;
     border-color: white;
+    font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100px;
+    height: 100px;
 }
 
 td, tr, th {
     color: white;
+    border-color: white;
+    border: 1px solid white;
+    padding: 8px;
+    width: 80px;
+    height: 50px;
 }
+
+th {
+    background-color: grey;
+  }
+tr {
+    background-color: rgb(32, 32, 32);
+  }
+td {
+    background-color: rgb(32, 32, 32);
+  }
+
+button{
+    background-color: rgb(91, 86, 114);
+    color: white;
+    
+}
+
+.studentList{
+    position: relative;
+    overflow-y: scroll;
+    width: 400px;
+    height: 300px;
+    left: 400px;
+  }
+  
+  .subList{
+    position: relative;
+    left: 400px;
+    overflow-y: scroll;
+    width: 400px;
+    height: 300px;
+  }

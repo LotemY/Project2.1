@@ -1,33 +1,45 @@
 <div class="all">
     <h2>{{info.name}}</h2>
 
-    <table border="1">
-        <tr>
-            <th>נקודות</th>
-            <th>שם משפחה</th>
-            <th>שם פרטי</th>
-        </tr>
-        <tr *ngFor="let s of thisClass.classStudents">
-            <td>{{findSub(s.subPoints)}}</td>
-            <td>{{s.lastName}}</td>
-            <td>{{s.firstName}}</td>
-        </tr>
-    </table>
+
+    <br><br>
+    <br><br>
+
+    <h5>רשימת תלמידים</h5>
+    <br>
+    <div class="studentList">
+        <table border="1">
+            <tr>
+                <th>נקודות</th>
+                <th>שם משפחה</th>
+                <th>שם פרטי</th>
+            </tr>
+            <tr *ngFor="let s of thisClass.classStudents">
+                <td>{{findSub(s.subPoints)}}</td>
+                <td>{{s.lastName}}</td>
+                <td>{{s.firstName}}</td>
+            </tr>
+        </table>
+    </div>
 
     <br>
     <br>
 
-    <h5>תת נושאים</h5>
-    <table border="1">
-        <tr>
-            <th>נקודות</th>
-            <th>שם</th>
-        </tr>
-        <tr *ngFor="let s of info.subsubject">
-            <td>{{s.points}}</td>
-            <td>{{s.name}}</td>
-        </tr>
-    </table>
+
+    <div class="subList" *ngIf="info.subsubject[0]">
+        <h5>תת נושאים</h5>
+        <br>
+        <table border="1">
+            <tr>
+                <th>נקודות</th>
+                <th>שם</th>
+            </tr>
+            <tr *ngFor="let s of info.subsubject">
+                <td>{{s.points}}</td>
+                <td>{{s.name}}</td>
+            </tr>
+        </table>
+    </div>
 
     <br>
     <br>
