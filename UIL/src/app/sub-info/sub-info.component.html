@@ -1,56 +1,60 @@
-<div class="all">
+
     <h2>{{info.name}}</h2>
 
 
     <br><br>
     <br><br>
 
-    <h5>רשימת תלמידים</h5>
-    <br>
-    <div class="studentList">
-        <table border="1">
-            <tr>
-                <th>נקודות</th>
-                <th>שם משפחה</th>
-                <th>שם פרטי</th>
-            </tr>
-            <tr *ngFor="let s of thisClass.classStudents">
-                <td>{{findSub(s.subPoints)}}</td>
-                <td>{{s.lastName}}</td>
-                <td>{{s.firstName}}</td>
-            </tr>
-        </table>
+    <div>
+        <h5>רשימת תלמידים</h5>
+        <br>
+        <div class="studentList">
+            <table border="1">
+                <tr>
+                    <th>נקודות</th>
+                    <th>שם משפחה</th>
+                    <th>שם פרטי</th>
+                </tr>
+                <tr *ngFor="let s of thisClass.classStudents">
+                    <td>{{findSub(s.subPoints)}}</td>
+                    <td>{{s.lastName}}</td>
+                    <td>{{s.firstName}}</td>
+                </tr>
+            </table>
+        </div>
     </div>
 
-    <br>
-    <br>
+    <br><br>
+    <br><br>
 
-
-    <div class="subList" *ngIf="info.subsubject[0]">
+    <div>
         <h5>תת נושאים</h5>
         <br>
-        <table border="1">
-            <tr>
-                <th>נקודות</th>
-                <th>שם</th>
-            </tr>
-            <tr *ngFor="let s of info.subsubject">
-                <td>{{s.points}}</td>
-                <td>{{s.name}}</td>
-            </tr>
-        </table>
+        <div class="subList" *ngIf="info.subsubject[0]">
+            <table border="1">
+                <tr>
+                    <th>נקודות</th>
+                    <th>שם</th>
+                </tr>
+                <tr *ngFor="let s of info.subsubject">
+                    <td>{{s.points}}</td>
+                    <td>{{s.name}}</td>
+                </tr>
+            </table>
+        </div>
     </div>
 
-    <br>
-    <br>
+    <br><br>
+    <br><br>
+    <br><br>
+
+    <div class="buttons">
 
     <div *ngIf="thisPerson._id==thisClass.classTeacher">
-        <button [disabled]="info.comp" (click)="complete()">השלם נושא</button>
+        <button style="background-color: blue;" [disabled]="info.comp" (click)="complete()">השלם נושא</button>
     </div>
 
-
-    <br>
-    <br>
+    <br><br>
 
     <button (click)="back()">חזרה</button>
 </div>

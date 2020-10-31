@@ -37,7 +37,8 @@ export class EditClassComponent implements OnInit {
   public editClass(name: String, grade: String) {
     if (this.totalPoints != 1000)
       return alert("חייב להשתמש בכל הנקודות");
-
+    if (name[0] == " " || name == "")
+      return alert("הכנס שם");
     if (grade != "")
       this.thisClass.grade = grade;
     if (Number(name))
@@ -51,6 +52,9 @@ export class EditClassComponent implements OnInit {
   public addSub(sub: String) {
     if (sub) {
       let counter = this.thisClass.classSubject.length;
+
+      if (sub[0] == " " || sub == "")
+      return alert("הכנס שם");
 
       if (counter == 10)
         return alert("הגעת לכמות נושאים מקסימאלי");
@@ -77,6 +81,8 @@ export class EditClassComponent implements OnInit {
 
   public addSubsub(name: String) {
     let thisSubsub = prompt("הכנס את שם התת נושא");
+      if (thisSubsub[0] == " " || thisSubsub == "")
+        return alert("הכנס שם");
 
     for (let i = 0; i < this.thisClass.classSubject.length; i++) {
       if (name == this.thisClass.classSubject[i].name) {
@@ -105,6 +111,8 @@ export class EditClassComponent implements OnInit {
   public editPoints(sub: classSubject, subsub?: any) {
     let points = Number(prompt("הכנס נקודות"));
     let subPoints = 0;
+    if (!Number(points))
+      return alert("חייב להיות מספר");
     if (points < 0)
       return alert("לא יכול להיות מספר שלילי");
     if (subsub) {
@@ -184,6 +192,8 @@ export class EditClassComponent implements OnInit {
   public addReward(item: String, cost: Number) {
     if (this.thisClass.rewards.length >= 5)
       return alert("הגעת למספר הטבות מקסימאלי");
+    if (item[0] == " " || item == "")
+      return alert("הכנס שם");
     if (!item || !cost)
       return alert("חייב להכניס את כל הפרמטרים");
     if (Number(item))

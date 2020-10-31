@@ -12,13 +12,11 @@ import { Student } from './shared/models/Student';
 
 /*
   -TASKS-
-  edit points subsub more than the subject
-  the scroll getout from all(name) div
-  create new class and display two new classes
-  create studnte after few they dont get token
+  complete subsubsubsubject
+  edit points student and the reason
   (button check)
--- error to right response
-   *refrash token*
+  error to right response
+  *refrash token*
 */
 
 export class ControllerService {

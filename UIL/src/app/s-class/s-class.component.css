@@ -2,15 +2,16 @@ h2 {
     -webkit-text-fill-color: white;
 }
 
-.all {
-    background-color: rgba(46, 43, 46, 0.75);
-    margin-left: 300px;
-    margin-right: 300px;
-    text-align: center;
-}
 
 h5 {
     color: white;
+}
+
+h2,h5{
+  margin-left: auto;
+  margin-right: auto;
+  left: 800px;
+  position: absolute;
 }
 
 table {
@@ -49,17 +50,33 @@ button{
 }
 
 .studentList{
-    position: relative;
-    overflow-y: scroll;
-    width: 400px;
-    height: 300px;
-    left: 400px;
-  }
-  
-  .subList{
-    position: relative;
-    left: 400px;
-    overflow-y: scroll;
-    width: 400px;
-    height: 300px;
-  }
+  position: relative;
+  overflow-y: scroll;
+  width: 400px;
+  height: 250px;
+  left: 700px;
+}
+
+.subList{
+  position: relative;
+  left: 700px;
+  overflow-y: scroll;
+  width: 400px;
+  height: 300px;
+  top: 100px;
+}
+
+.rewardsList{
+  position: relative;
+  left: 700px;
+  overflow-y: scroll;
+  width: 400px;
+  height: 250px;
+}
+
+.oo{
+  margin-left: auto;
+  margin-right: auto;
+  left: 900px;
+  position: absolute;
+}

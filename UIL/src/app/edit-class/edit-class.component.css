@@ -1,12 +1,11 @@
-.all {
-    background-color: rgba(46, 43, 46, 0.75);
-    margin-left: 300px;
-    margin-right: 300px;
-    text-align: center;
-}
+
 
 h5,h2{
     color: white;
+    margin-left: auto;
+    margin-right: auto;
+    left: 800px;
+    position: absolute;
 }
 
 td, tr, th {
@@ -41,41 +40,78 @@ table {
 
 label {
     color: white;
+    margin-left: auto;
+    margin-right: auto;
+    left: 800px;
+    position: absolute;
 }
 
 option {
     color: white;
+    margin-left: auto;
+    margin-right: auto;
+    left: 800px;
+    position: absolute;
+
 }
 
 button{
     background-color: rgb(91, 86, 114);
     color: white;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 input{
     text-align: right;
+    margin-left: auto;
+    margin-right: auto;
+    left: 800px;
+    position: absolute;
 }
 
 .studentList{
-    position: relative;
-    overflow-y: scroll;
-    width: 500px;
-    height: 300px;
-    left: 470px;
-  }
-  
-  .subList{
-    position: relative;
-    left: 230px;
-    overflow-y: scroll;
-    width: 750px;
-    height: 400px;
-  }
-  
-  .rewardList{
-      position: relative;
-    left: 470px;
-    overflow-y: scroll;
-    width: 500px;
-    height: 300px;
-  }
+  position: relative;
+  overflow-y: scroll;
+  width: 400px;
+  height: 250px;
+  left: 700px;
+}
+
+.subList{
+  position: relative;
+  left: 550px;
+  overflow-y: scroll;
+  width: 700px;
+  height: 300px;
+  top: 50px;
+}
+
+.rewardsList{
+  position: relative;
+  left: 700px;
+  overflow-y: scroll;
+  width: 400px;
+  height: 250px;
+}
+
+.buttons{
+  margin-left: auto;
+  margin-right: auto;
+  left: 800px;
+  position: absolute;
+}
+
+.grade{
+  margin-left: auto;
+  margin-right: auto;
+  left: 800px;
+  position: absolute;
+}
+
+.add{
+  margin-left: auto;
+  margin-right: auto;
+  left: 700px;
+  position: absolute;
+}

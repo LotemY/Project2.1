@@ -1,9 +1,4 @@
-.all {
-  background-color: rgba(46, 43, 46, 0.75);
-  margin-left: 300px;
-  margin-right: 300px;
-  text-align: center;
-}
+
 
 td, tr, th {
   color: white;
@@ -31,9 +26,9 @@ table {
   border-color: white;
   font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;
   border-collapse: collapse;
-  width: 100px;
-  height: 100px;
+  width: 100%;
 }
+
 
 
 h5,h2 {
@@ -57,23 +52,24 @@ button{
 .studentList{
   position: relative;
   overflow-y: scroll;
-  width: 500px;
-  height: 300px;
-  left: 470px;
+  width: 400px;
+  height: 250px;
+  left: 700px;
 }
 
 .subList{
   position: relative;
-  left: 380px;
-  overflow-y: scroll;
-  width: 600px;
-  height: 400px;
-}
-
-.rewardList{
-    position: relative;
-  left: 470px;
+  left: 600px;
   overflow-y: scroll;
   width: 500px;
   height: 300px;
+  top: 60px;
+}
+
+.rewardsList{
+  position: relative;
+  left: 700px;
+  overflow-y: scroll;
+  width: 400px;
+  height: 250px;
 }

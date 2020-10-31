@@ -35,7 +35,7 @@ export class NewClassComponent implements OnInit {
   }
 
   public createClass(name: String, grade: String) {
-    if (name == "")
+    if (name[0] == " " || name == "")
       return alert("הכנס שם");
     if (Number(name))
       return alert("השם לא יכול להיות מספר");
@@ -54,6 +54,8 @@ export class NewClassComponent implements OnInit {
     if (sub) {
       if (Number(sub))
         return alert("לא ניתן להכניס מספר");
+      if (sub[0] == " " || sub == "")
+        return alert("הכנס שם");
       let counter = this.newClass.classSubject.length
       for (let i = 0; i < counter; i++)
         if (this.newClass.classSubject[i].name == sub)
@@ -84,6 +86,8 @@ export class NewClassComponent implements OnInit {
 
   public addSubsub(name: String) {
     let thisSubsub = prompt("הכנס את שם התת נושא");
+    if (thisSubsub[0] == " " || thisSubsub == "")
+        return alert("הכנס שם");
 
     for (let i = 0; i < this.newClass.classSubject.length; i++) {
       if (name == this.newClass.classSubject[i].name) {
@@ -129,6 +133,8 @@ export class NewClassComponent implements OnInit {
   public addReward(item: String, cost: Number) {
     if (this.newClass.rewards.length >= 5)
       return alert("הגעת למספר הטבות מקסימאלי");
+    if (item[0] == " " || item == "")
+      return alert("הכנס שם");
     if (!item || !cost)
       return alert("חייב להכניס את כל הפרמטרים");
     if (Number(item))
