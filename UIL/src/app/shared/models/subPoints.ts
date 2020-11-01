@@ -1,4 +1,4 @@
 export class subPoints {
     subName: String;
-    points: Number;
+    points: number;
 }

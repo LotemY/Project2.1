@@ -5,6 +5,7 @@ import { Class } from '../shared/models/Class';
 import { classSubject } from '../shared/models/classSubject';
 import { Student } from '../shared/models/Student';
 import { subPoints } from '../shared/models/subPoints';
+import { subSubject } from '../shared/models/subSubject';
 
 @Component({
   selector: 'app-edit-class',
@@ -14,7 +15,7 @@ import { subPoints } from '../shared/models/subPoints';
 export class EditClassComponent implements OnInit {
   public thisClass: Class;
   public classNames = [`אזרחות`, `אנגלית`, `ביולוגיה`, `גיאוגרפיה`, `היסטוריה`, `חנ"ג`, `כימיה`, `מוסיקה`, `מתמטיקה`, `פיזיקה`, `ספרות`, `עברית`, `תנ"ך`];
-  public grades: String[] = ["","א","ב","ג","ד","ה","ו","ז","ח","ט","י","יא","יב",];
+  public grades: String[] = ["", "א", "ב", "ג", "ד", "ה", "ו", "ז", "ח", "ט", "י", "יא", "יב",];
   public totalPoints = 0;
 
   constructor(private service: ControllerService, private route: ActivatedRoute) {
@@ -37,7 +38,8 @@ export class EditClassComponent implements OnInit {
   public editClass(name: String, grade: String) {
     if (this.totalPoints != 1000)
       return alert("חייב להשתמש בכל הנקודות");
-
+    if (name[0] == " " || name == "")
+      return alert("הכנס שם");
     if (grade != "")
       this.thisClass.grade = grade;
     if (Number(name))
@@ -51,6 +53,9 @@ export class EditClassComponent implements OnInit {
   public addSub(sub: String) {
     if (sub) {
       let counter = this.thisClass.classSubject.length;
+
+      if (sub[0] == " " || sub == "")
+        return alert("הכנס שם");
 
       if (counter == 10)
         return alert("הגעת לכמות נושאים מקסימאלי");
@@ -77,6 +82,8 @@ export class EditClassComponent implements OnInit {
 
   public addSubsub(name: String) {
     let thisSubsub = prompt("הכנס את שם התת נושא");
+    if (thisSubsub[0] == " " || thisSubsub == "")
+      return alert("הכנס שם");
 
     for (let i = 0; i < this.thisClass.classSubject.length; i++) {
       if (name == this.thisClass.classSubject[i].name) {
@@ -90,10 +97,10 @@ export class EditClassComponent implements OnInit {
           if (this.thisClass.classSubject[i].subsubject[j].name == thisSubsub)
             return alert("שם לא יכול להיות דומה לשם הכיתה");
 
-        let sub: classSubject = {
+        let sub: subSubject = {
           name: thisSubsub,
-          points: 0,
-          subsubject: undefined
+          subComp: false,
+          points: 0
         }
 
         this.thisClass.classSubject[i].subsubject[this.thisClass.classSubject[i].subsubject.length] = sub;
@@ -105,6 +112,8 @@ export class EditClassComponent implements OnInit {
   public editPoints(sub: classSubject, subsub?: any) {
     let points = Number(prompt("הכנס נקודות"));
     let subPoints = 0;
+    if (!Number(points))
+      return alert("חייב להיות מספר");
     if (points < 0)
       return alert("לא יכול להיות מספר שלילי");
     if (subsub) {
@@ -184,6 +193,8 @@ export class EditClassComponent implements OnInit {
   public addReward(item: String, cost: Number) {
     if (this.thisClass.rewards.length >= 5)
       return alert("הגעת למספר הטבות מקסימאלי");
+    if (item[0] == " " || item == "")
+      return alert("הכנס שם");
     if (!item || !cost)
       return alert("חייב להכניס את כל הפרמטרים");
     if (Number(item))

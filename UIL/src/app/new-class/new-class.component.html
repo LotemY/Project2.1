@@ -1,4 +1,4 @@
-<div class="all">
+
     <div class="card-body">
         <h2> יצירת כיתה</h2>
         <br><br>
@@ -38,8 +38,8 @@
                         <th>נושא</th>
                     </tr>
                     <tr *ngFor="let sub of newClass.classSubject">
-                        <td *ngIf="sub.subsubject[0]">
-                            <table border="1">
+                        <td>
+                            <table border="1" *ngIf="sub.subsubject[0]">
                                 <tr *ngFor="let s of sub.subsubject">
                                     <td><button class="addLess" (click)="removeElement(sub.name,s.name)">הסר</button>
                                     </td>
@@ -56,9 +56,8 @@
             </div>
         </div>
 
-        <br>
-        <br>
-
+        <br><br>
+        <br><br>
 
         <div>
             <h5>הטבות</h5>
@@ -70,9 +69,9 @@
                 <label>סוג הטבה</label>
             </div>
             <br>
-            <div class="rewardList">
-                <div *ngIf="newClass.rewards[0]">
-                    <table border="1">
+            <div>
+                <div class="rewardsList">
+                    <table border="1" *ngIf="newClass.rewards[0]">
                         <tr>
                             <th></th>
                             <th>עלות</th>
@@ -88,8 +87,8 @@
             </div>
         </div>
 
-        <br>
-        <br>
+        <br><br>
+        <br><br>
 
         <div>
             <h5>רשימת תלמידים</h5>
@@ -124,4 +123,3 @@
         </div>
 
     </div>
-</div>

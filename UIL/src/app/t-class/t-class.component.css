@@ -1,12 +1,9 @@
 h2,h5 {
     -webkit-text-fill-color: white;
-}
-
-.all {
-    background-color: rgba(46, 43, 46, 0.75);
-    margin-left: 300px;
-    margin-right: 300px;
-    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    left: 800px;
+    position: absolute;
 }
 
 
@@ -31,18 +28,17 @@ td, tr, th {
 
 th {
     background-color: grey;
-  }
-  tr {
+}
+tr {
     background-color: rgb(32, 32, 32);
-  }
-  td {
+}
+td {
     background-color: rgb(32, 32, 32);
-  }
+}
 
-  button{
+button{
     background-color: rgb(91, 86, 114);
     color: white;
-    
 }
 
 input{
@@ -59,15 +55,34 @@ width: 60px;
 .studentList{
   position: relative;
   overflow-y: scroll;
-  width: 400px;
+  width: 650px;
   height: 300px;
-  left: 470px;
+  left: 570px;
 }
 
 .subList{
   position: relative;
-  left: 470px;
+  left: 700px;
   overflow-y: scroll;
   width: 400px;
-  height: 400px;
+  height: 300px;
+  top: 100px;
+}
+
+.rewardsList{
+  position: relative;
+  left: 700px;
+  overflow-y: scroll;
+  width: 400px;
+  height: 250px;
+}
+
+.botEditClass{
+  position: absolute;
+  left: 750px;
+}
+
+.botBack{
+  position: absolute;
+  left: 950px;
 }

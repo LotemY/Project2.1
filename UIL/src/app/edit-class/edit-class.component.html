@@ -1,136 +1,136 @@
-<div class="all">
-    <div class="card-body">
-        <h2> עריכת כיתה</h2>
-        <br><br>
-        <div>
-            <h5>שם כיתה</h5>
-            <input #name list="name" value="{{thisClass.className}}">
-            <datalist id="name">
-                <option *ngFor="let name of classNames">{{name}}</option>
-            </datalist>
-        </div>
+<h2> עריכת כיתה</h2>
+<br><br><br><br>
+<div>
+    <h5>שם כיתה</h5><br><br>
+    <input #name list="name" value="{{thisClass.className}}">
+    <datalist id="name">
+        <option *ngFor="let name of classNames">{{name}}</option>
+    </datalist>
+</div>
 
-        <br>
-        <br>
+<br>
+<br>
 
-        <div>
-            <h5>שכבה</h5>
-            <br>
-            <label> שכבה נוכחית: {{thisClass.grade}} </label>
-            <br>
-            <select #grade>
-                <option *ngFor="let grad of grades">{{grad}}</option>
-            </select>
-        </div>
+<div>
+    <h5>שכבה</h5>
+    <br>
+    <label> שכבה נוכחית: {{thisClass.grade}} </label>
+    <br>
+    <select class="grade"  #grade>
+        <option *ngFor="let grad of grades">{{grad}}</option>
+    </select>
+</div>
 
-        <br>
-        <br>
+<br>
+<br>
 
-        <div>
-            <h5>נושאים</h5>
-            <label *ngIf="totalPoints!=1000">&nbsp;{{1000-totalPoints}}&nbsp;:נקודות נותרות</label>
-            <br>
-            <button (click)="addSub(sub.value)">הוספה</button> &nbsp; <input #sub onfocus="this.value=''">
-            <br><br>
-            <div class="subList">
-                <table border="1" *ngIf="thisClass.classSubject[0]">
-                    <tr>
-                        <th></th>
-                        <th>תת נושא</th>
-                        <th></th>
-                        <th></th>
-                        <th>נקודות</th>
-                        <th>נושא</th>
-                    </tr>
-                    <tr *ngFor="let sub of thisClass.classSubject">
-                        <td><button (click)="addSubsub(sub.name)">הוספת תת הנושא</button></td>
-                        <td>
-                            <table border="1" *ngFor="let s of sub.subsubject">
-                                <tr>
-                                    <td><button (click)="removeElement(sub.name,s.name)">הסר תת נושא</button></td>
-                                    <td><button (click)="editPoints(sub,s)">עריכת נקודות</button></td>
-                                    <td>{{s.points}}</td>
-                                    <td>{{s.name}}</td>
-                                </tr>
-                            </table>
-                        </td>
-                        <td> <button (click)="removeElement(sub.name)">הסר נושא</button> </td>
-                        <td> <button (click)="editPoints(sub)">עריכת נקודות</button> </td>
-                        <td>{{sub.points}}</td>
-                        <td>{{sub.name}}</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
+<div>
+    <h5>נושאים</h5>
+    <br><br>
+    <label *ngIf="totalPoints!=1000">&nbsp;{{1000-totalPoints}}&nbsp;:נקודות נותרות</label>
+    <br>
+    <button class="add" (click)="addSub(sub.value)">הוספה</button> &nbsp; <input #sub onfocus="this.value=''">
+    <br>
+    <div class="subList">
+        <table border="1" *ngIf="thisClass.classSubject[0]">
+            <tr>
+                <th></th>
+                <th>תת נושא</th>
+                <th></th>
+                <th></th>
+                <th>נקודות</th>
+                <th>נושא</th>
+            </tr>
+            <tr *ngFor="let sub of thisClass.classSubject">
+                <td><button (click)="addSubsub(sub.name)">הוספת תת הנושא</button></td>
+                <td>
+                    <table border="1" *ngFor="let s of sub.subsubject">
+                        <tr>
+                            <td><button (click)="removeElement(sub.name,s.name)">הסר תת נושא</button></td>
+                            <td><button (click)="editPoints(sub,s)">עריכת נקודות</button></td>
+                            <td>{{s.points}}</td>
+                            <td>{{s.name}}</td>
+                        </tr>
+                    </table>
+                </td>
+                <td> <button (click)="removeElement(sub.name)">הסר נושא</button> </td>
+                <td> <button (click)="editPoints(sub)">עריכת נקודות</button> </td>
+                <td>{{sub.points}}</td>
+                <td>{{sub.name}}</td>
+            </tr>
+        </table>
+    </div>
+</div>
 
-        <br>
-        <br>
+<br><br>
+<br><br>
 
-        <div>
-            <h5>הטבות</h5>
-            <button (click)="addReward(reward.value,reCost.value)">הוספה</button> &nbsp;
-            <input type="number" #reCost onfocus="this.value=''">&nbsp;
-            <label>:עלות ההטבה</label>&nbsp;
-            <input #reward onfocus="this.value=''">&nbsp;
-            <label>:סוג ההטבה</label>
+<div>
+    <h5>הטבות</h5>
+    <br><br>
+    <button class="add" (click)="addReward(reward.value,reCost.value)">הוספה</button> &nbsp;
+    <input type="number" #reCost onfocus="this.value=''">&nbsp;
+    <label>:עלות ההטבה</label>&nbsp;
+    <input #reward onfocus="this.value=''">&nbsp;
+    <label>:סוג ההטבה</label>
 
-            <br>
-            <br>
+    <br>
+    <br>
 
-            <div class="rewardList" *ngIf="thisClass.rewards[0]">
-                <table border="1">
-                    <tr>
-                        <th> </th>
-                        <th>עלות</th>
-                        <th>הטבה</th>
-                    </tr>
+    <div class="rewardsList" *ngIf="thisClass.rewards[0]">
+        <table border="1">
+            <tr>
+                <th> </th>
+                <th>עלות</th>
+                <th>הטבה</th>
+            </tr>
 
-                    <tr *ngFor="let re of thisClass.rewards">
-                        <td> <button (click)="removeReward(re.item)">הסר</button></td>
-                        <td>{{re.cost}} </td>
-                        <td>{{re.item}}</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
+            <tr *ngFor="let re of thisClass.rewards">
+                <td> <button (click)="removeReward(re.item)">הסר</button></td>
+                <td>{{re.cost}} </td>
+                <td>{{re.item}}</td>
+            </tr>
+        </table>
+    </div>
+</div>
 
-        <br>
-        <br>
+<br><br>
+<br><br>
 
-        <div>
-            <h5>רשימת תלמידים</h5>
-            <br>
-            <button (click)="addStudent(student.value)">הוספה</button> &nbsp; <input #student type="number"
-                onfocus="this.value=''">
-            <br><br>
-            <div class="studentList">
-                <table border="1" *ngIf="thisClass.classStudents[0]">
-                    <tr>
+<div class="divStu">
+    <h5>רשימת תלמידים</h5>
+    <br><br>
+    <button class="add" (click)="addStudent(student.value)">הוספה</button> &nbsp; <input #student type="number"
+        onfocus="this.value=''">
+    <br><br>
+    <div class="studentList">
+        <table border="1" *ngIf="thisClass.classStudents[0]">
+            <tr>
 
-                        <th> </th>
-                        <th>מספר תלמידים</th>
-                    </tr>
-                    <tr *ngFor="let student of thisClass.classStudents">
-                        <td><button (click)="removeElement(student._id)"> הסר </button></td>
-                        <td>{{student._id}}</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
+                <th> </th>
+                <th>מספר תלמידים</th>
+            </tr>
+            <tr *ngFor="let student of thisClass.classStudents">
+                <td><button (click)="removeElement(student._id)"> הסר </button></td>
+                <td>{{student._id}}</td>
+            </tr>
+        </table>
+    </div>
+</div>
 
-        <br>
-        <br>
+<br>
+<br>
 
-        <div class="text-center">
-            <button class="btn btn-primary mr-1" (click)="editClass(name.value,grade.value)">עדכון</button> &nbsp;
-            <button class="btn btn-primary mr-1" (click)="goBack()">ביטול</button>
-        </div>
-        <br>
+<div class="buttons">
+    <div class="text-center">
+        <button class="btn btn-primary mr-1" (click)="editClass(name.value,grade.value)">עדכון</button> &nbsp;
+        <button class="btn btn-primary mr-1" (click)="goBack()">ביטול</button>
+    </div>
+    <br>
 
-        <br>
+    <br>
 
-        <div class="text-center">
-            <button style="background-color: red;" class="btn btn-primary mr-1" (click)="deleteClass()">מחיקה</button>
-        </div>
+    <div class="text-center">
+        <button style="background-color: red;" class="btn btn-primary mr-1" (click)="deleteClass()">מחיקה</button>
     </div>
 </div>

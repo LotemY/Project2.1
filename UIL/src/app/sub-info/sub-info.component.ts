@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Class } from '../shared/models/Class';
 import { Person } from '../shared/models/Person';
 import { classSubject } from '../shared/models/classSubject';
+import { subSubject } from '../shared/models/subSubject';
 
 @Component({
   selector: 'app-sub-info',
@@ -22,6 +23,7 @@ export class SubInfoComponent implements OnInit {
     this.service.teacherEmitter.subscribe(p => this.thisPerson = p);
     this.service.classEmitter.subscribe(c => this.thisClass = c);
     this.service.infoEmitter.subscribe(i => this.info = i);
+    this.info.subsubject = [];
   }
 
   ngOnInit(): void {
@@ -47,18 +49,53 @@ export class SubInfoComponent implements OnInit {
     let answer = prompt("הכנס כן כדי להשלים")
     if (answer == "כן") {
       this.info.comp = true;
-      for (let c = 0; c < this.thisClass.classSubject.length; c++)
+      let c;
+      for (c = 0; c < this.thisClass.classSubject.length; c++)
         if (this.thisClass.classSubject[c].name == this.info.name) {
           this.thisClass.classSubject[c] = this.info;
           break;
         }
+      for (let s = 0; s < this.thisClass.classSubject[c].subsubject.length; s++)
+        this.thisClass.classSubject[c].subsubject[s].subComp = true;
 
       for (let i = 0; i < this.thisClass.classStudents.length; i++) {
         this.thisClass.classStudents[i].classPoints += Number(this.info.points);
         for (let j = 0; j < this.thisClass.classStudents[i].subPoints.length; j++)
           if (this.thisClass.classStudents[i].subPoints[j].subName == this.info.name)
-            this.thisClass.classStudents[i].subPoints[j].points = this.info.points;
+            this.thisClass.classStudents[i].subPoints[j].points = Number(this.info.points);
       }
+      this.service.updatePoints(this.thisClass);
+    }
+  }
+
+  public subComplete(sub: subSubject) {
+    alert("?זהו כפתור חד פעמי, האם אתה בטוח שאתה רוצה להשלים את התת-נושא")
+    let answer = prompt("הכנס כן כדי להשלים")
+    if (answer == "כן") {
+      let c;
+      for (c = 0; c < this.thisClass.classSubject.length; c++)
+        if (this.thisClass.classSubject[c].name == this.info.name)
+          break;
+      for (let s = 0; s < this.thisClass.classSubject[c].subsubject.length; s++)
+        if (sub.name == this.thisClass.classSubject[c].subsubject[s].name) {
+          this.thisClass.classSubject[c].subsubject[s].subComp = true;
+          break;
+        }
+
+      for (let i = 0; i < this.thisClass.classStudents.length; i++) {
+        this.thisClass.classStudents[i].classPoints += Number(sub.points);
+        for (let j = 0; j < this.thisClass.classStudents[i].subPoints.length; j++)
+          if (this.thisClass.classStudents[i].subPoints[j].subName == this.info.name)
+            this.thisClass.classStudents[i].subPoints[j].points += Number(sub.points);
+      }
+      let com
+      for (com = 0; com < this.thisClass.classSubject[c].subsubject.length; com++)
+        if (!this.thisClass.classSubject[c].subsubject[com].subComp)
+          break;
+
+      if (com == this.thisClass.classSubject[c].subsubject.length)
+        this.thisClass.classSubject[c].comp = true;
+
       this.service.updatePoints(this.thisClass);
     }
   }

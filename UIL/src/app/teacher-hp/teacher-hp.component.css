@@ -114,11 +114,8 @@
 
 .all {
   background-color: rgba(46, 43, 46, 0.75);
-  margin-left: 300px;
-  margin-right: 300px;
   text-align: center;
   height: 1000px;
-  width: 1200px;
 }
 
 h2,h5 {
@@ -128,16 +125,15 @@ h2,h5 {
 .NameT{
   width: 200px;
   position: relative;
-  left: 500px;
   top:50px;
 }
 
 .newCl{
   position: relative;
-  left: 140px;
+  left: 340px;
   top: 200px;
   width: 210px;
-  height: 280 px;
+  height: 280px;
 }
 
 .allCards{
@@ -148,7 +144,7 @@ h2,h5 {
   bottom: 150px;
   left: 800px;
   right: 40px;
-  left: 400px;
+  left: 700px;
 }
 
 .pic{
@@ -162,7 +158,6 @@ h2,h5 {
 }
 
 .NameT{
- 
   width: 200px;
   position: relative;
   left: 500px;

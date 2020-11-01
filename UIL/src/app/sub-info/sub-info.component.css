@@ -1,13 +1,11 @@
 h2,h5 {
     -webkit-text-fill-color: rgb(255, 243, 243);
+    margin-left: auto;
+    margin-right: auto;
+    left: 800px;
+    position: absolute;
 }
 
-.all {
-    background-color: rgba(46, 43, 46, 0.75);
-    margin-left: 300px;
-    margin-right: 300px;
-    text-align: center;
-}
 
 table {
     margin-left: auto;
@@ -52,14 +50,22 @@ input{
   position: relative;
   overflow-y: scroll;
   width: 400px;
-  height: 300px;
-  left: 470px;
+  height: 250px;
+  left: 700px;
 }
 
 .subList{
   position: relative;
-  left: 470px;
+  left: 700px;
   overflow-y: scroll;
   width: 400px;
   height: 300px;
+  top: 70px;
+}
+
+.buttons{
+  margin-left: auto;
+  margin-right: auto;
+  left: 800px;
+  position: absolute;
 }

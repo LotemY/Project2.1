@@ -5,6 +5,7 @@ import { Class } from '../shared/models/Class';
 import { Person } from '../shared/models/Person';
 import { Student } from '../shared/models/Student';
 import { classSubject } from '../shared/models/classSubject';
+import { subSubject } from '../shared/models/subSubject';
 
 @Component({
   selector: 'app-new-class',
@@ -35,7 +36,7 @@ export class NewClassComponent implements OnInit {
   }
 
   public createClass(name: String, grade: String) {
-    if (name == "")
+    if (name[0] == " " || name == "")
       return alert("הכנס שם");
     if (Number(name))
       return alert("השם לא יכול להיות מספר");
@@ -54,6 +55,8 @@ export class NewClassComponent implements OnInit {
     if (sub) {
       if (Number(sub))
         return alert("לא ניתן להכניס מספר");
+      if (sub[0] == " " || sub == "")
+        return alert("הכנס שם");
       let counter = this.newClass.classSubject.length
       for (let i = 0; i < counter; i++)
         if (this.newClass.classSubject[i].name == sub)
@@ -84,6 +87,8 @@ export class NewClassComponent implements OnInit {
 
   public addSubsub(name: String) {
     let thisSubsub = prompt("הכנס את שם התת נושא");
+    if (thisSubsub[0] == " " || thisSubsub == "")
+      return alert("הכנס שם");
 
     for (let i = 0; i < this.newClass.classSubject.length; i++) {
       if (name == this.newClass.classSubject[i].name) {
@@ -97,10 +102,10 @@ export class NewClassComponent implements OnInit {
           if (this.newClass.classSubject[i].subsubject[j].name == thisSubsub)
             return alert("שם לא יכול להיות דומה לשם הכיתה");
 
-        let sub: classSubject = {
+        let sub: subSubject = {
           name: thisSubsub,
-          points: 0,
-          subsubject: undefined
+          subComp: false,
+          points: 0
         }
 
         this.newClass.classSubject[i].subsubject[this.newClass.classSubject[i].subsubject.length] = sub;;
@@ -129,6 +134,8 @@ export class NewClassComponent implements OnInit {
   public addReward(item: String, cost: Number) {
     if (this.newClass.rewards.length >= 5)
       return alert("הגעת למספר הטבות מקסימאלי");
+    if (item[0] == " " || item == "")
+      return alert("הכנס שם");
     if (!item || !cost)
       return alert("חייב להכניס את כל הפרמטרים");
     if (Number(item))

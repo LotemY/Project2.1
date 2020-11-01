@@ -1,12 +1,11 @@
-<div class="all">
+
     <h2>{{thisClass.className}} : {{thisClass.grade}}</h2>
 
-    <br>
-    <br>
+    <br><br>
+    <br><br>
 
     <div *ngIf="thisClass.classSubject[0]">
         <h5>נושאים</h5>
-        <br>
         <div class="subList">
             <table border="1">
                 <tr>
@@ -23,13 +22,17 @@
 
     <br> <br>
     <br> <br>
+    <br> <br>
+    <br> <br>
 
     <div *ngIf="thisClass.classStudents[0]">
         <h5>רשימת תלמידים</h5>
         <br>
+        <br>
         <div class="studentList">
             <table border="1">
                 <tr>
+                    <th></th>
                     <th></th>
                     <th></th>
                     <th>נקודות</th>
@@ -37,6 +40,13 @@
                     <th>שם פרטי</th>
                 </tr>
                 <tr *ngFor="let s of thisClass.classStudents">
+                    <td>
+                        <div>
+                            <select id="reasons" (change)="selectReason(s)">
+                                <option *ngFor="let r of Reasons">{{r}}</option>
+                            </select>
+                        </div>
+                    </td>
                     <td><button class="plusMinus" (click)="editPoints(s,0)">-</button></td>
                     <td><button class="plusMinus" (click)="editPoints(s,1)">+</button></td>
                     <td>{{s.classPoints}}</td>
@@ -52,26 +62,23 @@
 
     <div *ngIf="thisClass.rewards[0]">
         <h5>רשימת הטבות</h5>
-        <br>
-        <table border="1">
-            <tr>
-                <th>עלות</th>
-                <th>הטבה</th>
-            </tr>
-            <tr *ngFor="let r of thisClass.rewards">
-                <td>{{r.cost}}</td>
-                <td>{{r.item}}</td>
-            </tr>
-        </table>
+        <br><br>
+        <div class="rewardsList">
+            <table border="1">
+                <tr>
+                    <th>עלות</th>
+                    <th>הטבה</th>
+                </tr>
+                <tr *ngFor="let r of thisClass.rewards">
+                    <td>{{r.cost}}</td>
+                    <td>{{r.item}}</td>
+                </tr>
+            </table>
+        </div>
     </div>
 
     <br>
     <br>
 
-    <button (click)="goEditClass()">עריכת כיתה</button>
-
-    <br>
-    <br>
-
-    <button class="oo" (click)="goBack()">חזרה</button>
-</div>
+    <button class="botEditClass" (click)="goEditClass()">עריכת כיתה</button> &nbsp;
+    <button class="botBack" (click)="goBack()">חזרה</button>
