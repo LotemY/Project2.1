@@ -4,8 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Class } from '../shared/models/Class';
 import { Person } from '../shared/models/Person';
 import { Student } from '../shared/models/Student';
-import { classSubject } from '../shared/models/classSubject';
-import { subSubject } from '../shared/models/subSubject';
+import { ClassSubject } from '../shared/models/ClassSubject';
+import { SubSubject } from '../shared/models/SubSubject';
 
 @Component({
   selector: 'app-new-class',
@@ -64,7 +64,7 @@ export class NewClassComponent implements OnInit {
 
       if (counter < 10) {
         if (sub) {
-          let subject: classSubject = new classSubject;
+          let subject: ClassSubject = new ClassSubject;
           subject.name = sub;
           subject.points = 100;
           subject.subsubject = [];
@@ -102,7 +102,7 @@ export class NewClassComponent implements OnInit {
           if (this.newClass.classSubject[i].subsubject[j].name == thisSubsub)
             return alert("שם לא יכול להיות דומה לשם הכיתה");
 
-        let sub: subSubject = {
+        let sub: SubSubject = {
           name: thisSubsub,
           subComp: false,
           points: 0

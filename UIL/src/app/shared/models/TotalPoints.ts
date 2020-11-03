@@ -1,4 +1,4 @@
-export class totalPoints {
+export class TotalPoints {
     level: Number;
     xp: Number;
 }

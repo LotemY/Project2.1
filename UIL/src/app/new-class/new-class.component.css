@@ -31,22 +31,51 @@ table {
 
 
 
-h5,h2 {
+h5,h2{
   color: white;
+  margin-left: auto;
+  margin-right: auto;
+  left: 800px;
+  position: absolute;
 }
 
 label {
   color: white;
+  margin-left: auto;
+  margin-right: auto;
+  left: 800px;
+  position: absolute;
 }
-
 
 input{
   text-align: right;
+  margin-left: auto;
+  margin-right: auto;
+  left: 800px;
+  position: absolute;
+}
+
+option {
+  color: white;
+  margin-left: auto;
+  margin-right: auto;
+  left: 800px;
+  position: absolute;
+
+}
+
+.add{
+  margin-left: auto;
+  margin-right: auto;
+  left: 700px;
+  position: absolute;
 }
 
 button{
   background-color: rgb(91, 86, 114);
   color: white;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .studentList{
@@ -73,3 +102,19 @@ button{
   width: 400px;
   height: 250px;
 }
+
+.buttons{
+  margin-left: auto;
+  margin-right: auto;
+  left: 850px;
+  position: absolute;
+}
+
+label {
+  color: white;
+  margin-left: auto;
+  margin-right: auto;
+  left: 1050px;
+  position: absolute;
+}
+

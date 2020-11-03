@@ -99,7 +99,7 @@ classPut.patch("/api/teacherHP/:id/tClass/:cId/edit", auth, async (req, res) => 
                 tempUser.lastName = user.lastName;
                 tempUser.nickName = user.nickName;
                 tempUser.classPoints = 0;
-
+                tempUser.reason = [];
                 tempUser.subPoints = [];
                 for (let c = 0; c < req.body.classSubject.length; c++) {
                     tempUser.subPoints[c] = {};

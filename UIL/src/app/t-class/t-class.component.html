@@ -1,5 +1,5 @@
 
-    <h2>{{thisClass.className}} : {{thisClass.grade}}</h2>
+    <h2 style="font-style: italic;">{{thisClass.className}} : {{thisClass.grade}}</h2>
 
     <br><br>
     <br><br>
@@ -42,8 +42,8 @@
                 <tr *ngFor="let s of thisClass.classStudents">
                     <td>
                         <div>
-                            <select id="reasons" (change)="selectReason(s)">
-                                <option *ngFor="let r of Reasons">{{r}}</option>
+                            <select id="reason">
+                                <option *ngFor="let r of reasons">{{r}}</option>
                             </select>
                         </div>
                     </td>
@@ -82,3 +82,6 @@
 
     <button class="botEditClass" (click)="goEditClass()">עריכת כיתה</button> &nbsp;
     <button class="botBack" (click)="goBack()">חזרה</button>
+
+    <br>
+    <br>

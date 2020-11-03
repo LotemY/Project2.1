@@ -4,9 +4,17 @@ h5,h2{
     color: white;
     margin-left: auto;
     margin-right: auto;
-    left: 800px;
+    left: 850px;
     position: absolute;
+    text-align: right;
 }
+
+#theTop{
+  left: 850px;
+  position: absolute;
+  text-align: right;
+}
+
 
 td, tr, th {
     color: white;
@@ -42,18 +50,11 @@ label {
     color: white;
     margin-left: auto;
     margin-right: auto;
-    left: 800px;
+    left: 1050px;
     position: absolute;
 }
 
-option {
-    color: white;
-    margin-left: auto;
-    margin-right: auto;
-    left: 800px;
-    position: absolute;
 
-}
 
 button{
     background-color: rgb(91, 86, 114);
@@ -98,14 +99,14 @@ input{
 .buttons{
   margin-left: auto;
   margin-right: auto;
-  left: 800px;
+  left: 850px;
   position: absolute;
 }
 
 .grade{
   margin-left: auto;
   margin-right: auto;
-  left: 800px;
+  left: 850px;
   position: absolute;
 }
 
@@ -114,4 +115,15 @@ input{
   margin-right: auto;
   left: 700px;
   position: absolute;
+}
+
+
+#one{
+  top: 590px;
+}
+#two{
+  top: 1077px;
+}
+#three{
+  top: 1545px;
 }

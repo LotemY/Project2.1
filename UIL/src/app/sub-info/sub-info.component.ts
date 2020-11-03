@@ -3,8 +3,8 @@ import { ControllerService } from '../controller.service';
 import { ActivatedRoute } from '@angular/router';
 import { Class } from '../shared/models/Class';
 import { Person } from '../shared/models/Person';
-import { classSubject } from '../shared/models/classSubject';
-import { subSubject } from '../shared/models/subSubject';
+import { ClassSubject } from '../shared/models/ClassSubject';
+import { SubSubject } from '../shared/models/SubSubject';
 
 @Component({
   selector: 'app-sub-info',
@@ -14,7 +14,7 @@ import { subSubject } from '../shared/models/subSubject';
 export class SubInfoComponent implements OnInit {
   public thisPerson: Person;
   public thisClass: Class;
-  public info: classSubject = new classSubject();
+  public info: ClassSubject = new ClassSubject();
 
   constructor(private service: ControllerService, private route: ActivatedRoute) {
     this.thisPerson = this.service.person;
@@ -68,7 +68,7 @@ export class SubInfoComponent implements OnInit {
     }
   }
 
-  public subComplete(sub: subSubject) {
+  public subComplete(sub: SubSubject) {
     alert("?זהו כפתור חד פעמי, האם אתה בטוח שאתה רוצה להשלים את התת-נושא")
     let answer = prompt("הכנס כן כדי להשלים")
     if (answer == "כן") {

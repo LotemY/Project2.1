@@ -1,4 +1,4 @@
-<h2> עריכת כיתה</h2>
+<h2 style="font-style: italic;"> עריכת כיתה</h2>
 <br><br><br><br>
 <div>
     <h5>שם כיתה</h5><br><br>
@@ -8,28 +8,30 @@
     </datalist>
 </div>
 
-<br>
-<br>
+<br><br>
+<br><br>
 
 <div>
     <h5>שכבה</h5>
     <br>
-    <label> שכבה נוכחית: {{thisClass.grade}} </label>
     <br>
     <select class="grade"  #grade>
         <option *ngFor="let grad of grades">{{grad}}</option>
     </select>
+    <br>
+    <br>
+    <label id="theTop"> שכבה נוכחית: {{thisClass.grade}} </label>
 </div>
 
-<br>
-<br>
+<br><br>
+<br><br>
 
 <div>
     <h5>נושאים</h5>
     <br><br>
-    <label *ngIf="totalPoints!=1000">&nbsp;{{1000-totalPoints}}&nbsp;:נקודות נותרות</label>
-    <br>
-    <button class="add" (click)="addSub(sub.value)">הוספה</button> &nbsp; <input #sub onfocus="this.value=''">
+    <label id="theTop" *ngIf="totalPoints!=1000" style="color: white; background-color: red; font-weight: 800;">&nbsp;{{1000-totalPoints}}&nbsp;:נקודות נותרות</label>
+    <br> <br>
+    <button id="one" class="add" (click)="addSub(sub.value)">הוספה</button> &nbsp; <input #sub onfocus="this.value=''">
     <br>
     <div class="subList">
         <table border="1" *ngIf="thisClass.classSubject[0]">
@@ -68,12 +70,12 @@
 <div>
     <h5>הטבות</h5>
     <br><br>
-    <button class="add" (click)="addReward(reward.value,reCost.value)">הוספה</button> &nbsp;
-    <input type="number" #reCost onfocus="this.value=''">&nbsp;
-    <label>:עלות ההטבה</label>&nbsp;
-    <input #reward onfocus="this.value=''">&nbsp;
-    <label>:סוג ההטבה</label>
-
+    
+    <input type="number" #reCost onfocus="this.value=''"> &nbsp; &nbsp;
+    <label>:עלות ההטבה</label><br><br>
+    <input #reward onfocus="this.value=''"> &nbsp; &nbsp;
+    <label>:סוג ההטבה</label> &nbsp;
+    <button id="two" class="add" (click)="addReward(reward.value,reCost.value)">הוספה</button> &nbsp;
     <br>
     <br>
 
@@ -100,9 +102,9 @@
 <div class="divStu">
     <h5>רשימת תלמידים</h5>
     <br><br>
-    <button class="add" (click)="addStudent(student.value)">הוספה</button> &nbsp; <input #student type="number"
+    <button id="three" class="add" (click)="addStudent(student.value)">הוספה</button> &nbsp; <input #student type="number"
         onfocus="this.value=''">
-    <br><br>
+    <br><br><br><br>
     <div class="studentList">
         <table border="1" *ngIf="thisClass.classStudents[0]">
             <tr>
@@ -127,10 +129,10 @@
         <button class="btn btn-primary mr-1" (click)="goBack()">ביטול</button>
     </div>
     <br>
-
     <br>
-
     <div class="text-center">
         <button style="background-color: red;" class="btn btn-primary mr-1" (click)="deleteClass()">מחיקה</button>
     </div>
 </div>
+
+<br><br><br><br><br><br>

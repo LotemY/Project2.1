@@ -1,4 +1,4 @@
-import { totalPoints } from './totalPoints'
+import { TotalPoints } from './TotalPoints'
 export class Person {
     _id: String;
     firstName: String;
@@ -8,5 +8,5 @@ export class Person {
     token: string;
     nickName?: String;
     classPoints?: Array<{ id: Number, points: Number }>;
-    totalPoints?: totalPoints;
+    totalPoints?: TotalPoints;
 }

@@ -3,7 +3,7 @@ import { ControllerService } from '../controller.service';
 import { ActivatedRoute } from '@angular/router';
 import { Person } from '../shared/models/Person';
 import { Class } from '../shared/models/Class';
-import { totalPoints } from '../shared/models/totalPoints';
+import { TotalPoints } from '../shared/models/TotalPoints';
 
 @Component({
   selector: 'app-student-hp',
@@ -19,7 +19,7 @@ export class StudentHPComponent implements OnInit {
     this.myClasses = this.service.classArr;
     this.service.studentEmitter.subscribe(s => this.thisStudent = s);
     this.service.classesEmitter.subscribe(c => this.myClasses = c);
-    this.thisStudent.totalPoints = new totalPoints();
+    this.thisStudent.totalPoints = new TotalPoints();
 
     setTimeout(() => {
       let elem: HTMLElement = document.getElementById('myBar');

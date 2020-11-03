@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ControllerService } from '../controller.service'
 import { ActivatedRoute } from '@angular/router';
 import { Class } from '../shared/models/Class';
-import { classSubject } from '../shared/models/classSubject';
+import { ClassSubject } from '../shared/models/ClassSubject';
 import { Student } from '../shared/models/Student';
-import { subPoints } from '../shared/models/subPoints';
-import { subSubject } from '../shared/models/subSubject';
+import { SubPoints } from '../shared/models/SubPoints';
+import { SubSubject } from '../shared/models/SubSubject';
 
 @Component({
   selector: 'app-edit-class',
@@ -64,12 +64,12 @@ export class EditClassComponent implements OnInit {
         if (sub == this.thisClass.classSubject[i].name)
           return alert("הנושא כבר קיים");
 
-      let subject: classSubject = new classSubject;
+      let subject: ClassSubject = new ClassSubject;
       subject.name = sub;
       subject.points = 0;
       subject.subsubject = [];
       this.thisClass.classSubject[counter] = subject;
-      let temp: subPoints = new subPoints();
+      let temp: SubPoints = new SubPoints();
       temp.subName = sub;
       temp.points = 0;
       let t = 0;
@@ -97,7 +97,7 @@ export class EditClassComponent implements OnInit {
           if (this.thisClass.classSubject[i].subsubject[j].name == thisSubsub)
             return alert("שם לא יכול להיות דומה לשם הכיתה");
 
-        let sub: subSubject = {
+        let sub: SubSubject = {
           name: thisSubsub,
           subComp: false,
           points: 0
@@ -109,7 +109,7 @@ export class EditClassComponent implements OnInit {
     }
   }
 
-  public editPoints(sub: classSubject, subsub?: any) {
+  public editPoints(sub: ClassSubject, subsub?: any) {
     let points = Number(prompt("הכנס נקודות"));
     let subPoints = 0;
     if (!Number(points))
@@ -166,7 +166,7 @@ export class EditClassComponent implements OnInit {
       student.classPoints = 0;
       student.subPoints = [];
       for (let i = 0; i < this.thisClass.classSubject.length; i++) {
-        let temp: subPoints = new subPoints();
+        let temp: SubPoints = new SubPoints();
         temp.subName = this.thisClass.classSubject[i].name;
         temp.points = 0;
         student.subPoints[i] = temp;

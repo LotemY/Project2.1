@@ -2,7 +2,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Person } from './shared/models/Person';
 import { Class } from './shared/models/Class';
-import { classSubject } from './shared/models/classSubject';
+import { ClassSubject } from './shared/models/ClassSubject';
 import { Router } from '@angular/router';
 import { Student } from './shared/models/Student';
 
@@ -11,21 +11,23 @@ import { Student } from './shared/models/Student';
 })
 
 /*
-  -TASKS-
+-TASKS-
   xp text color
   disable button color
   move up the "back" buttons
   fill the dark background
-  edit points student and the reason
+  remove reason from option
+  help overmouse
+  show the reason to the student
   (button check)
   error to right response
-  *refrash token*
+  refrash token
 */
 
 export class ControllerService {
 
   public person: Person = new Person();
-  public info: classSubject = new classSubject();
+  public info: ClassSubject = new ClassSubject();
   public studentInfo: String;
   public class: Class = new Class();
   public classArr: Class[] = [];
@@ -34,7 +36,7 @@ export class ControllerService {
   public classEmitter: EventEmitter<Class> = new EventEmitter<Class>();
   public classesEmitter: EventEmitter<Class[]> = new EventEmitter<Class[]>();
   public logInEmitter: EventEmitter<Boolean> = new EventEmitter<Boolean>();
-  public infoEmitter: EventEmitter<classSubject> = new EventEmitter<classSubject>();
+  public infoEmitter: EventEmitter<ClassSubject> = new EventEmitter<ClassSubject>();
 
 
   private localHost = "http://localhost:3600/";
@@ -304,7 +306,7 @@ export class ControllerService {
 
   //************************  FUNCTION  ************************//
 
-  public removeElement(element: any, subsub?: String, classSub?: classSubject[], classStu?: Student[]): Array<any> {
+  public removeElement(element: any, subsub?: String, classSub?: ClassSubject[], classStu?: Student[]): Array<any> {
     let tempCounter = 0;
     let i, j;
 
@@ -320,7 +322,7 @@ export class ControllerService {
 
     else {
       if (!subsub) {
-        let temp: classSubject[] = [];
+        let temp: ClassSubject[] = [];
         for (i = 0; i < classSub.length; i++)
           if (classSub[i].name != element) {
             temp[tempCounter] = classSub[i];
@@ -329,7 +331,7 @@ export class ControllerService {
         return temp;  //Subject[]
       }
       else {
-        let temp: classSubject = new classSubject();
+        let temp: ClassSubject = new ClassSubject();
         temp.subsubject = [];
         for (i = 0; i < classSub.length; i++) {
           if (classSub[i].name == element) {

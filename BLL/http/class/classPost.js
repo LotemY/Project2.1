@@ -57,6 +57,7 @@ classP.post("/api/teacherHP/:id/newClass", auth, async (req, res) => {
             if (user) {
                 user.subPoints = [];
                 user.classPoints = 0;
+                user.reason = [];
                 user.email = undefined;
                 user.password = undefined;
                 user.nickName = undefined;
