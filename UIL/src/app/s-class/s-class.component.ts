@@ -12,6 +12,8 @@ import { Person } from '../shared/models/Person';
 export class SClassComponent implements OnInit {
   public thisStudent: Person;
   public thisClass: Class;
+  public counterNumStudent: number;
+  public counterNumrewards: number;
 
   constructor(private service: ControllerService, private route: ActivatedRoute) {
     this.thisStudent = this.service.person;
@@ -21,6 +23,8 @@ export class SClassComponent implements OnInit {
     this.thisClass.classStudents = [];
     this.thisClass.classSubject = [];
     this.thisClass.rewards = [];
+    this.counterNumStudent = 0;
+    this.counterNumrewards=0;
   }
 
   ngOnInit() {
@@ -28,6 +32,14 @@ export class SClassComponent implements OnInit {
       this.service.getClass(params.get('id'), params.get('cId'));
       this.service.getUser(params.get('id'));
     })
+    setTimeout(() => {
+      for(let i=0;i<this.thisClass.classStudents.length;i++){
+        this.counterNumStudent += 1;
+      }
+      for(let i=0;i<this.thisClass.rewards.length;i++){
+        this.counterNumrewards += 1;
+      }
+    }, 200);
   }
 
   public subInfo(info: String) {

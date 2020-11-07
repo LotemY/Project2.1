@@ -29,13 +29,17 @@ table {
   width: 100%;
 }
 
+#addbut{
+  top: 1170px;
+}
+
 
 
 h5,h2{
   color: white;
   margin-left: auto;
   margin-right: auto;
-  left: 800px;
+  left: 870px;
   position: absolute;
 }
 
@@ -55,14 +59,7 @@ input{
   position: absolute;
 }
 
-option {
-  color: white;
-  margin-left: auto;
-  margin-right: auto;
-  left: 800px;
-  position: absolute;
 
-}
 
 .add{
   margin-left: auto;
@@ -78,11 +75,18 @@ button{
   margin-right: auto;
 }
 
+.grades{
+  margin-left: auto;
+  margin-right: auto;
+  left: 870px;
+  position: absolute;
+}
+
 .studentList{
   position: relative;
   overflow-y: scroll;
   width: 400px;
-  height: 250px;
+  height: 320px;
   left: 700px;
 }
 
@@ -91,16 +95,15 @@ button{
   left: 600px;
   overflow-y: scroll;
   width: 500px;
-  height: 300px;
+  height: 420px;
   top: 60px;
 }
 
 .rewardsList{
   position: relative;
   left: 700px;
-  overflow-y: scroll;
   width: 400px;
-  height: 250px;
+  height: 320px;
 }
 
 .buttons{

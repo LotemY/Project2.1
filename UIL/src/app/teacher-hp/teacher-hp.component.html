@@ -1,35 +1,34 @@
+<div class="NameT">
+    <h2>{{thisTeacher.firstName}}&nbsp;{{thisTeacher.lastName}}</h2>
+</div>
+<br>
 
-    <div class="NameT">
-        <h2>{{thisTeacher.firstName}}&nbsp;{{thisTeacher.lastName}}</h2>
-    </div>
-    <br>
-
-    <div class="newCl">
-        <button class="button" (click)="goCreateClass()"><span>יצירת כיתה חדשה</span></button>
-    </div>
+<div class="newCl">
+    <button class="button" (click)="goCreateClass()"><span>יצירת כיתה חדשה</span></button>
+</div>
 
 
-    <div class="allCards">
-        <h5> רשימת כיתות </h5>
-        <section class="card-list">
-            <div *ngFor="let c of myClasses; let j=index">
-                <div class="b1" *ngIf="myClasses[j+j]">
-                    <button class="card" (click)="goClass(myClasses[j+j])">
-                        <div id="myProgress">
-                            <img class="pic" src="{{myClasses[j+j].img}}">
-                            <p id="mygrade">{{myClasses[j+j].className}} {{myClasses[j+j].grade}}</p>
-                        </div>
-                    </button>
-                </div>
-
-                <div *ngIf="myClasses[j+j+1]" class="b2">
-                    <button class="card" (click)="goClass(myClasses[j+j+1])">
-                        <div id="myProgress">
-                            <img class="pic" src="{{myClasses[j+j+1].img}}">
-                            <p id="mygrade">{{myClasses[j+j+1].className}} {{myClasses[j+j+1].grade}}</p>
-                        </div>
-                    </button>
-                </div>
+<div class="allCards">
+    <h5> רשימת כיתות </h5>
+    <section class="card-list">
+        <div *ngFor="let c of myClasses; let j=index">
+            <div class="b1" *ngIf="myClasses[j+j]">
+                <button class="card" (click)="goClass(myClasses[j+j])">
+                    <div id="myProgress">
+                        <img class="pic" src="{{myClasses[j+j].img}}">
+                        <p id="mygrade">{{myClasses[j+j].className}} {{myClasses[j+j].grade}}</p>
+                    </div>
+                </button>
             </div>
-        </section>
-    </div>
+
+            <div *ngIf="myClasses[j+j+1]" class="b2">
+                <button class="card" (click)="goClass(myClasses[j+j+1])">
+                    <div id="myProgress">
+                        <img class="pic" src="{{myClasses[j+j+1].img}}">
+                        <p id="mygrade">{{myClasses[j+j+1].className}} {{myClasses[j+j+1].grade}}</p>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </section>
+</div>

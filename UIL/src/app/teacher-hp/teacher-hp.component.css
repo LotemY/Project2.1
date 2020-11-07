@@ -112,11 +112,6 @@
   top: 60px;
 }
 
-.all {
-  background-color: rgba(46, 43, 46, 0.75);
-  text-align: center;
-  height: 1000px;
-}
 
 h2,h5 {
   color: white;
@@ -160,7 +155,7 @@ h2,h5 {
 .NameT{
   width: 200px;
   position: relative;
-  left: 500px;
+  left: 600px;
   top:50px;
 }
 

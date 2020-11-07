@@ -1,87 +1,110 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <h2 style="font-style: italic;">{{thisClass.className}} : {{thisClass.grade}}</h2>
+<h2 style="font-style: italic;">{{thisClass.className}} : {{thisClass.grade}}</h2>
 
+<br><br>
+<br><br>
+
+<div class="row">
+    <div class="column">
+        <div class="card">
+            <p><i class="fa fa-user"></i></p>
+            <h3>{{counterNumStudent}}+</h3>
+            <p>כמות תלמידים</p>
+        </div>
+    </div>
+
+    <div class="column">
+        <div class="card">
+            <p><i class="fa fa-flash"></i></p>
+            <h3>{{counterNumrewards}}+</h3>
+            <p>כמות ההטבות</p>
+        </div>
+    </div>
+</div>
+
+<br><br>
+<br><br>
+
+<div *ngIf="thisClass.classSubject[0]">
+    <h5>נושאים</h5>
+    <div class="subList">
+        <table border="1">
+            <tr>
+                <th>נקודות</th>
+                <th>שם</th>
+            </tr>
+            <tr *ngFor="let s of thisClass.classSubject">
+                <td>{{s.points}}</td>
+                <td><button (click)="subInfo(s.name)">{{s.name}}</button></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<br> <br>
+<br> <br>
+<br> <br>
+<br> <br>
+
+<div *ngIf="thisClass.classStudents[0]">
+    <h5>רשימת תלמידים</h5>
+    <br>
+    <br>
+    <div class="studentList">
+        <table border="1">
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th>נקודות</th>
+                <th>שם משפחה</th>
+                <th>שם פרטי</th>
+            </tr>
+            <tr *ngFor="let s of thisClass.classStudents">
+                <td>
+                    <div>
+                        <select id="reason" onchange="selectAreason(r)">  <!--test-->
+                            <option *ngFor="let r of reasons">{{r}}</option>
+                        </select>
+                    </div>
+                </td>
+                <td><button class="plusMinus" (click)="editPoints(s,0)">-</button></td>
+                <td><button class="plusMinus" (click)="editPoints(s,1)">+</button></td>
+                <td>{{s.classPoints}}</td>
+                <td>{{s.lastName}}</td>
+                <td>{{s.firstName}}</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<br>
+<br>
+
+<div *ngIf="thisClass.rewards[0]">
+    <h5>רשימת הטבות</h5>
     <br><br>
-    <br><br>
-
-    <div *ngIf="thisClass.classSubject[0]">
-        <h5>נושאים</h5>
-        <div class="subList">
-            <table border="1">
-                <tr>
-                    <th>נקודות</th>
-                    <th>שם</th>
-                </tr>
-                <tr *ngFor="let s of thisClass.classSubject">
-                    <td>{{s.points}}</td>
-                    <td><button (click)="subInfo(s.name)">{{s.name}}</button></td>
-                </tr>
-            </table>
-        </div>
+    <div class="rewardsList">
+        <table border="1">
+            <tr>
+                <th>עלות</th>
+                <th>הטבה</th>
+            </tr>
+            <tr *ngFor="let r of thisClass.rewards">
+                <td>{{r.cost}}</td>
+                <td>{{r.item}}</td>
+            </tr>
+        </table>
     </div>
+</div>
 
-    <br> <br>
-    <br> <br>
-    <br> <br>
-    <br> <br>
+<br>
+<br>
 
-    <div *ngIf="thisClass.classStudents[0]">
-        <h5>רשימת תלמידים</h5>
-        <br>
-        <br>
-        <div class="studentList">
-            <table border="1">
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th>נקודות</th>
-                    <th>שם משפחה</th>
-                    <th>שם פרטי</th>
-                </tr>
-                <tr *ngFor="let s of thisClass.classStudents">
-                    <td>
-                        <div>
-                            <select id="reason">
-                                <option *ngFor="let r of reasons">{{r}}</option>
-                            </select>
-                        </div>
-                    </td>
-                    <td><button class="plusMinus" (click)="editPoints(s,0)">-</button></td>
-                    <td><button class="plusMinus" (click)="editPoints(s,1)">+</button></td>
-                    <td>{{s.classPoints}}</td>
-                    <td>{{s.lastName}}</td>
-                    <td>{{s.firstName}}</td>
-                </tr>
-            </table>
-        </div>
-    </div>
+<button class="botEditClass" (click)="goEditClass()">עריכת כיתה</button> &nbsp;
+<button class="botBack" (click)="goBack()">חזרה</button>
 
-    <br>
-    <br>
-
-    <div *ngIf="thisClass.rewards[0]">
-        <h5>רשימת הטבות</h5>
-        <br><br>
-        <div class="rewardsList">
-            <table border="1">
-                <tr>
-                    <th>עלות</th>
-                    <th>הטבה</th>
-                </tr>
-                <tr *ngFor="let r of thisClass.rewards">
-                    <td>{{r.cost}}</td>
-                    <td>{{r.item}}</td>
-                </tr>
-            </table>
-        </div>
-    </div>
-
-    <br>
-    <br>
-
-    <button class="botEditClass" (click)="goEditClass()">עריכת כיתה</button> &nbsp;
-    <button class="botBack" (click)="goBack()">חזרה</button>
-
-    <br>
-    <br>
+<br>
+<br>

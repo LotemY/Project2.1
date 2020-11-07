@@ -11,12 +11,10 @@ import { Student } from './shared/models/Student';
 })
 
 /*
--TASKS-
-  xp text color
-  disable button color
+  -TASKS-
+  finish reason(tClass)
   move up the "back" buttons
   fill the dark background
-  remove reason from option
   help overmouse
   show the reason to the student
   (button check)

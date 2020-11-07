@@ -80,7 +80,7 @@
     height: 500px;
     overflow-y: scroll;
     overflow-x: hidden;
-    top: 80px;
+    top: 220px;
     right: 400px;
     left: 600px;
   }
@@ -104,7 +104,7 @@ h2, h3 ,h5{
   
 #myBar {
     width: 50%;
-    background-color: blue;
+    background-color: yellow;
     padding-top: 10px;
     padding-bottom: 10px;
     height: 30px;
@@ -113,6 +113,7 @@ h2, h3 ,h5{
 #myProgress {
     position: absolute;
     left: 40%;
+    color: blue;
 }
 
 .outerBar {
@@ -141,4 +142,9 @@ h2, h3 ,h5{
     margin-right: 70px;
     right: 30px;
     height: 100px;
+    }
+
+    .top{
+        position: absolute;
+        left: 850px;
     }

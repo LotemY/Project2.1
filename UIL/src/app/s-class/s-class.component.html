@@ -1,6 +1,29 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <h2>{{thisClass.className}} : {{thisClass.grade}} </h2>
 
 <br><br>
+
+
+<div class="row">
+    <div class="column">
+        <div class="card">
+            <p><i class="fa fa-user"></i></p>
+            <h3>{{counterNumStudent}}+</h3>
+            <p>כמות תלמידים</p>
+        </div>
+    </div>
+
+    <div class="column">
+        <div class="card">
+            <p><i class="fa fa-flash"></i></p>
+            <h3>{{counterNumrewards}}+</h3>
+            <p>כמות ההטבות</p>
+        </div>
+    </div>
+</div>
+
 <br><br>
 
 <div *ngIf="thisClass.classSubject[0]">

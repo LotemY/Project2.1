@@ -1,62 +1,122 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <h2>{{info.name}}</h2>
+<h2 style="font-style: italic;">{{info.name}}</h2>
 
+<br><br>
+<br><br>
 
-    <br><br>
-    <br><br>
+<div class="row">
 
-    <div>
-        <h5>רשימת תלמידים</h5>
-        <br>
-        <div class="studentList">
-            <table border="1">
-                <tr>
-                    <th>נקודות</th>
-                    <th>שם משפחה</th>
-                    <th>שם פרטי</th>
-                </tr>
-                <tr *ngFor="let s of thisClass.classStudents">
-                    <td>{{findSub(s.subPoints)}}</td>
-                    <td>{{s.lastName}}</td>
-                    <td>{{s.firstName}}</td>
-                </tr>
-            </table>
+    <div class="column">
+        <div class="card">
+            <p><i class="fa fa-suitcase"></i></p>
+            <h3>{{counterNumsubsubject}}+</h3>
+            <p>כמות תתי נושאים</p>
         </div>
     </div>
 
-    <br><br>
-    <br><br>
-
-    <div>
-        <h5>תת נושאים</h5>
-        <br>
-        <div class="subList" *ngIf="info.subsubject[0]">
-            <table border="1">
-                <tr>
-                    <th></th>
-                    <th>נקודות</th>
-                    <th>שם</th>
-                </tr>
-                <tr *ngFor="let s of info.subsubject">
-                    <td><button [disabled]="s.subComp" (click)="subComplete(s)">השלמת תת-נושא</button></td>
-                    <td>{{s.points}}</td>
-                    <td>{{s.name}}</td>
-                </tr>
-            </table>
+    <div class="column">
+        <div class="card">
+            <p><i class="fa fa-check"></i></p>
+            <h3>{{counterNumStudfinish}}+</h3>
+            <p>כמות התלמידים שסיימו את הנושא</p>
         </div>
     </div>
-
-    <br><br>
-    <br><br>
-    <br><br>
-
-    <div class="buttons">
-
-    <div *ngIf="thisPerson._id==thisClass.classTeacher">
-        <button style="background-color: blue;" [disabled]="info.comp" (click)="complete()">השלם נושא</button>
-    </div>
-
-    <br><br>
-
-    <button (click)="back()">חזרה</button>
 </div>
+
+<br><br>
+<br><br>
+
+<div>
+    <h5>רשימת תלמידים</h5>
+    <br>
+    <div class="studentList">
+        <table border="1">
+            <tr>
+                <th>נקודות</th>
+                <th>שם משפחה</th>
+                <th>שם פרטי</th>
+            </tr>
+            <tr *ngFor="let s of thisClass.classStudents">
+                <td>{{findSub(s.subPoints)}}</td>
+                <td>{{s.lastName}}</td>
+                <td>{{s.firstName}}</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<br><br>
+<br><br>
+
+<div *ngIf="thisPerson._id==thisClass.classTeacher;else elseBlock">
+    <h5>תת נושאים</h5>
+    <br>
+    <div class="subList" *ngIf="info.subsubject[0]">
+        <table border="1">
+            <tr>
+                <th></th>
+                <th>נקודות</th>
+                <th>שם</th>
+            </tr>
+            <tr *ngFor="let s of info.subsubject">
+                <td>
+                    <div *ngIf="s.subComp;else elseButton">
+                        <button style="color: gray;" [disabled]="s.subComp" (click)="subComplete(s)">הושלם</button>
+                    </div>
+                    <ng-template #elseButton><button [disabled]="s.subComp" (click)="subComplete(s)">השלמת
+                            תת-נושא</button></ng-template>
+                </td>
+                <td>{{s.points}}</td>
+                <td>{{s.name}}</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<ng-template #elseBlock>
+    <h5>תת נושאים</h5>
+    <br>
+    <div class="subList" *ngIf="info.subsubject[0]">
+        <table border="1">
+            <tr>
+                <th>נקודות</th>
+                <th>שם</th>
+            </tr>
+            <tr *ngFor="let s of info.subsubject">
+                <td>{{s.points}}</td>
+                <td>{{s.name}}</td>
+            </tr>
+        </table>
+    </div>
+</ng-template>
+
+<div *ngIf="thisPerson._id==thisClass.classTeacher">
+    <br><br>
+    <br><br>
+    <br><br>
+    <br><br>
+    <br><br>
+</div>
+
+<br><br>
+<br><br>
+
+<div class="buttons">
+    <div *ngIf="thisPerson._id==thisClass.classTeacher">
+        <div *ngIf="info.comp;else elseButton">
+            <button style="background-color: blue;color: gray;" [disabled]="info.comp" (click)="complete()">השלם
+                נושא</button>
+        </div>
+        <ng-template #elseButton>
+            <button style="background-color: blue;" [disabled]="info.comp" (click)="complete()">השלם נושא</button>
+        </ng-template>
+    </div>
+    <br>
+    <button class="backB" (click)="back()">חזרה</button>
+</div>
+
+<br><br><br><br><br>
+
+<br>
