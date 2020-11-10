@@ -55,30 +55,34 @@
     <div class="studentList">
         <table border="1">
             <tr>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th>נקודות</th>
-                <th>שם משפחה</th>
-                <th>שם פרטי</th>
+                <th>תלמידים</th>
             </tr>
             <tr *ngFor="let s of thisClass.classStudents">
                 <td>
-                    <div>
-                        <select id="reason" onchange="selectAreason(r)">  <!--test-->
-                            <option *ngFor="let r of reasons">{{r}}</option>
-                        </select>
+                    <button class="open-button" (click)="openForm(s)">{{s.lastName}} {{s.firstName}}</button>
+                    <div class="form-popup" id="myForm">
+                        <form action="/action_page.php" class="form-container">
+                            <h1>{{selectStudent.lastName}} {{selectStudent.firstName}}</h1>
+                            <h2 style="color: white;">{{selectStudent.classPoints}}</h2>
+
+                            <input #name list="name">
+                            <datalist id="name">
+                                <option *ngFor="let name of reasons">{{name}}</option>
+                            </datalist>
+                    
+                            <button class="plusMinus" (click)="editPoints(s,1)">+</button>
+                            <button class="plusMinus" (click)="editPoints(s,0)">-</button>
+                    
+                            <button type="submit" class="btn">Confirm</button>
+                            <button type="button" class="btn cancel" (click)="closeForm()">Close</button>
+                        </form>
                     </div>
                 </td>
-                <td><button class="plusMinus" (click)="editPoints(s,0)">-</button></td>
-                <td><button class="plusMinus" (click)="editPoints(s,1)">+</button></td>
-                <td>{{s.classPoints}}</td>
-                <td>{{s.lastName}}</td>
-                <td>{{s.firstName}}</td>
             </tr>
         </table>
     </div>
 </div>
+
 
 <br>
 <br>

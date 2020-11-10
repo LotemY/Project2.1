@@ -13,13 +13,8 @@ import { Student } from './shared/models/Student';
 /*
   -TASKS-
   finish reason(tClass)
-  move up the "back" buttons
-  fill the dark background
-  help overmouse
   show the reason to the student
   (button check)
-  error to right response
-  refrash token
 */
 
 export class ControllerService {

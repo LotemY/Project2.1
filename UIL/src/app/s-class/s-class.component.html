@@ -70,6 +70,20 @@
     <br><br>
     <br><br>
 
+    <p style="color: white;">&nbsp;</p>
+    <button type="button" class="collapsible" (click)="run()">עדכון נקודות</button>
+    <div class="content" *ngFor="let r of SelectReason">
+      <p class="reas">{{r.reasonPoints}} : {{r.reasonName}}</p>
+    </div>
+
+    <br><br>
+    <br><br>
+    <br><br>
+    <br><br>
+    <br><br>
+    <br><br>
+
+
     <div *ngIf="thisClass.rewards[0]">
         <h5>רשימת הטבות</h5>
         <br><br><br>

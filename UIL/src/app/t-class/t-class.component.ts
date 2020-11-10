@@ -18,6 +18,7 @@ export class TClassComponent implements OnInit {
   public selectReason: String;  // test!
   public counterNumStudent: number;
   public counterNumrewards: number;
+  public selectStudent: Student;
 
   constructor(private service: ControllerService, private route: ActivatedRoute) {
     this.thisTeacher = this.service.person;
@@ -31,6 +32,7 @@ export class TClassComponent implements OnInit {
     this.thisClass.rewards = [];
     this.counterNumStudent = 0;
     this.counterNumrewards=0;
+    this.selectStudent = new Student();
   }
 
   ngOnInit() {
@@ -59,6 +61,18 @@ export class TClassComponent implements OnInit {
   public subInfo(info: String) {
     this.service.goSubInfo(this.thisTeacher._id, this.thisClass._id, info);
   }
+
+
+  public openForm(s:Student) {
+    this.selectStudent = s;
+    
+    document.getElementById("myForm").style.display = "block";
+  }
+  
+  public closeForm() {
+    document.getElementById("myForm").style.display = "none";
+  }
+
 
   public editPoints(s: Student, num: Number) {
     let doc = document.getElementById('reason') as HTMLSelectElement;
