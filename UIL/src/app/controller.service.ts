@@ -12,7 +12,8 @@ import { Student } from './shared/models/Student';
 
 /*
   -TASKS-
-  finish reason(tClass)
+  add or less (radio)fix! tClass
+  reason (inputbox) fix! tClass
   show the reason to the student
   (button check)
 */

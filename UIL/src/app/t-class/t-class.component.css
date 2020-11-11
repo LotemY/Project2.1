@@ -46,11 +46,6 @@ input{
 }
 
 
-.plusMinus{
-width: 60px;
-
-}
-
 
 .studentList{
   position: relative;
@@ -162,8 +157,8 @@ width: 60px;
 
 /* Add styles to the form container */
 .form-container {
-  max-width: 350px;
-  height: 300px;
+  max-width: 400px;
+  height: 400px;
   padding: 10px;
   background-color: rgb(0, 0, 0);
   box-sizing: border-box;

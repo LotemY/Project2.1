@@ -63,17 +63,32 @@
                     <div class="form-popup" id="myForm">
                         <form action="/action_page.php" class="form-container">
                             <h1>{{selectStudent.lastName}} {{selectStudent.firstName}}</h1>
-                            <h2 style="color: white;">{{selectStudent.classPoints}}</h2>
+                            
+                            <h3 style="color: white;">{{selectStudent.classPoints}} מספר הנקודות</h3>
 
-                            <input #name list="name">
+                            
+                            <input id="nameField" list="name">
                             <datalist id="name">
                                 <option *ngFor="let name of reasons">{{name}}</option>
-                            </datalist>
-                    
-                            <button class="plusMinus" (click)="editPoints(s,1)">+</button>
-                            <button class="plusMinus" (click)="editPoints(s,0)">-</button>
-                    
-                            <button type="submit" class="btn">Confirm</button>
+                            </datalist> &nbsp;
+                            <label>סיבה</label>
+
+                            <br>
+
+                            
+                            <input id="pointField" type="number">&nbsp;
+                            <label>כמות</label>
+
+                            <br><br>
+
+                            <input id="radioB" type="radio" name="action" value="plus">
+                            <label>הוספה</label> &nbsp;&nbsp;
+                            <input type="radio" name="action" value="minus">
+                            <label>החסרה</label>
+                            
+                            <br><br>
+
+                            <button type="submit" class="btn" (click)="editPoints()">Confirm</button>
                             <button type="button" class="btn cancel" (click)="closeForm()">Close</button>
                         </form>
                     </div>

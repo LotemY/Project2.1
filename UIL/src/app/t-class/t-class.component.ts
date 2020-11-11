@@ -14,7 +14,7 @@ import { Reason } from '../shared/models/Reason';
 export class TClassComponent implements OnInit {
   public thisTeacher: Person;
   public thisClass: Class;
-  public reasons: String[] = ["","הגשת שיעורי בית","עזרה לחבר","השתתפות בשיעור","הגשת מבחן","התחצפות למורה","אי הכנת שיעורי בית","איחור","אי הגעה לשיעור","אחר"];
+  public reasons: String[] = ["", "הגשת שיעורי בית", "עזרה לחבר", "השתתפות בשיעור", "הגשת מבחן", "התחצפות למורה", "אי הכנת שיעורי בית", "איחור", "אי הגעה לשיעור", "אחר"];
   public selectReason: String;  // test!
   public counterNumStudent: number;
   public counterNumrewards: number;
@@ -31,7 +31,7 @@ export class TClassComponent implements OnInit {
     this.thisClass.classSubject = [];
     this.thisClass.rewards = [];
     this.counterNumStudent = 0;
-    this.counterNumrewards=0;
+    this.counterNumrewards = 0;
     this.selectStudent = new Student();
   }
 
@@ -41,10 +41,10 @@ export class TClassComponent implements OnInit {
       this.service.getUser(params.get('id'));
     })
     setTimeout(() => {
-      for(let i=0;i<this.thisClass.classStudents.length;i++){
+      for (let i = 0; i < this.thisClass.classStudents.length; i++) {
         this.counterNumStudent += 1;
       }
-      for(let i=0;i<this.thisClass.rewards.length;i++){
+      for (let i = 0; i < this.thisClass.rewards.length; i++) {
         this.counterNumrewards += 1;
       }
     }, 200);
@@ -63,49 +63,66 @@ export class TClassComponent implements OnInit {
   }
 
 
-  public openForm(s:Student) {
+  public openForm(s: Student) {
     this.selectStudent = s;
-    
+
+    let name = document.getElementById('nameField') as HTMLInputElement;
+    let point = document.getElementById('pointField') as HTMLInputElement;
+
+    name.value = "";
+    point.value = "";
+
     document.getElementById("myForm").style.display = "block";
   }
-  
+
   public closeForm() {
+
     document.getElementById("myForm").style.display = "none";
   }
 
+  public editPoints() {
+    let r = document.getElementById('nameField') as HTMLInputElement;
+    let p = document.getElementById('pointField') as HTMLInputElement;
+    let radio = (<HTMLInputElement>document.getElementById('radioB'));
 
-  public editPoints(s: Student, num: Number) {
-    let doc = document.getElementById('reason') as HTMLSelectElement;
-    let r = doc.options[0].value;
     let reason: Reason = new Reason();
+    reason.reasonName = "";
+    reason.reasonPoints = "";
 
-    if (r == "")
+    if (r.value == "")
       return alert("בחר סיבה קודם");
-    reason.reasonName = r;
-    let temp = prompt(`סיבה: ${r}\nנקודות כרגע: ${s.classPoints}`);
-    if (!Number(temp))
-      return;
-    if (Number(temp) < 0)
+    reason.reasonName = r.value;
+
+    if (!Number(p.value))
+      return alert("הכנס רק מספר");
+    if (Number(p.value) < 0)
       return alert("לא יכול להיות שלילי");
 
-    if (num == 1) {
-      if (s.classPoints + Number(temp) > 1000)
+    if (radio.checked) {
+      if (this.selectStudent.classPoints + Number(p.value) > 1000)
         return alert("הגעת למקסימום");
-      s.classPoints += Number(temp);
-      reason.reasonPoints = temp;
+      this.selectStudent.classPoints += Number(p.value);
+      reason.reasonPoints = p.value;
     }
     else {
-      if (s.classPoints - Number(temp) < 0)
+      if (this.selectStudent.classPoints - Number(p.value) < 0)
         return alert("לא יכול להיות שלילי");
-      s.classPoints -= Number(temp);
-      reason.reasonPoints = "-" + temp;
+      this.selectStudent.classPoints -= Number(p.value);
+      reason.reasonPoints = "-" + p.value;
     }
-    doc.value="";
-    s.reason[s.reason.length] = reason;
+
+    let length = this.selectStudent.reason.length
+    this.selectStudent.reason[length] = reason;
+    for (let i = 0; i < this.thisClass.classStudents.length; i++)
+      if (this.selectStudent._id == this.thisClass.classStudents[i]._id) {
+        this.thisClass.classStudents[i] = this.selectStudent;
+        break;
+      }
     this.service.updatePoints(this.thisClass);
+    document.getElementById("myForm").style.display = "none";
   }
 
-  public selectAreason(str){  // test!
+  public selectAreason(str) {  // test!
 
     this.selectReason = str.value;
     console.log("str", this.selectReason);
