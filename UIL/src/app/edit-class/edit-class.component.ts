@@ -199,7 +199,7 @@ export class EditClassComponent implements OnInit {
       return alert("חייב להכניס את כל הפרמטרים");
     if (Number(item))
       return alert("שם ההטבה לא יכול להיות מספר");
-    if (cost >= 1000)
+    if (cost >= 5000)
       return alert("עלות ההטבה גבוהה מדי");
     if (cost <= 0)
       return alert("לא ניתן להכניס מספר שלילי");

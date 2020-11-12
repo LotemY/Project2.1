@@ -82,7 +82,7 @@
     overflow-x: hidden;
     top: 220px;
     right: 400px;
-    left: 600px;
+    left: 550px;
   }
 
 h2, h3 ,h5{
@@ -146,5 +146,5 @@ h2, h3 ,h5{
 
     .top{
         position: absolute;
-        left: 850px;
+        left: 800px;
     }

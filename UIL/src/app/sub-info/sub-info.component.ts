@@ -15,7 +15,6 @@ export class SubInfoComponent implements OnInit {
   public thisPerson: Person;
   public thisClass: Class;
   public info: ClassSubject = new ClassSubject();
-  public counterNumsubsubject: number;
   public counterNumStudfinish: number;
 
 
@@ -27,11 +26,8 @@ export class SubInfoComponent implements OnInit {
     this.service.classEmitter.subscribe(c => this.thisClass = c);
     this.service.infoEmitter.subscribe(i => this.info = i);
     this.info.subsubject = [];
-
     this.counterNumStudfinish = 0;
-    this.counterNumsubsubject = 0;
-
-  }
+   }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(async params => {
@@ -53,7 +49,6 @@ export class SubInfoComponent implements OnInit {
       for (let i = 0; i < this.thisClass.classSubject.length; i++) {
         if (this.thisClass.classSubject[i].name == this.info.name)
           for (let j = 0; j < this.thisClass.classSubject[i].subsubject.length; j++) {
-            this.counterNumsubsubject += 1;
             for (let x = 0; x < this.thisClass.classStudents.length; x++) {
               for (let y = 0; y < this.thisClass.classStudents[x].subPoints.length; y++) {
                 if (this.thisClass.classStudents[x].subPoints[y].subName == this.info.name)

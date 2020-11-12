@@ -13,8 +13,6 @@ import { Reason } from '../shared/models/Reason';
 export class SClassComponent implements OnInit {
   public thisStudent: Person;
   public thisClass: Class;
-  public counterNumStudent: number;
-  public counterNumrewards: number;
   public SelectReason: Reason[] = [];
 
 
@@ -27,8 +25,6 @@ export class SClassComponent implements OnInit {
     this.thisClass.classStudents = [];
     this.thisClass.classSubject = [];
     this.thisClass.rewards = [];
-    this.counterNumStudent = 0;
-    this.counterNumrewards = 0;
   }
 
   ngOnInit() {
@@ -36,33 +32,24 @@ export class SClassComponent implements OnInit {
       this.service.getClass(params.get('id'), params.get('cId'));
       this.service.getUser(params.get('id'));
     })
-    setTimeout(() => {
-      for (let i = 0; i < this.thisClass.classStudents.length; i++) {
-        this.counterNumStudent += 1;
-      }
-      for (let i = 0; i < this.thisClass.rewards.length; i++) {
-        this.counterNumrewards += 1;
-      }
-      for (let i = 0; i < this.thisClass.classStudents.length; i++) {
-        if (this.thisClass.classStudents[i]._id == this.thisStudent._id) {
-          this.SelectReason = this.thisClass.classStudents[i].reason;
-          console.log(this.SelectReason);
-          break;
-        }
-      }
-
-
-    }, 200);
   }
 
   public run() {
-    var coll = document.getElementsByClassName("collapsible");
-    var i;
+    let coll = document.getElementsByClassName("collapsible");
+    let i;
+
+    for (i = 0; i < this.thisClass.classStudents.length; i++) {
+      if (this.thisClass.classStudents[i]._id == this.thisStudent._id) {
+        this.SelectReason = this.thisClass.classStudents[i].reason;
+        console.log(this.SelectReason);
+        break;
+      }
+    }
 
     for (i = 0; i < coll.length; i++) {
       coll[i].addEventListener("click", function () {
         this.classList.toggle("active");
-        var content = this.nextElementSibling;
+        let content = this.nextElementSibling;
         if (content.style.display === "block") {
           content.style.display = "none";
         } else {

@@ -10,7 +10,7 @@
     <div class="column">
         <div class="card">
             <p><i class="fa fa-user"></i></p>
-            <h3>{{counterNumStudent}}+</h3>
+            <h3>{{this.thisClass.classStudents.length}}+</h3>
             <p>כמות תלמידים</p>
         </div>
     </div>
@@ -18,7 +18,7 @@
     <div class="column">
         <div class="card">
             <p><i class="fa fa-flash"></i></p>
-            <h3>{{counterNumrewards}}+</h3>
+            <h3>{{this.thisClass.rewards.length}}+</h3>
             <p>כמות ההטבות</p>
         </div>
     </div>
@@ -67,7 +67,7 @@
                             <h3 style="color: white;">{{selectStudent.classPoints}} מספר הנקודות</h3>
 
                             
-                            <input id="nameField" list="name">
+                            <input id="nameField" list="name" autocomplete="off">
                             <datalist id="name">
                                 <option *ngFor="let name of reasons">{{name}}</option>
                             </datalist> &nbsp;
@@ -82,9 +82,9 @@
                             <br><br>
 
                             <input id="radioB" type="radio" name="action" value="plus">
-                            <label>הוספה</label> &nbsp;&nbsp;
-                            <input type="radio" name="action" value="minus">
-                            <label>החסרה</label>
+                            <label class="labels"> &nbsp; הוספה</label> &nbsp;&nbsp;
+                            <input id="radioA" type="radio" name="action" value="minus">
+                            <label class="labels"> &nbsp; החסרה</label>
                             
                             <br><br>
 

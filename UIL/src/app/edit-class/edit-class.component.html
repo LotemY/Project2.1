@@ -71,10 +71,11 @@
     <h5>הטבות</h5>
     <br><br>
     
-    <input type="number" #reCost onfocus="this.value=''"> &nbsp; &nbsp;
-    <label>:עלות ההטבה</label><br><br>
+    
     <input #reward onfocus="this.value=''"> &nbsp; &nbsp;
-    <label>:סוג ההטבה</label> &nbsp;
+    <label>:סוג ההטבה</label> <br><br> 
+    <input type="number" #reCost onfocus="this.value=''"> &nbsp; &nbsp;
+    <label>:עלות ההטבה</label> &nbsp;
     <button id="two" class="add" (click)="addReward(reward.value,reCost.value)">הוספה</button> &nbsp;
     <br>
     <br>
