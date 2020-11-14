@@ -61,7 +61,7 @@
                 <td>
                     <button class="open-button" (click)="openForm(s)">{{s.lastName}} {{s.firstName}}</button>
                     <div class="form-popup" id="myForm">
-                        <form action="/action_page.php" class="form-container">
+                        <form class="form-container">
                             <h1>{{selectStudent.lastName}} {{selectStudent.firstName}}</h1>
                             
                             <h3 style="color: white;">{{selectStudent.classPoints}} מספר הנקודות</h3>
@@ -88,8 +88,8 @@
                             
                             <br><br>
 
-                            <button type="submit" class="btn" (click)="editPoints()">Confirm</button>
-                            <button type="button" class="btn cancel" (click)="closeForm()">Close</button>
+                            <button type="submit" class="btn" (click)="editPoints()">אישור</button>
+                            <button type="button" class="btn cancel" (click)="closeForm()">ביטול</button>
                         </form>
                     </div>
                 </td>

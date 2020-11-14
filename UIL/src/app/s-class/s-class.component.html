@@ -68,19 +68,15 @@
 
 
     <br><br>
-    <br><br>
-
-    <p style="color: white;">&nbsp;</p>
-    <button type="button" class="collapsible" (click)="run()">עדכון נקודות</button>
-    <div class="content" *ngFor="let r of SelectReason">
-      <p class="reas">{{r.reasonPoints}} : {{r.reasonName}}</p>
+    <div class="form-popup" id="myFormT">
+        <form class="form-container">
+            <h1 style="color: rgb(248, 220, 129);">עדכוני נקודות אחרונים</h1>
+            <br><br>
+            <div *ngFor="let i of SelectReason">
+                <p>{{i.reasonPoints}} : {{i.reasonName}}</p>
+            </div>
+        </form>
     </div>
-
-    <br><br>
-    <br><br>
-    <br><br>
-    <br><br>
-    <br><br>
     <br><br>
 
 
@@ -93,9 +89,9 @@
                     <th>עלות</th>
                     <th>הטבה</th>
                 </tr>
-                <tr *ngFor="let r of thisClass.rewards">
-                    <td>{{r.cost}}</td>
-                    <td><button>{{r.item}}</button></td>
+                <tr *ngFor="let r of thisClass.rewards; let b = index">
+                    <td style="background-color: {{boolin[b]}}">{{r.cost}}</td>
+                    <td class="theR">{{r.item}}</td>
                 </tr>
             </table>
         </div>

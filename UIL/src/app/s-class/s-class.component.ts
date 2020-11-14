@@ -14,14 +14,18 @@ export class SClassComponent implements OnInit {
   public thisStudent: Person;
   public thisClass: Class;
   public SelectReason: Reason[] = [];
-
+  public sClassPoints: Number;
+  public boolin: String[] = [];
 
 
   constructor(private service: ControllerService, private route: ActivatedRoute) {
     this.thisStudent = this.service.person;
     this.thisClass = this.service.class;
     this.service.studentEmitter.subscribe(s => this.thisStudent = s);
-    this.service.classEmitter.subscribe(c => this.thisClass = c);
+    this.service.classEmitter.subscribe(c => {
+      this.thisClass = c;
+
+    });
     this.thisClass.classStudents = [];
     this.thisClass.classSubject = [];
     this.thisClass.rewards = [];
@@ -32,31 +36,34 @@ export class SClassComponent implements OnInit {
       this.service.getClass(params.get('id'), params.get('cId'));
       this.service.getUser(params.get('id'));
     })
-  }
 
-  public run() {
-    let coll = document.getElementsByClassName("collapsible");
-    let i;
-
-    for (i = 0; i < this.thisClass.classStudents.length; i++) {
-      if (this.thisClass.classStudents[i]._id == this.thisStudent._id) {
-        this.SelectReason = this.thisClass.classStudents[i].reason;
-        console.log(this.SelectReason);
-        break;
-      }
-    }
-
-    for (i = 0; i < coll.length; i++) {
-      coll[i].addEventListener("click", function () {
-        this.classList.toggle("active");
-        let content = this.nextElementSibling;
-        if (content.style.display === "block") {
-          content.style.display = "none";
-        } else {
-          content.style.display = "block";
+    setTimeout(() => {
+      document.getElementById("myFormT").style.display = "block";
+      for (let i = 0; i < this.thisClass.classStudents.length; i++) {
+        if (this.thisClass.classStudents[i]._id == this.thisStudent._id) {
+          this.SelectReason = this.thisClass.classStudents[i].reason;
+          this.sClassPoints = this.thisClass.classStudents[i].classPoints;
+          break;
         }
-      });
-    }
+      }
+    }, 200);
+
+
+    setTimeout(() => {
+
+      for (let i = 0; i < this.thisClass.classStudents.length; i++) {
+        if (this.thisClass.classStudents[i]._id == this.thisStudent._id) {
+          for (let j = 0; j < this.thisClass.rewards.length; j++) {
+            if (this.thisClass.classStudents[i].classPoints >= this.thisClass.rewards[j].cost)
+              this.boolin[j] = "Blue";
+            else{
+              this.boolin[j] = "Black";
+            }
+          }
+        }
+      }
+    }, 200);
+
   }
 
   public subInfo(info: String) {

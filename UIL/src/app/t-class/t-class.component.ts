@@ -91,7 +91,7 @@ export class TClassComponent implements OnInit {
       if (this.selectStudent.classPoints + Number(p.value) > 1000)
         return alert("הגעת למקסימום");
       this.selectStudent.classPoints += Number(p.value);
-      reason.reasonPoints = p.value;
+      reason.reasonPoints = "+" + p.value;
       radio.checked = false;
     }
     else if (radioS.checked) {
@@ -105,8 +105,12 @@ export class TClassComponent implements OnInit {
       return alert("בחר פעולה (הוספה/הסרה)");
     }
 
-    let length = this.selectStudent.reason.length
-    this.selectStudent.reason[length] = reason;
+    for (let r = 3; r >= 0; r--)
+      if (this.selectStudent.reason[r])
+        this.selectStudent.reason[(r + 1)] = this.selectStudent.reason[r];
+
+    this.selectStudent.reason[0] = reason;
+
     for (let i = 0; i < this.thisClass.classStudents.length; i++)
       if (this.selectStudent._id == this.thisClass.classStudents[i]._id) {
         this.thisClass.classStudents[i] = this.selectStudent;

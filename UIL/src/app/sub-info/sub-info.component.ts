@@ -15,7 +15,7 @@ export class SubInfoComponent implements OnInit {
   public thisPerson: Person;
   public thisClass: Class;
   public info: ClassSubject = new ClassSubject();
-  public counterNumStudfinish: number;
+  public counterNumSubfinish: number;
 
 
   constructor(private service: ControllerService, private route: ActivatedRoute) {
@@ -26,8 +26,8 @@ export class SubInfoComponent implements OnInit {
     this.service.classEmitter.subscribe(c => this.thisClass = c);
     this.service.infoEmitter.subscribe(i => this.info = i);
     this.info.subsubject = [];
-    this.counterNumStudfinish = 0;
-   }
+    this.counterNumSubfinish = 0;
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(async params => {
@@ -46,18 +46,12 @@ export class SubInfoComponent implements OnInit {
       }, 200);
     })
     setTimeout(() => {
-      for (let i = 0; i < this.thisClass.classSubject.length; i++) {
+      this.counterNumSubfinish = 0;
+      for (let i = 0; i < this.thisClass.classSubject.length; i++)
         if (this.thisClass.classSubject[i].name == this.info.name)
-          for (let j = 0; j < this.thisClass.classSubject[i].subsubject.length; j++) {
-            for (let x = 0; x < this.thisClass.classStudents.length; x++) {
-              for (let y = 0; y < this.thisClass.classStudents[x].subPoints.length; y++) {
-                if (this.thisClass.classStudents[x].subPoints[y].subName == this.info.name)
-                  if (this.thisClass.classStudents[x].subPoints[y].points == this.info.points)
-                    this.counterNumStudfinish += 1;
-              }
-            }
-          }
-      }
+          for (let j = 0; j < this.thisClass.classSubject[i].subsubject.length; j++)
+            if (this.thisClass.classSubject[i].subsubject[j].subComp)
+              this.counterNumSubfinish++;
     }, 200);
   }
 
@@ -112,7 +106,7 @@ export class SubInfoComponent implements OnInit {
 
       if (com == this.thisClass.classSubject[c].subsubject.length)
         this.thisClass.classSubject[c].comp = true;
-
+      this.counterNumSubfinish++;
       this.service.updatePoints(this.thisClass);
     }
   }

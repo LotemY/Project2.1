@@ -166,3 +166,35 @@ button {
   font-size: 18px;
   padding: 18px;
 }
+
+
+.form-popup {
+  display: none;
+  position: fixed;
+  bottom: 200px;
+  right: 15px;
+  border: 3px solid #fffefe;
+  z-index: 9;
+  box-sizing: border-box;
+}
+
+/* Add styles to the form container */
+.form-container {
+  max-width: 400px;
+  height: 400px;
+  padding: 10px;
+  background-color: rgb(0, 0, 0);
+  box-sizing: border-box;
+}
+
+p{
+  color: white;
+  font-size: large;
+}
+
+
+
+
+
+
+

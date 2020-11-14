@@ -12,8 +12,13 @@ import { Student } from './shared/models/Student';
 
 /*
   -TASKS-
-  show the reason to the student
+  
+  -token
+  -css
+  -create users
+  -rewards css
   (button check)
+
 */
 
 export class ControllerService {
