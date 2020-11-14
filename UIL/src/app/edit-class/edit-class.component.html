@@ -15,7 +15,7 @@
     <h5>שכבה</h5>
     <br>
     <br>
-    <select class="grade"  #grade>
+    <select class="grade" #grade>
         <option *ngFor="let grad of grades">{{grad}}</option>
     </select>
     <br>
@@ -29,7 +29,9 @@
 <div>
     <h5>נושאים</h5>
     <br><br>
-    <label id="theTop" *ngIf="totalPoints!=1000" style="color: white; background-color: red; font-weight: 800;">&nbsp;{{1000-totalPoints}}&nbsp;:נקודות נותרות</label>
+    <label id="theTop" *ngIf="totalPoints!=1000"
+        style="color: white; background-color: red; font-weight: 800;">&nbsp;{{1000-totalPoints}}&nbsp;:נקודות
+        נותרות</label>
     <br> <br>
     <button id="one" class="add" (click)="addSub(sub.value)">הוספה</button> &nbsp; <input #sub onfocus="this.value=''">
     <br>
@@ -70,18 +72,18 @@
 <div>
     <h5>הטבות</h5>
     <br><br>
-    
-    
+
+
     <input #reward onfocus="this.value=''"> &nbsp; &nbsp;
-    <label>:סוג ההטבה</label> <br><br> 
+    <label>:סוג ההטבה</label> <br><br>
     <input type="number" #reCost onfocus="this.value=''"> &nbsp; &nbsp;
     <label>:עלות ההטבה</label> &nbsp;
     <button id="two" class="add" (click)="addReward(reward.value,reCost.value)">הוספה</button> &nbsp;
     <br>
     <br>
 
-    <div class="rewardsList" *ngIf="thisClass.rewards[0]">
-        <table border="1">
+    <div class="rewardsList">
+        <table border="1" *ngIf="thisClass.rewards[0]">
             <tr>
                 <th> </th>
                 <th>עלות</th>
@@ -103,8 +105,8 @@
 <div class="divStu">
     <h5>רשימת תלמידים</h5>
     <br><br>
-    <button id="three" class="add" (click)="addStudent(student.value)">הוספה</button> &nbsp; <input #student type="number"
-        onfocus="this.value=''">
+    <button id="three" class="add" (click)="addStudent(student.value)">הוספה</button> &nbsp;
+    <input #student type="number" onfocus="this.value=''">
     <br><br><br><br>
     <div class="studentList">
         <table border="1" *ngIf="thisClass.classStudents[0]">

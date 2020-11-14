@@ -37,11 +37,13 @@ export class NewClassComponent implements OnInit {
 
   public createClass(name: String, grade: String) {
     if (name[0] == " " || name == "")
-      return alert("הכנס שם");
+      return alert("בחר שם כיתה");
     if (Number(name))
       return alert("השם לא יכול להיות מספר");
     if (name.length > 11)
       return alert("השם ארוך מדי");
+    if (name.length < 3)
+      return alert("השם קצר מדי");
     if (grade == "")
       return alert("הכנס שכבת הכיתה");
 
@@ -56,7 +58,11 @@ export class NewClassComponent implements OnInit {
       if (Number(sub))
         return alert("לא ניתן להכניס מספר");
       if (sub[0] == " " || sub == "")
-        return alert("הכנס שם");
+        return alert("בחר שם נושא");
+      if(sub.length > 20)
+        return alert("שם הנושא ארוך מידי");
+      if(sub.length < 3)
+        return alert("שם הנושא קצר מידי");
       let counter = this.newClass.classSubject.length
       for (let i = 0; i < counter; i++)
         if (this.newClass.classSubject[i].name == sub)
@@ -88,7 +94,13 @@ export class NewClassComponent implements OnInit {
   public addSubsub(name: String) {
     let thisSubsub = prompt("הכנס את שם התת נושא");
     if (thisSubsub[0] == " " || thisSubsub == "")
-      return alert("הכנס שם");
+      return alert("בחר שם תת נושא");
+
+    if(name.length > 20)
+      return alert("שם תת הנושא ארוך מידי");
+
+    if(name.length < 3)
+      return alert("שם תת הנושא קצר מידי");
 
     for (let i = 0; i < this.newClass.classSubject.length; i++) {
       if (name == this.newClass.classSubject[i].name) {
@@ -135,7 +147,7 @@ export class NewClassComponent implements OnInit {
     if (this.newClass.rewards.length >= 5)
       return alert("הגעת למספר הטבות מקסימאלי");
     if (item[0] == " " || item == "")
-      return alert("הכנס שם");
+      return alert("בחר שם הטבה");
     if (!item || !cost)
       return alert("חייב להכניס את כל הפרמטרים");
     if (Number(item))
@@ -144,6 +156,10 @@ export class NewClassComponent implements OnInit {
       return alert("עלות ההטבה גבוהה מדי");
     if (cost <= 0)
       return alert("לא ניתן להכניס מספר שלילי");
+    if(item.length > 20)
+      return alert("שם ההטבה ארוך מידי");
+    if(item.length < 3)
+      return alert("שם ההטבה קצר מידי");
     for (let i = 0; i < this.newClass.rewards.length; i++)
       if (this.newClass.rewards[i].item == item)
         return alert("ההטבה כבר נמצאת");

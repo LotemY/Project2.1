@@ -42,19 +42,20 @@ classP.post("/api/teacherHP/:id/newClass", auth, async (req, res) => {
             newClass._id = thisId;
         }
         while (reqCounter < req.body.classStudents.length) {
-            let user = await userCollection.findOne({ _id: String(req.body.classStudents[reqCounter]._id) });
-            let len = 0;
-            if (!user.classPoints)
-                user.classPoints = [];
+            try {
+                let user = await userCollection.findOne({ _id: String(req.body.classStudents[reqCounter]._id) });
+                let len = 0;
+                if (!user.classPoints)
+                    user.classPoints = [];
 
-            else
-                len = user.classPoints.length;
-            user.classPoints[len] = {};
-            user.classPoints[len].id = newClass._id;
-            user.classPoints[len].points = 0;
+                else
+                    len = user.classPoints.length;
+                user.classPoints[len] = {};
+                user.classPoints[len].id = newClass._id;
+                user.classPoints[len].points = 0;
 
-            await userCollection.updateOne({ _id: user._id }, { $set: { classPoints: user.classPoints } });
-            if (user) {
+                await userCollection.updateOne({ _id: user._id }, { $set: { classPoints: user.classPoints } });
+
                 user.subPoints = [];
                 user.classPoints = 0;
                 user.reason = [];
@@ -72,6 +73,7 @@ classP.post("/api/teacherHP/:id/newClass", auth, async (req, res) => {
                 newClass.classStudents[sutdentCounter] = user;
                 sutdentCounter++;
             }
+            catch(err){};
             reqCounter++;
         }
 

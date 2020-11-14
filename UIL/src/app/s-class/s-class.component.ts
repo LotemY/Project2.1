@@ -55,9 +55,9 @@ export class SClassComponent implements OnInit {
         if (this.thisClass.classStudents[i]._id == this.thisStudent._id) {
           for (let j = 0; j < this.thisClass.rewards.length; j++) {
             if (this.thisClass.classStudents[i].classPoints >= this.thisClass.rewards[j].cost)
-              this.boolin[j] = "Blue";
+              this.boolin[j] = "true";
             else{
-              this.boolin[j] = "Black";
+              this.boolin[j] = "false";
             }
           }
         }

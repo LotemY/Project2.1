@@ -90,8 +90,8 @@
                     <th>הטבה</th>
                 </tr>
                 <tr *ngFor="let r of thisClass.rewards; let b = index">
-                    <td style="background-color: {{boolin[b]}}">{{r.cost}}</td>
-                    <td class="theR">{{r.item}}</td>
+                    <td [ngStyle]="{'background-color': 'true' == boolin[b]? 'green' : 'black'}">{{r.cost}}</td>
+                    <td [ngStyle]="{'background-color': 'true' == boolin[b]? 'green' : 'black'}">{{r.item}}</td>
                 </tr>
             </table>
         </div>

@@ -134,7 +134,7 @@ h2,h5 {
 .allCards{
   position: relative;
   width: 800px;
-  height: 500px;
+  height: 600px;
   overflow-y: scroll;
   bottom: 150px;
   left: 800px;
@@ -152,11 +152,17 @@ h2,h5 {
   position: relative;
 }
 
+#labels{
+  left: 900px;
+  top: 200px;
+  position: absolute;
+}
+
 .NameT{
   width: 200px;
-  position: relative;
-  left: 600px;
-  top:50px;
+  position: absolute;
+  left: 650px;
+  top:100px;
 }
 
 .b1{

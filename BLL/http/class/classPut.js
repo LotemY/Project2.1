@@ -43,21 +43,24 @@ classPut.patch("/api/teacherHP/:id/tClass/:cId/edit", auth, async (req, res) => 
             if (b == req.body.classStudents.length) {
                 let tempPoints = [];
                 let count = 0;
-                let userPoints = await userCollection.findOne({ _id: iClass.classStudents[a]._id });
-                for (let c = 0; c < userPoints.classPoints.length; c++)
-                    if (userPoints.classPoints[c].id != iClass._id) {
-                        tempPoints[count] = userPoints.classPoints[c];
-                        count++;
-                    }
-                userPoints.classPoints = tempPoints;
-                pointsRefresh(userPoints);
-                await userCollection.updateOne({ _id: userPoints._id }, { $set: { classPoints: tempPoints } });
+                try {
+                    let userPoints = await userCollection.findOne({ _id: iClass.classStudents[a]._id });
+                    for (let c = 0; c < userPoints.classPoints.length; c++)
+                        if (userPoints.classPoints[c].id != iClass._id) {
+                            tempPoints[count] = userPoints.classPoints[c];
+                            count++;
+                        }
+                    userPoints.classPoints = tempPoints;
+                    pointsRefresh(userPoints);
+                    await userCollection.updateOne({ _id: userPoints._id }, { $set: { classPoints: tempPoints } });
+                } catch (err) { };
             }
         }
 
         let exist = false;
         let j = 0;
         let studnetArr = [];
+        let countStud = 0;
         for (let i = 0; i < req.body.classStudents.length; i++) {
             exist = false;
             for (j; j < iClass.classStudents.length; j++) {
@@ -86,28 +89,30 @@ classPut.patch("/api/teacherHP/:id/tClass/:cId/edit", auth, async (req, res) => 
                 studnetArr[i] = iClass.classStudents[j];
             }
             else {
-                let user = await userCollection.findOne({ _id: req.body.classStudents[i]._id });
-                let tempUser = {};
-                let cpLen = user.classPoints.length;
-                user.classPoints[cpLen] = {};
-                user.classPoints[cpLen].id = iClass._id;
-                user.classPoints[cpLen].points = 0;
-                await userCollection.updateOne({ _id: user._id }, { $set: { classPoints: user.classPoints } })
+                try {
+                    let user = await userCollection.findOne({ _id: req.body.classStudents[i]._id });
+                    let tempUser = {};
+                    let cpLen = user.classPoints.length;
+                    user.classPoints[cpLen] = {};
+                    user.classPoints[cpLen].id = iClass._id;
+                    user.classPoints[cpLen].points = 0;
+                    await userCollection.updateOne({ _id: user._id }, { $set: { classPoints: user.classPoints } })
 
-                tempUser._id = user._id;
-                tempUser.firstName = user.firstName;
-                tempUser.lastName = user.lastName;
-                tempUser.nickName = user.nickName;
-                tempUser.classPoints = 0;
-                tempUser.reason = [];
-                tempUser.subPoints = [];
-                for (let c = 0; c < req.body.classSubject.length; c++) {
-                    tempUser.subPoints[c] = {};
-                    tempUser.subPoints[c].subName = req.body.classSubject[c].name;
-                    tempUser.subPoints[c].points = 0;
-                }
-                studnetArr[i] = {};
-                studnetArr[i] = tempUser;
+                    tempUser._id = user._id;
+                    tempUser.firstName = user.firstName;
+                    tempUser.lastName = user.lastName;
+                    tempUser.nickName = user.nickName;
+                    tempUser.classPoints = 0;
+                    tempUser.reason = [];
+                    tempUser.subPoints = [];
+                    for (let c = 0; c < req.body.classSubject.length; c++) {
+                        tempUser.subPoints[c] = {};
+                        tempUser.subPoints[c].subName = req.body.classSubject[c].name;
+                        tempUser.subPoints[c].points = 0;
+                    }
+                    studnetArr[countStud] = {};
+                    studnetArr[countStud++] = tempUser;
+                } catch (err) { };
             }
         }
         await classCollection.updateOne({ _id: iClass._id }, { $set: { classStudents: studnetArr } });
